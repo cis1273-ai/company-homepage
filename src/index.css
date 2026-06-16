@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+@theme {
+  --color-primary: #001736;
+  --color-primary-container: #002b5c;
+  --color-secondary: #005db6;
+  --color-background: #fbf9f8;
+  --color-surface: #ffffff;
+  --color-surface-low: #f5f3f3;
+  --color-on-surface: #1b1c1c;
+  --color-on-surface-muted: #747780;
+  --color-outline: #e4e2e2;
+  
+  --font-sans: 'Hanken Grotesk', 'Noto Sans KR', ui-sans-serif, system-ui, sans-serif;
+}
