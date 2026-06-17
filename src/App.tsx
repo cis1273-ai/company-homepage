@@ -371,16 +371,9 @@ function ProfileSection() {
             </div>
           </div>
           
-          <div className="block lg:table-cell lg:w-5/12 lg:vertical-align-top mt-12 lg:mt-0">
-    <div className="relative lg:sticky lg:top-28 w-full">
-      <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full max-w-[450px] mx-auto lg:max-w-none rounded-lg border-4 border-white shadow-2xl" />
-    </div>
-  </div>
-            <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
-          </div>
-
+          <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28">
+          <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
         </div>
-      </div>
     </section>
   );
 }
