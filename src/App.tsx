@@ -24,6 +24,7 @@ export default function App() {
 
 import React, { useState } from 'react';
 import { Users, Lightbulb, Award, CheckCircle2, Menu, X, ArrowRight, Check } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
 
 const IconMap: Record<string, React.FC<any>> = {
@@ -360,7 +361,7 @@ function ProfileSection() {
                       </li>
                       <li className="bg-surface-low rounded p-4 text-[14px] md:text-[15px] text-on-surface-muted leading-[1.7] break-keep border-l-2 border-l-gray-300">
                         <span className="font-bold text-on-surface block mb-1">직무 중심 HR 솔루션</span>
-                        현대적 HR의 핵심인 과학적 직무 분석과 직무가치 평가(Job Evaluation) 시스템을 구축합니다. 역량 중심의 직급 체계 고도화는 물론, 구성원의 동기부여를 극대화할 수 있는 성과 및 직무 기반의 보수 체계(Total Rewards)를 설계하여 조직의 보상 경쟁력을 강화합니다.
+                        현대적 HR의 핵심인 과학적 직무 분석과 직무가치 평가(Job Evaluation) 시스템을 구축합니다. 역량 중심의 직급 체계 고도화는 물론, 구성원의 동기부여를 극대화할 수 있는 성과 및 직무 기반의 보수 체계(Total Rewards) 단위를 설계하여 조직의 보상 경쟁력을 강화합니다.
                       </li>
                       <li className="bg-surface-low rounded p-4 text-[14px] md:text-[15px] text-on-surface-muted leading-[1.7] break-keep border-l-2 border-l-gray-300">
                         <span className="font-bold text-on-surface block mb-1">성과 관리 및 평가 환류</span>
@@ -412,17 +413,26 @@ function CTASection() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-      if (!response.ok) {
-        throw new Error('이메일 전송에 실패했습니다.');
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS 환경변수가 설정되지 않았습니다.');
       }
+
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        },
+        publicKey
+      );
 
       setIsSuccess(true);
       setFormData({ name: '', company: '', email: '', phone: '', message: '' });
@@ -432,7 +442,7 @@ function CTASection() {
       }, 3000);
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('문의 접수 중 오류가 발생했습니다. 나중에 다시 시도해주세요. (서버 환경변수를 확인해주세요.)');
+      alert('문의 접수 중 오류가 발생했습니다. 나중에 다시 시도해주세요. (EmailJS 환경변수를 확인해주세요.)');
     } finally {
       setIsSubmitting(false);
     }
@@ -550,4 +560,3 @@ function Footer() {
     </footer>
   );
 }
-
