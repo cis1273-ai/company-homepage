@@ -392,9 +392,9 @@ function CTASection() {
     setIsSubmitting(true);
     
     try {
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      const serviceId = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
 
       await emailjs.send(serviceId, templateId, {
         name: formData.name,
