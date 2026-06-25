@@ -39,6 +39,7 @@ export default function App() {
         <DetailedServicesSection />
         <StatsClientsSection />
         <ProfileSection />
+        <CaseStudySection />
         <CTASection />
       </main>
       <Footer />
@@ -48,26 +49,22 @@ export default function App() {
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  
   return (
     <header className="sticky top-0 z-50 bg-surface border-b border-outline">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 h-24 flex items-center justify-between">
         <div className="flex items-center cursor-pointer py-2 -ml-8 md:-ml-14">
           <img src="/logo.png" alt="엘레브앤컴퍼니 Logo" className="h-16 md:h-20 w-auto object-contain object-left" />
         </div>
-        
         <nav className="hidden md:flex gap-10 items-center font-medium text-[15px] md:-mr-8">
           <a href="#about" className="text-on-surface hover:text-secondary transition-colors">회사소개</a>
           <a href="#services" className="text-on-surface hover:text-secondary transition-colors">서비스 영역</a>
           <a href="#projects" className="text-on-surface hover:text-secondary transition-colors">주요 실적</a>
           <a href="#contact" className="text-on-surface hover:text-secondary transition-colors">상담 문의</a>
         </nav>
-        
         <button className="md:hidden p-2 text-on-surface" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
-      
       {menuOpen && (
         <div className="md:hidden absolute top-24 left-0 w-full bg-surface border-b border-outline p-4 flex flex-col gap-4 shadow-lg">
           <a href="#about" className="p-2 font-medium" onClick={() => setMenuOpen(false)}>회사소개</a>
@@ -91,14 +88,9 @@ function Hero() {
           <span className="font-bold text-white">엘레브앤컴퍼니</span>는 기업의 지속 가능한 성장을 위한<br />
           최적의 인적 자원 전략과 실행력을 제공합니다.
         </h1>
-        
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <a href="#contact" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block">
-            상담 문의하기
-          </a>
-          <a href="/company_profile.pdf" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block">
-            회사 소개서
-          </a>
+          <a href="#contact" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block">상담 문의하기</a>
+          <a href="/company_profile.pdf" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block">회사 소개서</a>
         </div>
       </div>
     </section>
@@ -115,7 +107,6 @@ function GreetingSection() {
         <h3 className="text-lg md:text-[19px] font-medium text-secondary mb-12">
           안녕하십니까, 엘레브앤컴퍼니 대표 전인식입니다.
         </h3>
-        
         <div className="space-y-6 text-[15px] md:text-[16px] text-on-surface-muted leading-[1.8] break-keep">
           <p>한 분야에서 25년을 보낸다는 것은, 수많은 기업의 고민을 내 고민처럼 여기고 함께 밤을 지새웠다는 의미이기도 합니다.</p>
           <p>지난 2010년, 더 가치 있는 HR 서비스를 제공하고자 문을 연 <span className="font-semibold text-on-surface">엘레브앤컴퍼니</span>는 언제나 '고객중심'의 가치를 최우선에 두고 달려왔습니다. 우리는 단순히 컨설팅을 제공하는 제3자가 아닙니다. 고객사의 치열한 현장 속으로 들어가 함께 호흡하고, 기업이 직면한 진짜 문제를 함께 해결하는 가장 든든한 러닝메이트입니다.</p>
@@ -123,13 +114,12 @@ function GreetingSection() {
           <div className="pl-5 md:pl-6 py-2 border-l-4 border-secondary/40 my-10 italic text-on-surface font-medium">
             <p className="mb-2">"CEO의 철학이 조직 말단까지 흐르는 고객 맞춤형 전략,"</p>
             <p>"구성원의 성장이 기업의 이익으로 이어지는 상생(相生)의 매커니즘"을</p>
-            <p className="mt-4 not-italic font-normal text-on-surface-muted text-[15px] md:text-[15px]">
+            <p className="mt-4 not-italic font-normal text-on-surface-muted text-[15px]">
               구축하는 것이 <span className="font-semibold text-on-surface">엘레브앤컴퍼니</span>가 존재하는 이유이자 사명입니다.
             </p>
           </div>
           <p>고객사의 성장이 곧 저희의 성장이며, 기업과 인재가 함께 상생할 때 비로소 위대한 도약이 시작됩니다. 화려한 수식어보다 확실한 '결과'로 증명하겠습니다.</p>
           <p>철저하게 고객의 눈높이에서 고민하고, 진심을 담은 컨설팅으로 귀사의 위대한 여정에 늘 동행하겠습니다.</p>
-          
           <div className="mt-16 pt-8 border-t border-outline/50 flex align-middle justify-end pr-4">
             <span className="font-bold text-lg md:text-[19px] text-on-surface">엘레브앤컴퍼니 대표 전인식 올림</span>
           </div>
@@ -164,11 +154,9 @@ function CoreValuesSection() {
             </div>
           </div>
         </div>
-
         <div className="text-center mb-16">
           <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2 mb-2">Our Core Values</h2>
         </div>
-        
         <div className="grid md:grid-cols-3 gap-8">
           {coreValues.map((val, idx) => {
             const Icon = IconMap[val.icon] || Users;
@@ -198,7 +186,6 @@ function BusinessModelSection() {
             엘레브앤컴퍼니의 세 가지 핵심 사업 영역은 유기적으로 통합되어, 기업의 인사 문제를 근본적으로 해결하고 최적의 고객 가치를 창출합니다.
           </p>
         </div>
-        
         <div className="grid md:grid-cols-3 gap-8">
           {businessModels.map((model) => (
             <div key={model.id} className="bg-surface border border-outline rounded p-10 flex flex-col items-center text-center transition-all duration-300 hover:border-secondary">
@@ -215,7 +202,6 @@ function BusinessModelSection() {
 
 function DetailedServicesSection() {
   const [activeTab, setActiveTab] = useState(0);
-  
   return (
     <section className="py-24 bg-surface px-4 md:px-6 border-t border-outline">
       <div className="max-w-[1000px] mx-auto">
@@ -223,23 +209,19 @@ function DetailedServicesSection() {
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2">Detailed Services</h2>
           </div>
-          
           <div className="flex flex-wrap border-b border-outline mb-12 w-full">
             {detailedServices.map((service, idx) => (
               <button
                 key={service.id}
                 onClick={() => setActiveTab(idx)}
                 className={`py-4 px-4 font-bold text-[15px] sm:text-[17px] border-b-2 transition-colors flex-1 text-center whitespace-nowrap ${
-                  activeTab === idx 
-                    ? 'border-secondary text-primary' 
-                    : 'border-transparent text-on-surface-muted hover:text-on-surface'
+                  activeTab === idx ? 'border-secondary text-primary' : 'border-transparent text-on-surface-muted hover:text-on-surface'
                 }`}
               >
                 {service.title}
               </button>
             ))}
           </div>
-          
           <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 min-h-[200px]">
             {detailedServices[activeTab].items.map((item, idx) => (
               <div key={idx} className="flex items-center gap-4 bg-background p-6 rounded-lg shadow-sm border border-outline hover:border-secondary transition-all hover:-translate-y-1">
@@ -258,7 +240,6 @@ function useCountUp(target: number, duration: number = 2000) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const started = useRef(false);
-
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -282,7 +263,6 @@ function useCountUp(target: number, duration: number = 2000) {
     observer.observe(el);
     return () => observer.disconnect();
   }, [target, duration]);
-
   return { count, ref };
 }
 
@@ -290,36 +270,33 @@ function StatsClientsSection() {
   const projects = useCountUp(150, 2000);
   const retention = useCountUp(80, 2000);
   const experience = useCountUp(25, 2000);
-
   return (
     <section id="projects" className="bg-primary text-white">
       <div className="border-b border-primary-container px-4 md:px-6 py-20">
-        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-12 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-primary-container">
-          <div className="md:pr-12" ref={experience.ref}>
+        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-primary-container">
+          <div className="py-8 md:py-0 px-8 md:px-12 text-center" ref={experience.ref}>
             <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">EXPERIENCE</h3>
             <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{experience.count}<span className="text-4xl text-white">년+</span></div>
             <p className="text-xl font-semibold mb-2">컨설팅 경력</p>
           </div>
-          <div className="md:px-12" ref={projects.ref}>
+          <div className="py-8 md:py-0 px-8 md:px-12 text-center" ref={projects.ref}>
             <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">SUCCESS TRACK</h3>
             <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{projects.count}여 <span className="text-4xl text-white">건</span></div>
             <p className="text-xl font-semibold mb-2">누적 프로젝트 수행</p>
           </div>
-          <div className="pt-12 md:pt-0 md:pl-12" ref={retention.ref}>
+          <div className="py-8 md:py-0 px-8 md:px-12 text-center" ref={retention.ref}>
             <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">RETENTION</h3>
             <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{retention.count}%+</div>
             <p className="text-xl font-semibold mb-2">기존 고객 재계약률</p>
           </div>
         </div>
       </div>
-
       <div className="px-4 md:px-6 py-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-sm tracking-widest font-bold text-gray-400 mb-2">TRUSTED BY</h2>
             <h3 className="text-2xl font-bold tracking-widest">CLIENT TRUST</h3>
           </div>
-          
           <div className="grid md:grid-cols-2 gap-16">
             <div>
               <h4 className="text-blue-300 font-bold mb-6 text-lg border-b border-primary-container pb-4">공공 부문</h4>
@@ -349,21 +326,17 @@ function ProfileSection() {
     <section className="py-24 bg-background px-4 md:px-6 border-t border-outline">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
           <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
             <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
           </div>
-
           <div className="lg:col-span-7 order-2 lg:order-1 space-y-8">
             <div>
               <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
               <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-6">Principal Consultant</span>
-              
               <p className="font-bold text-[15px] md:text-[16px] text-primary p-6 bg-surface-low rounded border-l-4 border-secondary leading-relaxed break-keep shadow-sm">
                 "조직 및 인적자원관리 전략 분야에 있어 25년에 걸친 전략적 통찰력과 전문적 실무 역량의 결집"
               </p>
             </div>
-            
             <div className="space-y-6 text-on-surface-muted text-[15px] leading-relaxed break-keep">
               <div>
                 <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
@@ -374,7 +347,6 @@ function ProfileSection() {
                   네모파트너즈(Nemo Partners) 이사를 역임하였으며, 국내 경영 컨설팅 산업의 성장기부터 현재에 이르기까지 약 25년에 달하는 심도 있는 실무 경력과 사업적 통찰력을 보유하고 있습니다. 단순한 이론적 자문 수준을 넘어, 급변하는 경영 환경 속에서 조직의 중장기 비전과 실제 인사 실행 전략을 정밀하게 정렬시키는 핵심 의사결정 파트너로서 독보적인 입지를 확고히 해왔습니다.
                 </p>
               </div>
-
               <div>
                 <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
@@ -384,11 +356,8 @@ function ProfileSection() {
                   공공 부문 108건 및 민간 부문 42건을 합산하여 총 150여 건 이상의 대형 프로젝트를 성공적으로 완수하였습니다. 이는 중앙 부처의 정책 수립 지원부터 지방자치단체 산하 공공기관의 체질 개선, 그리고 대기업의 글로벌 인사 전략 구축에 이르기까지, 다양한 조직 생태계의 특수성을 깊이 있게 이해하고 각기 다른 문제 해결 방법론을 유연하게 적용할 수 있는 검증된 실무 능력을 의미합니다.
                 </p>
               </div>
-
               <div className="pt-4 border-t border-outline/50">
-                <h3 className="font-bold text-on-surface text-xl mb-4 text-primary">
-                  심화 전문 영역 (Core Competencies)
-                </h3>
+                <h3 className="font-bold text-on-surface text-xl mb-4 text-primary">심화 전문 영역 (Core Competencies)</h3>
                 <div className="space-y-4 pl-1">
                   <div className="bg-surface-low p-4 rounded border border-outline/40">
                     <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
@@ -398,7 +367,6 @@ function ProfileSection() {
                       조직 정밀 진단(Diagnostic)을 통해 숨겨진 비효율을 찾아내고, 기능 기반의 과학적 적정 정원 산정(Manpower Sizing)을 수행합니다. 이를 통해 거시적 거버넌스 체계를 재설계하고 실행력 있는 중장기 경영 전략 로드맵을 수립하는 데 특화되어 있습니다.
                     </p>
                   </div>
-
                   <div className="bg-surface-low p-4 rounded border border-outline/40">
                     <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
                       <Users size={18} /> 직무 중심 HR 솔루션
@@ -407,7 +375,6 @@ function ProfileSection() {
                       현대적 HR의 핵심인 과학적 직무 분석과 직무가치 평가(Job Evaluation) 시스템을 구축합니다. 역량 중심의 직급 체계 고도화는 물론, 구성원의 동기부여를 극대화할 수 있는 성과 및 직무 기반의 보수 체계(Total Rewards)를 설계하여 조직의 보상 경쟁력을 강화합니다.
                     </p>
                   </div>
-
                   <div className="bg-surface-low p-4 rounded border border-outline/40">
                     <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
                       <ShieldCheck size={18} /> 성과 관리 및 평가 환류
@@ -418,7 +385,6 @@ function ProfileSection() {
                   </div>
                 </div>
               </div>
-
               <div className="pt-4 border-t border-outline/50">
                 <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
                   <BookOpen size={18} className="text-secondary" />
@@ -430,7 +396,124 @@ function ProfileSection() {
               </div>
             </div>
           </div>
+        </div>
 
+        {/* Career Timeline */}
+        <div className="mt-20 pt-16 border-t border-outline">
+          <h3 className="text-2xl font-bold text-center inline-block border-b-[3px] border-secondary pb-2 mb-16 w-full text-center">Career Timeline</h3>
+          <div className="relative max-w-[700px] mx-auto">
+            <div className="absolute left-[90px] md:left-[110px] top-0 bottom-0 w-px bg-outline"></div>
+            {[
+              { year: '2001', content: '경희대학교 경영학 석사 취득 · 리더스앤컴퍼니 입사', highlight: false },
+              { year: '2007', content: '네모파트너즈(Nemo Partners) 조직인사그룹 이사 취임', highlight: false },
+              { year: '2008', content: '금융감독원 대규모 조직 재설계 프로젝트 수행', highlight: false },
+              { year: '2010', content: '엘레브앤컴퍼니 설립 · 대표 컨설턴트 (현재)', highlight: true },
+              { year: '2011–2018', content: '인천광역시 출자출연기관 경영평가위원 역임', highlight: false },
+              { year: '2018–2020', content: '서울특별시·영등포구 경영평가위원 역임', highlight: false },
+              { year: '2025', content: '누적 프로젝트 150여 건 · 기존 고객 재계약률 80%+', highlight: false },
+            ].map((item, idx) => (
+              <div key={idx} className="relative flex items-start gap-6 mb-10">
+                <div className="w-[90px] md:w-[110px] flex-shrink-0 text-right">
+                  <span className={`text-[13px] font-bold leading-tight ${item.highlight ? 'text-secondary' : 'text-on-surface-muted'}`}>{item.year}</span>
+                </div>
+                <div className="absolute left-[90px] md:left-[110px] top-[6px] w-3 h-3 rounded-full border-2 -translate-x-1/2 z-10 bg-background" style={{ borderColor: item.highlight ? 'var(--color-secondary)' : 'var(--color-outline)' }}></div>
+                <div className={`pl-6 pb-1 ${item.highlight ? 'bg-surface-low border border-secondary/30 rounded p-4 shadow-sm' : ''}`}>
+                  <p className={`text-[15px] leading-relaxed break-keep ${item.highlight ? 'font-bold text-primary' : 'text-on-surface'}`}>{item.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+const caseStudies = [
+  {
+    num: '01',
+    client: '경상남도사회서비스원',
+    year: '2025',
+    title: '현장 중심 직무 인사시스템 구축',
+    problem: '돌봄 서비스 종사자의 직무 난이도·책임 수준이 보상에 반영되지 않아 직무 몰입도 저하',
+    approach: '현장 중심 직무 인사 시스템 설계 → 직무 난이도·책임 수준별 보상 체계 정교화',
+    result: '종사자 직무 몰입도 향상, 사회 서비스 질적 제고',
+  },
+  {
+    num: '02',
+    client: '외교부',
+    year: '2018',
+    title: '재외공관장 성과평가 체계 고도화',
+    problem: '외교 업무 특수성으로 인해 기존 성과 평가지표의 객관성·타당성 부족',
+    approach: '재외공관장 성과평가 제도 합리화 → 외교 업무 특수성 반영 지표 타당성 검토',
+    result: '객관적 성과 측정 가능한 평가 체계 확립, 국가 외교 역량 극대화 기여',
+  },
+  {
+    num: '03',
+    client: 'LH주거복지정보',
+    year: '2023',
+    title: '조직 기능 고도화 및 경영성과 체계 구축',
+    problem: '조직 비전과 하부 실행 과제 간 정렬(Alignment) 부재, 주거복지 서비스 기능 비효율',
+    approach: '조직 기능 정밀 진단 → 비전-실행 과제 연계성 분석 → 핵심 기능 재편안 도출',
+    result: '주거복지 서비스 강화를 위한 조직 기능 최적화 및 경영성과 체계 확립',
+  },
+  {
+    num: '04',
+    client: '금융감독원',
+    year: '2008',
+    title: '글로벌 금융기관 조직 재설계',
+    problem: '글로벌 금융위기 속 국가 금융감독 시스템의 공공성·전문성 동시 강화 필요',
+    approach: '경영혁신안 마련 → 조직 기능 통폐합 및 구조 개편 자문',
+    result: '부처 간 기능 중복 해소, 슬림화된 국가 인력 운영 모델 제시',
+  },
+];
+
+function CaseStudySection() {
+  const [active, setActive] = useState(0);
+  const c = caseStudies[active];
+  return (
+    <section className="py-24 bg-surface-low px-4 md:px-6 border-t border-outline">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2">Case Studies</h2>
+          <p className="text-on-surface-muted mt-6 text-[15px]">대표 프로젝트 수행 사례</p>
+        </div>
+        <div className="flex flex-wrap gap-3 justify-center mb-12">
+          {caseStudies.map((cs, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActive(idx)}
+              className={`px-5 py-2.5 rounded text-[14px] font-bold border transition-all ${
+                active === idx
+                  ? 'bg-secondary text-white border-secondary'
+                  : 'bg-surface border-outline text-on-surface-muted hover:border-secondary hover:text-secondary'
+              }`}
+            >
+              {cs.num}. {cs.client}
+            </button>
+          ))}
+        </div>
+        <div className="bg-surface border border-outline rounded-lg p-8 md:p-12 shadow-sm max-w-[860px] mx-auto">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-4xl font-bold text-secondary/20">{c.num}</span>
+            <div>
+              <p className="text-secondary font-bold text-sm tracking-widest">{c.client} · {c.year}</p>
+              <h3 className="text-xl md:text-2xl font-bold text-on-surface break-keep">{c.title}</h3>
+            </div>
+          </div>
+          <div className="space-y-6">
+            {[
+              { label: '문제', color: 'bg-red-50 border-red-200', labelColor: 'text-red-500', text: c.problem },
+              { label: '접근', color: 'bg-blue-50 border-blue-200', labelColor: 'text-secondary', text: c.approach },
+              { label: '결과', color: 'bg-green-50 border-green-200', labelColor: 'text-green-600', text: c.result },
+            ].map((row, i) => (
+              <div key={i} className={`flex gap-4 p-5 rounded-lg border ${row.color}`}>
+                <span className={`font-bold text-sm w-10 flex-shrink-0 pt-0.5 ${row.labelColor}`}>{row.label}</span>
+                <p className="text-on-surface text-[15px] leading-relaxed break-keep">{row.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -446,12 +529,10 @@ function CTASection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
     try {
       const serviceId = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
       const templateId = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
       const publicKey = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
-
       await emailjs.send(serviceId, templateId, {
         name: formData.name,
         company: formData.company,
@@ -459,7 +540,6 @@ function CTASection() {
         phone: formData.phone,
         message: formData.message,
       }, publicKey);
-
       setIsSuccess(true);
       setFormData({ name: '', company: '', email: '', phone: '', message: '' });
       setTimeout(() => setIsSuccess(false), 5000);
