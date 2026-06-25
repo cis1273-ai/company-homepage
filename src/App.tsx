@@ -21,7 +21,7 @@ export default function App() {
   return (
     <div className="font-sans min-h-screen text-on-surface bg-background">
       
-      {/* 👑 1. TypeScript 에러 없는 완벽한 가로 흐름 띠 (배경: 네이비 / 글자: 흰색) */}
+      {/* 🎯 기존 디자인 배너 원형 그대로 복구 + TypeScript 에러만 해결 */}
       <div className="w-full bg-[#0a2540] py-2.5 overflow-hidden border-b border-white/10 flex items-center">
         <div className="whitespace-nowrap flex animate-[marquee_30s_linear_infinite]" style={{ animation: 'marquee 30s linear infinite' }}>
           {/* 첫 번째 세트 */}
@@ -41,7 +41,7 @@ export default function App() {
           <span className="text-white/40 text-xs md:text-sm mx-2 shrink-0">|</span>
         </div>
 
-        {/* CSS 애니메이션 효과 직접 주입 (config 파일 수정 불필요) */}
+        {/* 빌드 에러 없이 글자가 흐르게 만드는 CSS 주입 */}
         <style>{`
           @keyframes marquee {
             0% { transform: translateX(0%); }
@@ -67,7 +67,7 @@ export default function App() {
 }
 
 // ==========================================
-// 여기서부터는 홈페이지를 구성하는 개별 구역들입니다.
+// 기존 원본 컴포넌트 디자인 (원상복구)
 // ==========================================
 
 function Header() {
@@ -265,24 +265,19 @@ function StatsClientsSection() {
   return (
     <section id="stats" className="py-20 bg-surface border-t border-outline">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 text-center">
-        
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-on-surface mb-2">숫자로 보는 신뢰</h2>
-          <p className="text-on-surface-muted text-sm md:text-base">
-            25년간 쌓아온 검증된 트랙 레코드와 파트너십의 결과입니다.
-          </p>
+          <p className="text-on-surface-muted text-sm md:text-base">25년간 쌓아온 검증된 트랙 레코드와 파트너십의 결과입니다.</p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto">
-          <div className="bg-surface-low p-8 rounded-xl border border-outline/40 shadow-sm transform transition hover:scale-105 duration-300">
+          <div className="bg-surface-low p-8 rounded-xl border border-outline/40 shadow-sm">
             <p className="text-on-surface-muted font-medium text-base mb-2">누적 프로젝트 수행건수</p>
             <p className="text-5xl md:text-6xl font-extrabold text-primary tracking-tight">
               {projectCount}<span className="text-3xl md:text-4xl text-secondary ml-1">+</span>
             </p>
             <p className="text-xs text-on-surface-muted mt-3">공공 부문 108건 및 민간 부문 42건 합산 기준</p>
           </div>
-
-          <div className="bg-surface-low p-8 rounded-xl border border-outline/40 shadow-sm transform transition hover:scale-105 duration-300">
+          <div className="bg-surface-low p-8 rounded-xl border border-outline/40 shadow-sm">
             <p className="text-on-surface-muted font-medium text-base mb-2">기존 고객 재계약률</p>
             <p className="text-5xl md:text-6xl font-extrabold text-primary tracking-tight">
               {retentionRate}<span className="text-3xl md:text-4xl text-secondary ml-1">%</span>
@@ -290,7 +285,6 @@ function StatsClientsSection() {
             <p className="text-xs text-on-surface-muted mt-3">지속적인 신뢰와 전략적 파트너십의 지표</p>
           </div>
         </div>
-
       </div>
     </section>
   );
@@ -300,89 +294,24 @@ function ProfileSection() {
   return (
     <section id="profile" className="py-24 bg-background px-4 md:px-6 border-t border-outline">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
-            <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-5 w-full">
+            <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border shadow-xl" />
           </div>
-
-          <div className="lg:col-span-7 order-2 lg:order-1 space-y-8">
+          <div className="lg:col-span-7 space-y-6">
             <div>
               <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
-              <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-6">Principal Consultant</span>
-              
-              <p className="font-bold text-[15px] md:text-[16px] text-primary p-6 bg-surface-low rounded border-l-4 border-secondary leading-relaxed break-keep shadow-sm">
-                "조직 및 인적자원관리 전략 분야에 있어 25년에 걸친 전략적 통찰력과 전문적 실무 역량의 결집"
+              <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-4">Principal Consultant</span>
+              <p className="text-on-surface-muted text-base leading-relaxed break-keep">
+                네모파트너즈 이사를 역임하며 25년간 조직 전략 및 HR 솔루션 부문을 선도해 왔습니다. 이론적 접근에 그치지 않고, 기업과 공공기관의 실질적인 체질 개선을 이끌어내는 실행 중심의 컨설팅을 지향합니다.
               </p>
             </div>
-            
-            <div className="space-y-6 text-on-surface-muted text-[15px] leading-relaxed break-keep">
-              <div>
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                  총 경력 개요 및 전략적 리더십
-                </h3>
-                <p className="pl-3.5">
-                  네모파트너즈(Nemo Partners) 이사 직위 역임을 포함하여, 국내 경영 컨설팅 산업의 성장기부터 현재에 이르기까지 약 25년에 달하는 심도 있는 실무 경력과 사업적 통찰력을 보유하고 있습니다. 단순한 이론적 자문 수준을 넘어, 급변하는 경영 환경 속에서 조직의 중장기 비전과 실제 인사 실행 전략을 정밀하게 정렬시키는 핵심 의사결정 파트너로서 독보적인 입지를 확고히 해왔습니다.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                  압도적인 프로젝트 트랙 레코드
-                </h3>
-                <p className="pl-3.5">
-                  공공 부문 108건 및 민간 부문 42건을 합산하여 총 150여 건 이상의 대형 프로젝트를 성공적으로 완수하였습니다. 이는 중앙 부처의 정책 수립 지원부터 지방자치단체 산하 공공기관의 체질 개선, 그리고 대기업의 글로벌 인사 전략 구축에 이르기까지, 다양한 조직 생태계의 특수성을 깊이 있게 이해하고 각기 다른 문제 해결 방법론을 유연하게 적용할 수 있는 검증된 실무 능력을 의미합니다.
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-outline/50">
-                <h3 className="font-bold text-on-surface text-xl mb-4 text-primary">
-                  심화 전문 영역 (Core Competencies)
-                </h3>
-                <div className="space-y-4 pl-1">
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <BarChart3 size={18} /> 조직 전략 및 거버넌스
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      조직 정밀 진단(Diagnostic)을 통해 숨겨진 비효율을 찾아내고, 기능 기반의 과학적 적정 정원 산정(Manpower Sizing)을 수행합니다. 이를 통해 거시적 거버넌스 체계를 재설계하고 실행력 있는 중장기 경영 전략 로드맵을 수립하는 데 특화되어 있습니다.
-                    </p>
-                  </div>
-
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <Users size={18} /> 직무 중심 HR 솔루션
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      현대적 HR의 핵심인 과학적 직무 분석과 직무가치 평가(Job Evaluation) 시스템을 구축합니다. 역량 중심의 직급 체계 고도화는 물론, 구성원의 동기부여를 극대화할 수 있는 성과 및 직무 기반의 보수 체계(Total Rewards)를 설계하여 조직의 보상 경쟁력을 강화합니다.
-                    </p>
-                  </div>
-
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <ShieldCheck size={18} /> 성과 관리 및 평가 환류
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      BSC(Balanced Scorecard) 및 MBO 체계를 조직 문화에 맞게 커스터마이징하여 구축합니다. 특히 공공기관 경영평가(Internal & External) 대응에 있어 단순한 지표 관리를 넘어, 평가 결과가 조직의 실제 성과 향상으로 이어지도록 하는 환류 시스템 고도화 자문에 강점을 보유하고 있습니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-outline/50">
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <BookOpen size={18} className="text-secondary" />
-                  지식 자본 및 학술적 기여
-                </h3>
-                <p className="pl-6 text-sm sm:text-[15px]">
-                  『알기 쉬운 조사방법론』, 『사례로 배우는 스포츠마케팅』 등 다수의 전문 서적 저술 활동과 총 46회 이상의 기업 및 공공기관 대상 전문 강연을 실시하였습니다. 이를 통해 이론과 현장 실무가 융합된 지식 자산을 업계에 공유하고, 후배 컨설턴트 및 인사 담당자들에게 실질적인 가이드라인을 제시하며 해당 분야의 지식 전파를 주도해오고 있습니다.
-                </p>
-              </div>
+            <div className="space-y-3 text-on-surface-muted text-sm md:text-base">
+              <p className="flex items-center gap-2"><Briefcase size={18} className="text-primary" /> 네모파트너즈(Nemo Partners) 이사 역임</p>
+              <p className="flex items-center gap-2"><GraduationCap size={18} className="text-primary" /> 공공 및 민간 부문 총 150여 건 이상의 프로젝트 총괄</p>
+              <p className="flex items-center gap-2"><BookOpen size={18} className="text-primary" /> 『알기 쉬운 조사방법론』 등 다수 서적 저술 및 강연 활동</p>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -415,48 +344,46 @@ function CTASection() {
         <p className="text-on-surface-muted mb-8 text-sm md:text-base break-keep">
           조직 진단, 정원 산정, 인사제도 수립 등 당면한 HR 이슈에 대해 25년 베테랑 컨설턴트가 직접 초기 방향성을 무료로 자문해 드립니다.
         </p>
-
         {!isFormVisible ? (
-          <button onClick={() => setIsFormVisible(true)} className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-base font-medium text-on-primary shadow-lg transition hover:bg-primary-hover transform hover:scale-105 duration-200">
+          <button onClick={() => setIsFormVisible(true)} className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-base font-medium text-on-primary shadow-lg transition hover:bg-primary-hover">
             상담 신청서 작성하기
           </button>
         ) : (
-          <form onSubmit={handleSubmit} className="bg-background p-6 md:p-8 rounded-xl border border-outline shadow-xl text-left space-y-5 animate-fade-in">
+          <form onSubmit={handleSubmit} className="bg-background p-6 md:p-8 rounded-xl border border-outline shadow-xl text-left space-y-5">
             {isSuccess ? (
               <div className="text-center py-8 space-y-3">
                 <CheckCircle2 className="mx-auto text-secondary" size={48} />
                 <h3 className="text-xl font-bold text-on-surface">문의가 성공적으로 접수되었습니다.</h3>
                 <p className="text-sm text-on-surface-muted break-keep">확인 후 대표 컨설턴트가 영업일 기준 48시간 이내에 직접 연락드리겠습니다.</p>
-                <button type="button" onClick={() => setIsSuccess(false)} className="text-sm text-primary font-semibold underline mt-4">새 문의 작성하기</button>
               </div>
             ) : (
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-on-surface-muted mb-1">성함 *</label>
-                    <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm focus:border-primary focus:outline-none" />
+                    <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-on-surface-muted mb-1">회사명 / 기관명 *</label>
-                    <input type="text" required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm focus:border-primary focus:outline-none" />
+                    <input type="text" required value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm" />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-on-surface-muted mb-1">이메일 주소 *</label>
-                    <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm focus:border-primary focus:outline-none" />
+                    <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-on-surface-muted mb-1">연락처 *</label>
-                    <input type="tel" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm focus:border-primary focus:outline-none" />
+                    <input type="tel" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-on-surface-muted mb-1">문의 내용 (주요 HR 이슈 및 고민 사항) *</label>
-                  <textarea required rows={4} value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm focus:border-primary focus:outline-none resize-none"></textarea>
+                  <label className="block text-xs font-semibold text-on-surface-muted mb-1">문의 내용 *</label>
+                  <textarea required rows={4} value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full rounded-lg border border-outline/60 bg-surface-low px-3 py-2 text-sm resize-none"></textarea>
                 </div>
                 <div className="flex gap-3 justify-end pt-2">
-                  <button type="button" onClick={() => setIsFormVisible(false)} className="px-4 py-2 text-sm font-medium text-on-surface-muted border border-outline rounded-lg hover:bg-surface-low">취소</button>
+                  <button type="button" onClick={() => setIsFormVisible(false)} className="px-4 py-2 text-sm font-medium text-on-surface-muted border border-outline rounded-lg">취소</button>
                   <button type="submit" disabled={isSubmitting} className="px-6 py-2 text-sm font-medium text-on-primary bg-primary rounded-lg hover:bg-primary-hover disabled:opacity-50">{isSubmitting ? "전송 중..." : "상담 신청하기"}</button>
                 </div>
               </>
@@ -476,11 +403,6 @@ function Footer() {
           <p className="font-bold text-base text-on-primary">엘레브앤컴퍼니 (Elev앤Company)</p>
           <p>대표컨설턴트 : 전인식 | 이메일 : cis1273@gmail.com</p>
           <p className="text-xs text-on-primary/60">© 2026 Elev앤Company. All rights reserved.</p>
-        </div>
-        <div className="flex gap-4 text-xs">
-          <a href="#services" className="hover:underline">주요서비스</a>
-          <a href="#profile" className="hover:underline">대표소개</a>
-          <a href="#contact" className="hover:underline">문의하기</a>
         </div>
       </div>
     </footer>
