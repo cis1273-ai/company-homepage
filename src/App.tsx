@@ -270,24 +270,31 @@ function StatsClientsSection() {
   const projects = useCountUp(150, 2000);
   const retention = useCountUp(80, 2000);
   const experience = useCountUp(25, 2000);
+  const lectures = useCountUp(50, 2000);
+
   return (
     <section id="projects" className="bg-primary text-white">
       <div className="border-b border-primary-container px-4 md:px-6 py-20">
-        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-primary-container">
-          <div className="py-8 md:py-0 px-8 md:px-12 text-center" ref={experience.ref}>
+        <div className="max-w-[1200px] mx-auto grid md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-primary-container">
+          <div className="py-8 md:py-0 px-6 md:px-8 text-center" ref={experience.ref}>
             <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">EXPERIENCE</h3>
             <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{experience.count}<span className="text-4xl text-white">년+</span></div>
             <p className="text-xl font-semibold mb-2">컨설팅 경력</p>
           </div>
-          <div className="py-8 md:py-0 px-8 md:px-12 text-center" ref={projects.ref}>
+          <div className="py-8 md:py-0 px-6 md:px-8 text-center" ref={projects.ref}>
             <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">SUCCESS TRACK</h3>
             <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{projects.count}여 <span className="text-4xl text-white">건</span></div>
             <p className="text-xl font-semibold mb-2">누적 프로젝트 수행</p>
           </div>
-          <div className="py-8 md:py-0 px-8 md:px-12 text-center" ref={retention.ref}>
+          <div className="py-8 md:py-0 px-6 md:px-8 text-center" ref={retention.ref}>
             <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">RETENTION</h3>
             <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{retention.count}%+</div>
             <p className="text-xl font-semibold mb-2">기존 고객 재계약률</p>
+          </div>
+          <div className="py-8 md:py-0 px-6 md:px-8 text-center" ref={lectures.ref}>
+            <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">LECTURE</h3>
+            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{lectures.count}여 <span className="text-4xl text-white">건</span></div>
+            <p className="text-xl font-semibold mb-2">풍부한 전문 강의 실적</p>
           </div>
         </div>
       </div>
@@ -397,34 +404,6 @@ function ProfileSection() {
             </div>
           </div>
         </div>
-
-        {/* Career Timeline */}
-        <div className="mt-20 pt-16 border-t border-outline">
-          <h3 className="text-2xl font-bold text-center inline-block border-b-[3px] border-secondary pb-2 mb-16 w-full text-center">Career Timeline</h3>
-          <div className="relative max-w-[700px] mx-auto">
-            <div className="absolute left-[90px] md:left-[110px] top-0 bottom-0 w-px bg-outline"></div>
-            {[
-              { year: '2001', content: '경희대학교 경영학 석사 취득 · 리더스앤컴퍼니 입사', highlight: false },
-              { year: '2007', content: '네모파트너즈(Nemo Partners) 조직인사그룹 이사 취임', highlight: false },
-              { year: '2008', content: '금융감독원 대규모 조직 재설계 프로젝트 수행', highlight: false },
-              { year: '2010', content: '엘레브앤컴퍼니 설립 · 대표 컨설턴트 (현재)', highlight: true },
-              { year: '2011–2018', content: '인천광역시 출자출연기관 경영평가위원 역임', highlight: false },
-              { year: '2018–2020', content: '서울특별시·영등포구 경영평가위원 역임', highlight: false },
-              { year: '2025', content: '누적 프로젝트 150여 건 · 기존 고객 재계약률 80%+', highlight: false },
-            ].map((item, idx) => (
-              <div key={idx} className="relative flex items-start gap-6 mb-10">
-                <div className="w-[90px] md:w-[110px] flex-shrink-0 text-right">
-                  <span className={`text-[13px] font-bold leading-tight ${item.highlight ? 'text-secondary' : 'text-on-surface-muted'}`}>{item.year}</span>
-                </div>
-                <div className="absolute left-[90px] md:left-[110px] top-[6px] w-3 h-3 rounded-full border-2 -translate-x-1/2 z-10 bg-background" style={{ borderColor: item.highlight ? 'var(--color-secondary)' : 'var(--color-outline)' }}></div>
-                <div className={`pl-6 pb-1 ${item.highlight ? 'bg-surface-low border border-secondary/30 rounded p-4 shadow-sm' : ''}`}>
-                  <p className={`text-[15px] leading-relaxed break-keep ${item.highlight ? 'font-bold text-primary' : 'text-on-surface'}`}>{item.content}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
       </div>
     </section>
   );
@@ -473,44 +452,39 @@ function CaseStudySection() {
   const [active, setActive] = useState(0);
   const c = caseStudies[active];
   return (
-    <section className="py-24 bg-surface-low px-4 md:px-6 border-t border-outline">
+    <section className="py-24 bg-surface px-4 md:px-6 border-t border-outline">
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2">Case Studies</h2>
           <p className="text-on-surface-muted mt-6 text-[15px]">대표 프로젝트 수행 사례</p>
         </div>
-        <div className="flex flex-wrap gap-3 justify-center mb-12">
+        <div className="flex flex-wrap border-b border-outline mb-12 w-full max-w-[860px] mx-auto">
           {caseStudies.map((cs, idx) => (
             <button
               key={idx}
               onClick={() => setActive(idx)}
-              className={`px-5 py-2.5 rounded text-[14px] font-bold border transition-all ${
-                active === idx
-                  ? 'bg-secondary text-white border-secondary'
-                  : 'bg-surface border-outline text-on-surface-muted hover:border-secondary hover:text-secondary'
+              className={`py-4 px-4 font-bold text-[14px] sm:text-[15px] border-b-2 transition-colors flex-1 text-center whitespace-nowrap ${
+                active === idx ? 'border-secondary text-primary' : 'border-transparent text-on-surface-muted hover:text-on-surface'
               }`}
             >
               {cs.num}. {cs.client}
             </button>
           ))}
         </div>
-        <div className="bg-surface border border-outline rounded-lg p-8 md:p-12 shadow-sm max-w-[860px] mx-auto">
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-4xl font-bold text-secondary/20">{c.num}</span>
-            <div>
-              <p className="text-secondary font-bold text-sm tracking-widest">{c.client} · {c.year}</p>
-              <h3 className="text-xl md:text-2xl font-bold text-on-surface break-keep">{c.title}</h3>
-            </div>
+        <div className="bg-surface-low border border-outline rounded p-8 md:p-12 max-w-[860px] mx-auto">
+          <div className="mb-8 pb-6 border-b border-outline">
+            <p className="text-secondary font-bold text-sm tracking-widest mb-2">{c.client} · {c.year}</p>
+            <h3 className="text-xl md:text-2xl font-bold text-on-surface break-keep">{c.title}</h3>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-5">
             {[
-              { label: '문제', color: 'bg-red-50 border-red-200', labelColor: 'text-red-500', text: c.problem },
-              { label: '접근', color: 'bg-blue-50 border-blue-200', labelColor: 'text-secondary', text: c.approach },
-              { label: '결과', color: 'bg-green-50 border-green-200', labelColor: 'text-green-600', text: c.result },
+              { label: '문제', text: c.problem },
+              { label: '접근', text: c.approach },
+              { label: '결과', text: c.result },
             ].map((row, i) => (
-              <div key={i} className={`flex gap-4 p-5 rounded-lg border ${row.color}`}>
-                <span className={`font-bold text-sm w-10 flex-shrink-0 pt-0.5 ${row.labelColor}`}>{row.label}</span>
-                <p className="text-on-surface text-[15px] leading-relaxed break-keep">{row.text}</p>
+              <div key={i} className="flex gap-4 items-start">
+                <span className="font-bold text-[13px] tracking-widest text-secondary border border-secondary/30 bg-surface px-2 py-0.5 rounded flex-shrink-0 mt-0.5">{row.label}</span>
+                <p className="text-on-surface-muted text-[15px] leading-relaxed break-keep">{row.text}</p>
               </div>
             ))}
           </div>
