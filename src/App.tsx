@@ -12,9 +12,24 @@ const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
 };
 
+const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인적자원관리 전략 25년 경력 · 네모파트너즈 이사 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 46회 이상 · 저서 『알기 쉬운 조사방법론』 『사례로 배우는 스포츠마케팅』';
+
+function Ticker() {
+  const repeated = `${TICKER_TEXT}　　　　　${TICKER_TEXT}`;
+  return (
+    <div className="overflow-hidden bg-primary-container text-blue-100 text-[12px] tracking-wide h-8 flex items-center">
+      <div className="ticker-track whitespace-nowrap select-none">
+        <span className="px-8">{repeated}</span>
+        <span className="px-8">{repeated}</span>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <div className="font-sans min-h-screen text-on-surface bg-background">
+      <Ticker />
       <Header />
       <main>
         <Hero />
@@ -292,15 +307,12 @@ function ProfileSection() {
   return (
     <section className="py-24 bg-background px-4 md:px-6 border-t border-outline">
       <div className="max-w-[1200px] mx-auto">
-        {/* 모바일에서는 사진(order-1)이 먼저 나오고 텍스트(order-2)가 아래로 가며, PC(lg 이상)에서는 원래대로 양옆 배치 */}
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* [변경] 프로필 사진 영역: 모바일에서 무조건 맨 위에 먼저 보이도록 order-1 설정 */}
           <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
             <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
           </div>
 
-          {/* 이력 텍스트 영역: 모바일에서 사진 다음으로 자연스럽게 이어지도록 order-2 설정 */}
           <div className="lg:col-span-7 order-2 lg:order-1 space-y-8">
             <div>
               <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
