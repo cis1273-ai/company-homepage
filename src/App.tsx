@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
@@ -12,7 +12,7 @@ const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
 };
 
-const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인적자원관리 전략 25년 경력 · 네모파트너즈 이사 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 46회 이상 · 저서 『알기 쉬운 조사방법론』 『사례로 배우는 스포츠마케팅』';
+const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인적자원관리 분야 25년 경력 · 네모파트너즈 이사 역임 · 前 서울특별시·인천광역시 출자출연기관 경영평가 위원 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 46회 이상 · 저서 『알기 쉬운 조사방법론』';
 
 function Ticker() {
   const repeated = `${TICKER_TEXT}　　　　　${TICKER_TEXT}`;
@@ -254,24 +254,65 @@ function DetailedServicesSection() {
   );
 }
 
+function useCountUp(target: number, duration: number = 2000) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const start = performance.now();
+          const tick = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * target));
+            if (progress < 1) requestAnimationFrame(tick);
+            else setCount(target);
+          };
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target, duration]);
+
+  return { count, ref };
+}
+
 function StatsClientsSection() {
+  const projects = useCountUp(150, 2000);
+  const retention = useCountUp(80, 2000);
+  const experience = useCountUp(25, 2000);
+
   return (
     <section id="projects" className="bg-primary text-white">
       <div className="border-b border-primary-container px-4 md:px-6 py-20">
-        <div className="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-12 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-primary-container">
-          <div className="md:pr-12">
+        <div className="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-12 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-primary-container">
+          <div className="md:pr-12" ref={experience.ref}>
+            <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">EXPERIENCE</h3>
+            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{experience.count}<span className="text-4xl text-white">년+</span></div>
+            <p className="text-xl font-semibold mb-2">컨설팅 경력</p>
+          </div>
+          <div className="md:px-12" ref={projects.ref}>
             <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">SUCCESS TRACK</h3>
-            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">150여 <span className="text-4xl text-white">건</span></div>
+            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{projects.count}여 <span className="text-4xl text-white">건</span></div>
             <p className="text-xl font-semibold mb-2">누적 프로젝트 수행</p>
           </div>
-          <div className="pt-12 md:pt-0 md:pl-12">
+          <div className="pt-12 md:pt-0 md:pl-12" ref={retention.ref}>
             <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">RETENTION</h3>
-            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">80%+</div>
+            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{retention.count}%+</div>
             <p className="text-xl font-semibold mb-2">기존 고객 재계약률</p>
           </div>
         </div>
       </div>
-      
+
       <div className="px-4 md:px-6 py-24">
         <div className="max-w-[1200px] mx-auto">
           <div className="text-center mb-16">
