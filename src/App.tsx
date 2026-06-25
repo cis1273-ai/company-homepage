@@ -21,21 +21,33 @@ export default function App() {
   return (
     <div className="font-sans min-h-screen text-on-surface bg-background">
       
-      {/* 👑 1. 무조건 글자가 보이고 천천히 가로로 흐르는 배너 띠 (배경: 네이비 / 글자: 흰색) */}
-      <div className="w-full bg-[#0a2540] py-2.5 overflow-hidden border-b border-white/10">
-        <marquee className="text-white text-xs md:text-sm font-semibold tracking-wide" scrollamount="4" behavior="scroll" direction="left">
-          <span className="mx-12">🎯 조직 및 인적자원관리 전략 분야 25년 베테랑</span>
-          <span className="mx-12">|</span>
-          <span className="mx-12">💼 총 150여 건 이상의 대형 프로젝트 성공적 완수 (공공 108건 / 민간 42건)</span>
-          <span className="mx-12">|</span>
-          <span className="mx-12">📚 네모파트너즈(Nemo Partners) 이사 역임 및 전문 서적 저술</span>
-          <span className="mx-12">|</span>
-          <span className="mx-12">🎯 조직 및 인적자원관리 전략 분야 25년 베테랑</span>
-          <span className="mx-12">|</span>
-          <span className="mx-12">💼 총 150여 건 이상의 대형 프로젝트 성공적 완수 (공공 108건 / 민간 42건)</span>
-          <span className="mx-12">|</span>
-          <span className="mx-12">📚 네모파트너즈(Nemo Partners) 이사 역임 및 전문 서적 저술</span>
-        </marquee>
+      {/* 👑 1. TypeScript 에러 없는 완벽한 가로 흐름 띠 (배경: 네이비 / 글자: 흰색) */}
+      <div className="w-full bg-[#0a2540] py-2.5 overflow-hidden border-b border-white/10 flex items-center">
+        <div className="whitespace-nowrap flex animate-[marquee_30s_linear_infinite]" style={{ animation: 'marquee 30s linear infinite' }}>
+          {/* 첫 번째 세트 */}
+          <span className="text-white text-xs md:text-sm font-semibold tracking-wide mx-12 shrink-0">🎯 조직 및 인적자원관리 전략 분야 25년 베테랑</span>
+          <span className="text-white/40 text-xs md:text-sm mx-2 shrink-0">|</span>
+          <span className="text-white text-xs md:text-sm font-semibold tracking-wide mx-12 shrink-0">💼 총 150여 건 이상의 대형 프로젝트 성공적 완수 (공공 108건 / 민간 42건)</span>
+          <span className="text-white/40 text-xs md:text-sm mx-2 shrink-0">|</span>
+          <span className="text-white text-xs md:text-sm font-semibold tracking-wide mx-12 shrink-0">📚 네모파트너즈(Nemo Partners) 이사 역임 및 전문 서적 저술</span>
+          <span className="text-white/40 text-xs md:text-sm mx-2 shrink-0">|</span>
+          
+          {/* 끊김 없는 반복을 위한 두 번째 복사 세트 */}
+          <span className="text-white text-xs md:text-sm font-semibold tracking-wide mx-12 shrink-0">🎯 조직 및 인적자원관리 전략 분야 25년 베테랑</span>
+          <span className="text-white/40 text-xs md:text-sm mx-2 shrink-0">|</span>
+          <span className="text-white text-xs md:text-sm font-semibold tracking-wide mx-12 shrink-0">💼 총 150여 건 이상의 대형 프로젝트 성공적 완수 (공공 108건 / 민간 42건)</span>
+          <span className="text-white/40 text-xs md:text-sm mx-2 shrink-0">|</span>
+          <span className="text-white text-xs md:text-sm font-semibold tracking-wide mx-12 shrink-0">📚 네모파트너즈(Nemo Partners) 이사 역임 및 전문 서적 저술</span>
+          <span className="text-white/40 text-xs md:text-sm mx-2 shrink-0">|</span>
+        </div>
+
+        {/* CSS 애니메이션 효과 직접 주입 (config 파일 수정 불필요) */}
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+          }
+        `}</style>
       </div>
 
       <Header />
@@ -112,18 +124,10 @@ function GreetingSection() {
       <div className="max-w-[1000px] mx-auto text-center">
         <h2 className="text-2xl md:text-3xl font-bold text-on-surface mb-8">CEO 메시지</h2>
         <div className="space-y-6 text-on-surface-muted text-base md:text-lg leading-relaxed break-keep font-normal">
-          <p>
-            안녕하십니까? 엘레브앤컴퍼니 대표컨설턴트 전인식입니다.
-          </p>
-          <p>
-            오늘날의 경영 환경은 그 어느 때보다 예측 불가능하며 빠르게 변화하고 있습니다. 이러한 변화의 소용돌이 속에서 조직이 생존하고 나아가 지속 가능한 경쟁 우위를 확보하기 위한 유일한 열쇠는 바로 <strong>'사람(Human)'</strong>과 <strong>'조직(Organization)'</strong>에 있습니다.
-          </p>
-          <p>
-            엘레브앤컴퍼니는 단순한 이론적 컨설팅이나 유행하는 제도의 맹목적 도입을 지양합니다. 고객사가 직면한 고유한 비즈니스 맥락과 조직 문화를 깊이 있게 분석하여, 현업에서 실제로 작동하고 구성원들이 공감할 수 있는 <strong>'실행 중심의 맞춤형 솔루션'</strong>을 설계합니다.
-          </p>
-          <p>
-            지난 25년간 공공과 민간을 아우르는 150여 건의 대형 프로젝트를 통해 검증된 최고 수준의 전략적 통찰력과 정교한 방법론을 바탕으로, 귀사의 가장 든든한 성장의 동반자가 될 것을 약속드립니다. 감사합니다.
-          </p>
+          <p>안녕하십니까? 엘레브앤컴퍼니 대표컨설턴트 전인식입니다.</p>
+          <p>오늘날의 경영 환경은 그 어느 때보다 예측 불가능하며 빠르게 변화하고 있습니다. 이러한 변화의 소용돌이 속에서 조직이 생존하고 나아가 지속 가능한 경쟁 우위를 확보하기 위한 유일한 열쇠는 바로 <strong>'사람(Human)'</strong>과 <strong>'조직(Organization)'</strong>에 있습니다.</p>
+          <p>엘레브앤컴퍼니는 단순한 이론적 컨설팅이나 유행하는 제도의 맹목적 도입을 지양합니다. 고객사가 직면한 고유한 비즈니스 맥락과 조직 문화를 깊이 있게 분석하여, 현업에서 실제로 작동하고 구성원들이 공감할 수 있는 <strong>'실행 중심의 맞춤형 솔루션'</strong>을 설계합니다.</p>
+          <p>지난 25년간 공공과 민간을 아우르는 150여 건의 대형 프로젝트를 통해 검증된 최고 수준의 전략적 통찰력과 정교한 방법론을 바탕으로, 귀사의 가장 든든한 성장의 동반자가 될 것을 약속드립니다. 감사합니다.</p>
         </div>
       </div>
     </section>
@@ -223,7 +227,6 @@ function DetailedServicesSection() {
   );
 }
 
-// 👑 2. 0부터 또르륵 올라가는 '숫자로 보는 신뢰' 카운트업 구역
 function StatsClientsSection() {
   const [projectCount, setProjectCount] = useState(0);
   const [retentionRate, setRetentionRate] = useState(0);
@@ -293,7 +296,6 @@ function StatsClientsSection() {
   );
 }
 
-// 👑 3. 모바일 화면 최적화 대표소개 구역
 function ProfileSection() {
   return (
     <section id="profile" className="py-24 bg-background px-4 md:px-6 border-t border-outline">
