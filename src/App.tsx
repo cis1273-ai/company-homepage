@@ -15,6 +15,24 @@ const IconMap: Record<string, React.FC<any>> = {
 export default function App() {
   return (
     <div className="font-sans min-h-screen text-on-surface bg-background">
+      
+      {/* 👑 가로로 천천히 흐르는 얇은 띠 배너 추가 구역 */}
+      <div className="w-full bg-primary text-on-primary py-2 text-xs md:text-sm font-medium overflow-hidden whitespace-nowrap border-b border-outline/20">
+        <div className="inline-block animate-[marquee_30s_linear_infinite] pl-[100%] hover:[animation-play-state:paused] cursor-pointer">
+          <span className="mx-8">🎯 조직 및 인적자원관리 전략 분야 25년 베테랑</span>
+          <span className="mx-8">|</span>
+          <span className="mx-8">💼 총 150여 건 이상의 대형 프로젝트 성공적 완수 (공공 108건 / 민간 42건)</span>
+          <span className="mx-8">|</span>
+          <span className="mx-8">📚 네모파트너즈(Nemo Partners) 이사 역임 및 전문 서적 저술</span>
+          <span className="mx-8">|</span>
+          <span className="mx-8">🎯 조직 및 인적자원관리 전략 분야 25년 베테랑</span>
+          <span className="mx-8">|</span>
+          <span className="mx-8">💼 총 150여 건 이상의 대형 프로젝트 성공적 완수 (공공 108건 / 민간 42건)</span>
+          <span className="mx-8">|</span>
+          <span className="mx-8">📚 네모파트너즈(Nemo Partners) 이사 역임 및 전문 서적 저술</span>
+        </div>
+      </div>
+
       <Header />
       <main>
         <Hero />
