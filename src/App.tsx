@@ -1,22 +1,27 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, { useState } from 'react';
-import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
-
-const IconMap: Record<string, React.FC<any>> = {
-  Users, Lightbulb, Award
-};
+import React, { useState, useEffect } from 'react';
+import { 
+  BarChart3, 
+  Users, 
+  ShieldCheck, 
+  BookOpen, 
+  Briefcase, 
+  GraduationCap, 
+  Award, 
+  Mail, 
+  Phone, 
+  Building2,
+  FileText,
+  CheckCircle2,
+  ChevronRight,
+  Menu,
+  X
+} from 'lucide-react';
 
 export default function App() {
   return (
     <div className="font-sans min-h-screen text-on-surface bg-background">
       
-      {/* 👑 가로로 천천히 흐르는 얇은 띠 배너 추가 구역 */}
+      {/* 👑 1. 가로로 천천히 흐르는 얇은 띠 배너 구역 */}
       <div className="w-full bg-primary text-on-primary py-2 text-xs md:text-sm font-medium overflow-hidden whitespace-nowrap border-b border-outline/20">
         <div className="inline-block animate-[marquee_30s_linear_infinite] pl-[100%] hover:[animation-play-state:paused] cursor-pointer">
           <span className="mx-8">🎯 조직 및 인적자원관리 전략 분야 25년 베테랑</span>
@@ -49,58 +54,51 @@ export default function App() {
   );
 }
 
+// ==========================================
+// 여기서부터는 홈페이지를 구성하는 개별 구역들입니다.
+// ==========================================
+
 function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  
   return (
-    <header className="sticky top-0 z-50 bg-surface border-b border-outline">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 h-24 flex items-center justify-between">
-        <div className="flex items-center cursor-pointer py-2 -ml-8 md:-ml-14">
-          <img src="/logo.png" alt="엘레브앤컴퍼니 Logo" className="h-16 md:h-20 w-auto object-contain object-left" />
+    <header className="sticky top-0 z-40 w-full border-b border-outline/40 bg-background/95 backdrop-blur px-4 md:px-6">
+      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="text-xl font-black tracking-tight text-primary flex items-center gap-2">
+            <Building2 className="text-secondary" size={24} />
+            <span>엘레브앤컴퍼니 <span className="text-xs font-medium text-on-surface-muted block md:inline md:ml-1">HR 컨설팅</span></span>
+          </div>
         </div>
-        
-        <nav className="hidden md:flex gap-10 items-center font-medium text-[15px] md:-mr-8">
-          <a href="#about" className="text-on-surface hover:text-secondary transition-colors">회사소개</a>
-          <a href="#services" className="text-on-surface hover:text-secondary transition-colors">서비스 영역</a>
-          <a href="#projects" className="text-on-surface hover:text-secondary transition-colors">주요 실적</a>
-          <a href="#contact" className="text-on-surface hover:text-secondary transition-colors">상담 문의</a>
+        <nav className="hidden md:flex gap-6 text-sm font-medium text-on-surface-muted">
+          <a href="#services" className="hover:text-primary transition">주요서비스</a>
+          <a href="#stats" className="hover:text-primary transition">주요실적</a>
+          <a href="#profile" className="hover:text-primary transition">대표소개</a>
+          <a href="#contact" className="hover:text-primary transition">문의하기</a>
         </nav>
-        
-        <button className="md:hidden p-2 text-on-surface" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
       </div>
-      
-      {menuOpen && (
-        <div className="md:hidden absolute top-24 left-0 w-full bg-surface border-b border-outline p-4 flex flex-col gap-4 shadow-lg">
-          <a href="#about" className="p-2 font-medium" onClick={() => setMenuOpen(false)}>회사소개</a>
-          <a href="#services" className="p-2 font-medium" onClick={() => setMenuOpen(false)}>서비스 영역</a>
-          <a href="#projects" className="p-2 font-medium" onClick={() => setMenuOpen(false)}>주요 실적</a>
-          <a href="#contact" className="p-2 font-medium" onClick={() => setMenuOpen(false)}>상담 문의</a>
-        </div>
-      )}
     </header>
   );
 }
 
 function Hero() {
   return (
-    <section className="bg-primary text-white py-24 md:py-36 px-4 md:px-6">
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-6 md:gap-8">
-        <p className="text-lg md:text-xl font-medium tracking-wide">
-          조직과 사람, 그리고 변화를 잇는 <span className="font-bold">통합 HR 솔루션 파트너</span>
-        </p>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-medium leading-[1.4] text-gray-200 tracking-tight break-keep">
-          <span className="font-bold text-white">엘레브앤컴퍼니</span>는 기업의 지속 가능한 성장을 위한<br />
-          최적의 인적 자원 전략과 실행력을 제공합니다.
+    <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 via-background to-background py-24 md:py-32 px-4 md:px-6">
+      <div className="mx-auto max-w-[1200px] text-center">
+        <span className="inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-xs font-medium text-secondary mb-6">
+          Organization & HR Consulting Firm
+        </span>
+        <h1 className="text-4xl font-extrabold tracking-tight text-on-surface sm:text-5xl md:text-6xl max-w-3xl mx-auto leading-[1.15]">
+          조직의 잠재력을 깨우는 <br className="hidden sm:inline" />
+          <span className="text-primary">인사·조직 전략 파트너</span>
         </h1>
-        
-        <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <a href="#contact" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block">
-            상담 문의하기
+        <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-on-surface-muted leading-relaxed break-keep">
+          25년의 전문성과 150여 건의 성공적인 프로젝트 수행 경험을 바탕으로, 공공기관과 민간기업의 지속 가능한 성장을 위한 맞춤형 HR 솔루션을 제공합니다.
+        </p>
+        <div className="mt-10 flex justify-center gap-4">
+          <a href="#contact" className="inline-flex h-11 items-center justify-center rounded-lg bg-primary px-6 text-sm font-medium text-on-primary shadow transition hover:bg-primary-hover">
+            무료 상담 신청하기
           </a>
-          <a href="/company_profile.pdf" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block">
-            회사 소개서
+          <a href="#services" className="inline-flex h-11 items-center justify-center rounded-lg border border-outline px-6 text-sm font-medium text-on-surface shadow-sm transition hover:bg-surface-low">
+            서비스 알아보기
           </a>
         </div>
       </div>
@@ -110,32 +108,22 @@ function Hero() {
 
 function GreetingSection() {
   return (
-    <section className="py-24 bg-surface-low px-4 md:px-6 border-b border-outline">
-      <div className="max-w-[900px] mx-auto">
-        <h2 className="text-2xl md:text-3xl lg:text-[32px] font-bold text-on-surface mb-6 leading-tight break-keep">
-          사람을 향한 진심, <br className="hidden sm:block"/> 상생을 이끄는 고객중심의 정교한 전략.
-        </h2>
-        <h3 className="text-lg md:text-[19px] font-medium text-secondary mb-12">
-          안녕하십니까, 엘레브앤컴퍼니 대표 전인식입니다.
-        </h3>
-        
-        <div className="space-y-6 text-[15px] md:text-[16px] text-on-surface-muted leading-[1.8] break-keep">
-          <p>한 분야에서 25년을 보낸다는 것은, 수많은 기업의 고민을 내 고민처럼 여기고 함께 밤을 지새웠다는 의미이기도 합니다.</p>
-          <p>지난 2010년, 더 가치 있는 HR 서비스를 제공하고자 문을 연 <span className="font-semibold text-on-surface">엘레브앤컴퍼니</span>는 언제나 '고객중심'의 가치를 최우선에 두고 달려왔습니다. 우리는 단순히 컨설팅을 제공하는 제3자가 아닙니다. 고객사의 치열한 현장 속으로 들어가 함께 호흡하고, 기업이 직면한 진짜 문제를 함께 해결하는 가장 든든한 러닝메이트입니다.</p>
-          <p>경영학 책에 나오는 뻔한 이론은 현장에서 결코 작동하지 않습니다.<br/>저희는 기업마다 가진 고유의 가치와 구성원들의 목소리에 먼저 귀 기울입니다.</p>
-          <div className="pl-5 md:pl-6 py-2 border-l-4 border-secondary/40 my-10 italic text-on-surface font-medium">
-            <p className="mb-2">"CEO의 철학이 조직 말단까지 흐르는 고객 맞춤형 전략,"</p>
-            <p>"구성원의 성장이 기업의 이익으로 이어지는 상생(相生)의 매커니즘"을</p>
-            <p className="mt-4 not-italic font-normal text-on-surface-muted text-[15px] md:text-[15px]">
-              구축하는 것이 <span className="font-semibold text-on-surface">엘레브앤컴퍼니</span>가 존재하는 이유이자 사명입니다.
-            </p>
-          </div>
-          <p>고객사의 성장이 곧 저희의 성장이며, 기업과 인재가 함께 상생할 때 비로소 위대한 도약이 시작됩니다. 화려한 수식어보다 확실한 '결과'로 증명하겠습니다.</p>
-          <p>철저하게 고객의 눈높이에서 고민하고, 진심을 담은 컨설팅으로 귀사의 위대한 여정에 늘 동행하겠습니다.</p>
-          
-          <div className="mt-16 pt-8 border-t border-outline/50 flex align-middle justify-end pr-4">
-            <span className="font-bold text-lg md:text-[19px] text-on-surface">엘레브앤컴퍼니 대표 전인식 올림</span>
-          </div>
+    <section className="py-20 bg-surface px-4 md:px-6 border-t border-outline">
+      <div className="max-w-[1000px] mx-auto text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-on-surface mb-8">CEO 메시지</h2>
+        <div className="space-y-6 text-on-surface-muted text-base md:text-lg leading-relaxed break-keep font-normal">
+          <p>
+            안녕하십니까? 엘레브앤컴퍼니 대표컨설턴트 전인식입니다.
+          </p>
+          <p>
+            오늘날의 경영 환경은 그 어느 때보다 예측 불가능하며 빠르게 변화하고 있습니다. 이러한 변화의 소용돌이 속에서 조직이 생존하고 나아가 지속 가능한 경쟁 우위를 확보하기 위한 유일한 열쇠는 바로 <strong>'사람(Human)'</strong>과 <strong>'조직(Organization)'</strong>에 있습니다.
+          </p>
+          <p>
+            엘레브앤컴퍼니는 단순한 이론적 컨설팅이나 유행하는 제도의 맹목적 도입을 지양합니다. 고객사가 직면한 고유한 비즈니스 맥락과 조직 문화를 깊이 있게 분석하여, 현업에서 실제로 작동하고 구성원들이 공감할 수 있는 <strong>'실행 중심의 맞춤형 솔루션'</strong>을 설계합니다.
+          </p>
+          <p>
+            지난 25년간 공공과 민간을 아우르는 150여 건의 대형 프로젝트를 통해 검증된 최고 수준의 전략적 통찰력과 정교한 방법론을 바탕으로, 귀사의 가장 든든한 성장의 동반자가 될 것을 약속드립니다. 감사합니다.
+          </p>
         </div>
       </div>
     </section>
@@ -143,380 +131,19 @@ function GreetingSection() {
 }
 
 function CoreValuesSection() {
+  const values = [
+    { title: "전문성 (Professionalism)", desc: "25년간 축적된 심도 있는 지식과 공공·민간을 아우르는 풍부한 실무 경험을 바탕으로 최고 수준의 산출물을 보장합니다." },
+    { title: "맞춤화 (Customization)", desc: "기성 솔루션을 복사해 붙여넣지 않습니다. 귀사 고유의 환경과 당면 과제에 완벽히 정렬된 독창적 대안을 제시합니다." },
+    { title: "실행력 (Actionability)", desc: "보고서로만 존재하는 전략은 가치가 없습니다. 제도 도입 이후의 변화 관리와 실제 현업 적용 가능성을 최우선으로 고려합니다." }
+  ];
+
   return (
-    <section id="about" className="py-24 bg-background px-4 md:px-6">
+    <section className="py-20 bg-background px-4 md:px-6 border-t border-outline">
       <div className="max-w-[1200px] mx-auto">
-        <div className="mb-24">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2 mb-8">Brand Identity</h2>
-          </div>
-          <div className="space-y-8 text-on-surface-muted leading-relaxed break-keep text-[15px]">
-            <div>
-              <h3 className="text-[17px] font-bold text-on-surface mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                상생을 뜻하는 '인터록킹(Interlocking)' 추상화 컨셉
-              </h3>
-              <p className="pl-3.5">두 개의 유연한 고리가 서로 맞물려 있거나 무한대(∞) 기호를 변형한 형태입니다.</p>
-            </div>
-            <div>
-              <h3 className="text-[17px] font-bold text-on-surface mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                심벌 의미
-              </h3>
-              <p className="pl-3.5">컨설팅 회사와 고객사가 함께 맞물려 돌아가며 가치를 창출하는 &quot;상생&quot;과 &quot;고객 중심&quot;의 철학을 가장 직관적으로 보여줍니다.</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center mb-16">
-          <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2 mb-2">Our Core Values</h2>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {coreValues.map((val, idx) => {
-            const Icon = IconMap[val.icon] || Users;
-            return (
-              <div key={idx} className="bg-surface border border-outline rounded p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-surface-low rounded flex items-center justify-center mb-6 border border-outline">
-                  <Icon size={24} className="text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-4 text-on-surface">{val.title}</h3>
-                <p className="text-on-surface-muted leading-[1.6] break-keep">{val.description}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function BusinessModelSection() {
-  return (
-    <section id="services" className="py-24 bg-surface-low px-4 md:px-6">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="text-center mb-16 flex flex-col items-center">
-          <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2 mb-6">Services</h2>
-          <p className="text-on-surface-muted max-w-2xl px-4 leading-[1.6]">
-            엘레브앤컴퍼니의 세 가지 핵심 사업 영역은 유기적으로 통합되어, 기업의 인사 문제를 근본적으로 해결하고 최적의 고객 가치를 창출합니다.
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {businessModels.map((model) => (
-            <div key={model.id} className="bg-surface border border-outline rounded p-10 flex flex-col items-center text-center transition-all duration-300 hover:border-secondary">
-              <span className="text-secondary font-bold text-2xl mb-6">{model.id}</span>
-              <h3 className="text-xl font-bold mb-4 break-keep">{model.title}</h3>
-              <p className="text-on-surface-muted leading-[1.6] break-keep">{model.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function DetailedServicesSection() {
-  const [activeTab, setActiveTab] = useState(0);
-  
-  return (
-    <section className="py-24 bg-surface px-4 md:px-6 border-t border-outline">
-      <div className="max-w-[1000px] mx-auto">
-        <div className="flex flex-col">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2">Detailed Services</h2>
-          </div>
-          
-          <div className="flex flex-wrap border-b border-outline mb-12 w-full">
-            {detailedServices.map((service, idx) => (
-              <button
-                key={service.id}
-                onClick={() => setActiveTab(idx)}
-                className={`py-4 px-4 font-bold text-[15px] sm:text-[17px] border-b-2 transition-colors flex-1 text-center whitespace-nowrap ${
-                  activeTab === idx 
-                    ? 'border-secondary text-primary' 
-                    : 'border-transparent text-on-surface-muted hover:text-on-surface'
-                }`}
-              >
-                {service.title}
-              </button>
-            ))}
-          </div>
-          
-          <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 min-h-[200px]">
-            {detailedServices[activeTab].items.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-4 bg-background p-6 rounded-lg shadow-sm border border-outline hover:border-secondary transition-all hover:-translate-y-1">
-                <CheckCircle2 size={24} className="text-secondary flex-shrink-0" />
-                <span className="text-lg font-medium">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function StatsClientsSection() {
-  // 0부터 또르륵 올라갈 숫자를 관리하는 상태(State) 설정
-  const [projectCount, setProjectCount] = React.useState(0);
-  const [retentionRate, setRetentionRate] = React.useState(0);
-
-  React.useEffect(() => {
-    const duration = 2000; // 숫자가 올라가는 총 시간 (2000ms = 2초)
-    let startTime: number | null = null;
-
-    const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = timestamp - startTime;
-      
-      // 애니메이션 진행률 (0에서 1까지 계산)
-      const progressRatio = Math.min(progress / duration, 1);
-      
-      // 감속 효과(Ease-out)를 주어 끝으로 갈수록 부드럽게 멈추도록 계산
-      const easeOutQuad = 1 - (1 - progressRatio) * (1 - progressRatio);
-
-      // 목표 수치 설정 (공공108 + 민간42 = 총 150여 건 반영)
-      const targetProjects = 150;
-      const targetRate = 92; // 재계약률 예시 수치 (필요시 원하는 숫자로 변경 가능)
-
-      setProjectCount(Math.floor(easeOutQuad * targetProjects));
-      setRetentionRate(Math.floor(easeOutQuad * targetRate));
-
-      if (progress < duration) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    // 애니메이션 시작
-    requestAnimationFrame(animate);
-  }, []);
-
-  return (
-    <section className="py-20 bg-surface border-t border-outline">
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 text-center">
-        
-        {/* 구역 타이틀 */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-on-surface mb-2">숫자로 보는 신뢰</h2>
-          <p className="text-on-surface-muted text-sm md:text-base">
-            25년간 쌓아온 검증된 트랙 레코드와 파트너십의 결과입니다.
-          </p>
-        </div>
-
-        {/* 숫자 카드 레이아웃 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[800px] mx-auto">
-          
-          {/* 카드 1: 누적 프로젝트 수행건수 */}
-          <div className="bg-surface-low p-8 rounded-xl border border-outline/40 shadow-sm transform transition hover:scale-105 duration-300">
-            <p className="text-on-surface-muted font-medium text-base mb-2">누적 프로젝트 수행건수</p>
-            <p className="text-5xl md:text-6xl font-extrabold text-primary tracking-tight">
-              {projectCount}<span className="text-3xl md:text-4xl text-secondary ml-1">+</span>
-            </p>
-            <p className="text-xs text-on-surface-muted mt-3">공공 부문 108건 및 민간 부문 42건 합산 기준</p>
-          </div>
-
-          {/* 카드 2: 기존 고객 재계약률 */}
-          <div className="bg-surface-low p-8 rounded-xl border border-outline/40 shadow-sm transform transition hover:scale-105 duration-300">
-            <p className="text-on-surface-muted font-medium text-base mb-2">기존 고객 재계약률</p>
-            <p className="text-5xl md:text-6xl font-extrabold text-primary tracking-tight">
-              {retentionRate}<span className="text-3xl md:text-4xl text-secondary ml-1">%</span>
-            </p>
-            <p className="text-xs text-on-surface-muted mt-3">지속적인 신뢰와 전략적 파트너십의 지표</p>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
-function ProfileSection() {
-  return (
-    <section className="py-24 bg-background px-4 md:px-6 border-t border-outline">
-      <div className="max-w-[1200px] mx-auto">
-        {/* 모바일에서는 사진(order-1)이 먼저 나오고 텍스트(order-2)가 아래로 가며, PC(lg 이상)에서는 원래대로 양옆 배치 */}
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* [변경] 프로필 사진 영역: 모바일에서 무조건 맨 위에 먼저 보이도록 order-1 설정 */}
-          <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
-            <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
-          </div>
-
-          {/* 이력 텍스트 영역: 모바일에서 사진 다음으로 자연스럽게 이어지도록 order-2 설정 */}
-          <div className="lg:col-span-7 order-2 lg:order-1 space-y-8">
-            <div>
-              <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
-              <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-6">Principal Consultant</span>
-              
-              <p className="font-bold text-[15px] md:text-[16px] text-primary p-6 bg-surface-low rounded border-l-4 border-secondary leading-relaxed break-keep shadow-sm">
-                "조직 및 인적자원관리 전략 분야에 있어 25년에 걸친 전략적 통찰력과 전문적 실무 역량의 결집"
-              </p>
-            </div>
-            
-            <div className="space-y-6 text-on-surface-muted text-[15px] leading-relaxed break-keep">
-              <div>
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                  총 경력 개요 및 전략적 리더십
-                </h3>
-                <p className="pl-3.5">
-                  네모파트너즈(Nemo Partners) 이사를 역임하였으며, 국내 경영 컨설팅 산업의 성장기부터 현재에 이르기까지 약 25년에 달하는 심도 있는 실무 경력과 사업적 통찰력을 보유하고 있습니다. 단순한 이론적 자문 수준을 넘어, 급변하는 경영 환경 속에서 조직의 중장기 비전과 실제 인사 실행 전략을 정밀하게 정렬시키는 핵심 의사결정 파트너로서 독보적인 입지를 확고히 해왔습니다.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                  압도적인 프로젝트 트랙 레코드
-                </h3>
-                <p className="pl-3.5">
-                  공공 부문 108건 및 민간 부문 42건을 합산하여 총 150여 건 이상의 대형 프로젝트를 성공적으로 완수하였습니다. 이는 중앙 부처의 정책 수립 지원부터 지방자치단체 산하 공공기관의 체질 개선, 그리고 대기업의 글로벌 인사 전략 구축에 이르기까지, 다양한 조직 생태계의 특수성을 깊이 있게 이해하고 각기 다른 문제 해결 방법론을 유연하게 적용할 수 있는 검증된 실무 능력을 의미합니다.
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-outline/50">
-                <h3 className="font-bold text-on-surface text-xl mb-4 text-primary">
-                  심화 전문 영역 (Core Competencies)
-                </h3>
-                <div className="space-y-4 pl-1">
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <BarChart3 size={18} /> 조직 전략 및 거버넌스
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      조직 정밀 진단(Diagnostic)을 통해 숨겨진 비효율을 찾아내고, 기능 기반의 과학적 적정 정원 산정(Manpower Sizing)을 수행합니다. 이를 통해 거시적 거버넌스 체계를 재설계하고 실행력 있는 중장기 경영 전략 로드맵을 수립하는 데 특화되어 있습니다.
-                    </p>
-                  </div>
-
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <Users size={18} /> 직무 중심 HR 솔루션
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      현대적 HR의 핵심인 과학적 직무 분석과 직무가치 평가(Job Evaluation) 시스템을 구축합니다. 역량 중심의 직급 체계 고도화는 물론, 구성원의 동기부여를 극대화할 수 있는 성과 및 직무 기반의 보수 체계(Total Rewards)를 설계하여 조직의 보상 경쟁력을 강화합니다.
-                    </p>
-                  </div>
-
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <ShieldCheck size={18} /> 성과 관리 및 평가 환류
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      BSC(Balanced Scorecard) 및 MBO 체계를 조직 문화에 맞게 커스터마이징하여 구축합니다. 특히 공공기관 경영평가(Internal & External) 대응에 있어 단순한 지표 관리를 넘어, 평가 결과가 조직의 실제 성과 향상으로 이어지도록 하는 환류 시스템 고도화 자문에 강점을 보유하고 있습니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-outline/50">
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <BookOpen size={18} className="text-secondary" />
-                  지식 자본 및 학술적 기여
-                </h3>
-                <p className="pl-6 text-sm sm:text-[15px]">
-                  『알기 쉬운 조사방법론』, 『사례로 배우는 스포츠마케팅』 등 다수의 전문 서적 저술 활동과 총 46회 이상의 기업 및 공공기관 대상 전문 강연을 실시하였습니다. 이를 통해 이론과 현장 실무가 융합된 지식 자산을 업계에 공유하고, 후배 컨설턴트 및 인사 담당자들에게 실질적인 가이드라인을 제시하며 해당 분야의 지식 전파를 주도해오고 있습니다.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CTASection() {
-  const [isFormVisible, setIsFormVisible] = useState(false);
-  const [formData, setFormData] = useState({ name: '', company: '', email: '', phone: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      const serviceId = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
-
-      await emailjs.send(serviceId, templateId, {
-        name: formData.name,
-        company: formData.company,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-      }, publicKey);
-
-      setIsSuccess(true);
-      setFormData({ name: '', company: '', email: '', phone: '', message: '' });
-      setTimeout(() => setIsSuccess(false), 5000);
-    } catch (error) {
-      console.error('EmailJS 발송 실패:', error);
-      alert('메일 발송에 실패했습니다. 관리자에게 문의해주세요.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  return (
-    <section id="contact" className="bg-surface-low py-24 px-4 border-y border-outline">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">조직의 미래를 함께 설계하시겠습니까?</h2>
-        {!isFormVisible && !isSuccess && (
-          <button onClick={() => setIsFormVisible(true)} className="bg-secondary text-white px-10 py-5 rounded font-bold shadow-lg hover:bg-[#004f9b] transition-colors text-lg">
-            상담 문의하기
-          </button>
-        )}
-        {isSuccess && <div className="bg-green-100 p-6 rounded text-green-700 font-semibold">문의가 성공적으로 전달되었습니다.</div>}
-        {isFormVisible && !isSuccess && (
-          <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-background p-8 rounded shadow-lg mt-8 text-left mx-auto border border-outline">
-            <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2">성함</label>
-              <input required name="name" value={formData.name} onChange={handleChange} placeholder="성함을 입력해주세요" className="w-full px-4 py-3 border rounded focus:outline-none focus:border-secondary" />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2">회사명</label>
-              <input required name="company" value={formData.company} onChange={handleChange} placeholder="회사명을 입력해주세요" className="w-full px-4 py-3 border rounded focus:outline-none focus:border-secondary" />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2">이메일 주소</label>
-              <input required type="email" name="email" value={formData.email} onChange={handleChange} placeholder="example@email.com" className="w-full px-4 py-3 border rounded focus:outline-none focus:border-secondary" />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2">연락처</label>
-              <input required name="phone" value={formData.phone} onChange={handleChange} placeholder="010-0000-0000" className="w-full px-4 py-3 border rounded focus:outline-none focus:border-secondary" />
-            </div>
-            <div className="mb-6">
-              <label className="block text-sm font-semibold mb-2">문의 내용</label>
-              <textarea name="message" value={formData.message} onChange={handleChange} rows={5} placeholder="상담받으실 내용을 상세히 적어주세요" className="w-full px-4 py-3 border rounded focus:outline-none focus:border-secondary" />
-            </div>
-            <div className="flex gap-4">
-              <button type="submit" disabled={isSubmitting} className="bg-secondary text-white px-8 py-3 rounded font-bold hover:bg-[#004f9b] transition-colors disabled:bg-gray-400">
-                {isSubmitting ? '전송 중...' : '문의하기 접수'}
-              </button>
-              <button type="button" onClick={() => setIsFormVisible(false)} className="border border-outline px-6 py-3 rounded text-on-surface-muted hover:bg-surface-low transition-colors">
-                취소
-              </button>
-            </div>
-          </form>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="bg-[#111822] text-gray-400 py-16 px-4 md:px-6 text-sm text-center">
-      <p>© 2026 Ellev&Company. All rights reserved.</p>
-    </footer>
-  );
-}
+        <h2 className="text-3xl font-bold text-on-surface text-center mb-12">핵심 가치</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {values.map((v, i) => (
+            <div key={i} className="p-6 bg-surface-low rounded-xl border border-outline/50 shadow-sm">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-lg mb-4">{i+1}</div>
+              <h3 className="text-xl font-bold text-on-surface mb-2">{v.title}</h3>
+              <p className
