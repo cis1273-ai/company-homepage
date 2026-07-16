@@ -522,17 +522,16 @@ function CTASection() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbzirWOPvVWErE4Dk2_LpfF0xI0Z6YrDoYLCg_ynp_y-yuW5nBEKDQpnzsR36FxBPlAD8Q/exec', {
-        method: 'POST',
+      const params = new URLSearchParams({
+        name: formData.name,
+        company: formData.company,
+        email: formData.email,
+        contact: formData.phone,
+        message: formData.message,
+      });
+      await fetch(`https://script.google.com/macros/s/AKfycbykmXSj0YKsvUjC7QTJdKYyNbZWzw7J9jV-M_AhK5K1HFvocdhl6z73b5wAvmZ8cJnWxg/exec?${params}`, {
+        method: 'GET',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          company: formData.company,
-          email: formData.email,
-          contact: formData.phone,
-          message: formData.message,
-        }),
       });
       setIsSuccess(true);
       setFormData({ name: '', company: '', email: '', phone: '', message: '' });
