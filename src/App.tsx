@@ -522,22 +522,24 @@ function CTASection() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const serviceId = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
-      await emailjs.send(serviceId, templateId, {
-        name: formData.name,
-        company: formData.company,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-      }, publicKey);
+      await fetch('https://script.google.com/macros/s/AKfycbzirWOPvVWErE4Dk2_LpfF0xI0Z6YrDoYLCg_ynp_y-yuW5nBEKDQpnzsR36FxBPlAD8Q/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          contact: formData.phone,
+          message: formData.message,
+        }),
+      });
       setIsSuccess(true);
       setFormData({ name: '', company: '', email: '', phone: '', message: '' });
       setTimeout(() => setIsSuccess(false), 5000);
     } catch (error) {
-      console.error('EmailJS 발송 실패:', error);
-      alert('메일 발송에 실패했습니다. 관리자에게 문의해주세요.');
+      console.error('전송 실패:', error);
+      alert('전송에 실패했습니다. 관리자에게 문의해주세요.');
     } finally {
       setIsSubmitting(false);
     }
