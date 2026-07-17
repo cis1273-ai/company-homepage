@@ -56,6 +56,27 @@ export default function App() {
   );
 }
 
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbykmXSj0YKsvUjC7QTJdKYyNbZWzw7J9jV-M_AhK5K1HFvocdhl6z73b5wAvmZ8cJnWxg/exec';
+const STATUS_OPTIONS = ['신규 문의', '연락 중', '답변 완료', '보류'];
+const STATUS_STYLE: Record<string, string> = {
+  '신규 문의': 'bg-blue-100 text-blue-700',
+  '연락 중': 'bg-yellow-100 text-yellow-700',
+  '답변 완료': 'bg-green-100 text-green-700',
+  '보류': 'bg-gray-100 text-gray-500',
+};
+
+type Inquiry = {
+  rowIndex: number;
+  date: string;
+  name: string;
+  company: string;
+  email: string;
+  contact: string;
+  message: string;
+  status: string;
+  memo: string;
+};
+
 function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => sessionStorage.getItem('adminAuth') === 'true');
   const [pw, setPw] = useState('');
@@ -104,17 +125,192 @@ function AdminPage() {
     );
   }
 
+  return <AdminDashboard onLogout={handleLogout} />;
+}
+
+function AdminDashboard({ onLogout }: { onLogout: () => void }) {
+  const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+  const [selected, setSelected] = useState<Inquiry | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [statusSaving, setStatusSaving] = useState(false);
+  const [memo, setMemo] = useState('');
+  const [memoSaving, setMemoSaving] = useState(false);
+  const [memoSaved, setMemoSaved] = useState(false);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${SCRIPT_URL}?action=getData`);
+      const data: Inquiry[] = await res.json();
+      const sorted = [...data].reverse();
+      setInquiries(sorted);
+      if (selected) {
+        const updated = sorted.find(i => i.rowIndex === selected.rowIndex);
+        if (updated) setSelected(updated);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { if (selected) setMemo(selected.memo); }, [selected?.rowIndex]);
+
+  const handleStatusChange = async (newStatus: string) => {
+    if (!selected) return;
+    setStatusSaving(true);
+    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: newStatus, memo: selected.memo });
+    new Image().src = `${SCRIPT_URL}?${params}`;
+    await new Promise(r => setTimeout(r, 1500));
+    await fetchData();
+    setStatusSaving(false);
+  };
+
+  const handleMemoSave = async () => {
+    if (!selected) return;
+    setMemoSaving(true);
+    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: selected.status, memo });
+    new Image().src = `${SCRIPT_URL}?${params}`;
+    await new Promise(r => setTimeout(r, 1500));
+    await fetchData();
+    setMemoSaving(false);
+    setMemoSaved(true);
+    setTimeout(() => setMemoSaved(false), 2000);
+  };
+
+  const total = inquiries.length;
+  const newCount = inquiries.filter(i => i.status === '신규 문의').length;
+  const doneCount = inquiries.filter(i => i.status === '답변 완료').length;
+
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-12">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gray-50 px-4 py-8">
+      <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-bold text-gray-800">관리자 대시보드</h1>
-          <button onClick={handleLogout} className="text-sm text-gray-500 hover:text-gray-700 border border-gray-300 px-4 py-2 rounded-lg transition-colors">
-            로그아웃
-          </button>
+          <button onClick={onLogout} className="text-sm text-gray-500 hover:text-gray-700 border border-gray-300 px-4 py-2 rounded-lg transition-colors">로그아웃</button>
         </div>
-        <div className="bg-white rounded-2xl shadow p-8 text-center text-gray-400">
-          <p className="text-lg">대시보드 준비 중입니다.</p>
+
+        {/* 통계 카드 */}
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
+            <p className="text-xs text-gray-400 mb-2 font-medium tracking-wide">전체 문의</p>
+            <p className="text-4xl font-bold text-gray-800">{total}</p>
+            <p className="text-xs text-gray-400 mt-2">건</p>
+          </div>
+          <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-400">
+            <p className="text-xs text-gray-400 mb-2 font-medium tracking-wide">신규 문의</p>
+            <p className="text-4xl font-bold text-orange-500">{newCount}</p>
+            <p className="text-xs text-gray-400 mt-2">건</p>
+          </div>
+          <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-green-500">
+            <p className="text-xs text-gray-400 mb-2 font-medium tracking-wide">답변 완료</p>
+            <p className="text-4xl font-bold text-green-600">{doneCount}</p>
+            <p className="text-xs text-gray-400 mt-2">건</p>
+          </div>
+        </div>
+
+        {/* 목록 + 상세 */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* 목록 테이블 */}
+          <div className="flex-1 bg-white rounded-xl shadow-sm overflow-hidden">
+            {loading ? (
+              <div className="p-12 text-center text-gray-400">불러오는 중...</div>
+            ) : inquiries.length === 0 ? (
+              <div className="p-12 text-center text-gray-400">문의 내역이 없습니다.</div>
+            ) : (
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50 border-b">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-gray-400 font-medium text-xs">날짜</th>
+                    <th className="px-4 py-3 text-left text-gray-400 font-medium text-xs">회사명</th>
+                    <th className="px-4 py-3 text-left text-gray-400 font-medium text-xs">담당자</th>
+                    <th className="px-4 py-3 text-left text-gray-400 font-medium text-xs">상태</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {inquiries.map(inq => (
+                    <tr
+                      key={inq.rowIndex}
+                      onClick={() => setSelected(inq)}
+                      className={`border-b cursor-pointer hover:bg-blue-50 transition-colors ${selected?.rowIndex === inq.rowIndex ? 'bg-blue-50' : ''}`}
+                    >
+                      <td className="px-4 py-3 text-gray-400 text-xs">{inq.date ? new Date(inq.date).toLocaleDateString('ko-KR') : '-'}</td>
+                      <td className="px-4 py-3 font-semibold text-gray-800">{inq.company}</td>
+                      <td className="px-4 py-3 text-gray-600">{inq.name}</td>
+                      <td className="px-4 py-3">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${STATUS_STYLE[inq.status] || 'bg-gray-100 text-gray-500'}`}>{inq.status}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+
+          {/* 상세 패널 */}
+          {selected && (
+            <div className="w-full lg:w-80 bg-white rounded-xl shadow-sm p-6 flex-shrink-0">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h2 className="font-bold text-gray-800 text-lg">{selected.company}</h2>
+                  <p className="text-sm text-gray-400 mt-0.5">{selected.name}</p>
+                </div>
+                <button onClick={() => setSelected(null)} className="text-gray-300 hover:text-gray-500 text-lg leading-none">✕</button>
+              </div>
+
+              <div className="space-y-4 mb-6 text-sm border-b pb-6">
+                <div>
+                  <p className="text-xs text-gray-400 mb-0.5">연락처</p>
+                  <p className="font-medium text-gray-800">{selected.contact}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400 mb-0.5">이메일</p>
+                  <p className="font-medium text-gray-800">{selected.email}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400 mb-0.5">접수 시각</p>
+                  <p className="font-medium text-gray-800">{selected.date ? new Date(selected.date).toLocaleString('ko-KR') : '-'}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400 mb-0.5">문의 내용</p>
+                  <p className="font-medium text-gray-800 whitespace-pre-wrap leading-relaxed">{selected.message}</p>
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <label className="text-xs text-gray-400 block mb-1.5">상태 변경</label>
+                <select
+                  value={selected.status}
+                  onChange={e => handleStatusChange(e.target.value)}
+                  disabled={statusSaving}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
+                >
+                  {STATUS_OPTIONS.map(s => <option key={s}>{s}</option>)}
+                </select>
+                {statusSaving && <p className="text-xs text-blue-400 mt-1">저장 중...</p>}
+              </div>
+
+              <div>
+                <label className="text-xs text-gray-400 block mb-1.5">관리자 메모</label>
+                <textarea
+                  value={memo}
+                  onChange={e => setMemo(e.target.value)}
+                  rows={4}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400 resize-none"
+                  placeholder="메모를 입력하세요"
+                />
+                <button
+                  onClick={handleMemoSave}
+                  disabled={memoSaving}
+                  className="mt-2 w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300"
+                >
+                  {memoSaving ? '저장 중...' : memoSaved ? '✓ 저장됨' : '메모 저장'}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
