@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck } from 'lucide-react';
+import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck, Clock, Target, RefreshCw, Mic } from 'lucide-react';
 import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
 import { ADMIN_PASSWORD } from './admin-config';
 
@@ -437,8 +437,10 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="bg-primary text-white py-24 md:py-36 px-4 md:px-6">
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-6 md:gap-8">
+    <section className="relative bg-primary text-white py-24 md:py-36 px-4 md:px-6 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.04]" style={{backgroundImage: 'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)', backgroundSize: '24px 24px'}} />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-secondary opacity-[0.07] translate-x-1/3 translate-y-1/3" />
+      <div className="relative max-w-[1200px] mx-auto flex flex-col gap-6 md:gap-8">
         <p className="text-lg md:text-xl font-medium tracking-wide">
           조직과 사람, 그리고 변화를 잇는 <span className="font-bold">통합 HR 솔루션 파트너</span>
         </p>
@@ -519,9 +521,9 @@ function CoreValuesSection() {
           {coreValues.map((val, idx) => {
             const Icon = IconMap[val.icon] || Users;
             return (
-              <div key={idx} className="bg-surface border border-outline rounded p-8 sm:p-10 transition-transform duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-surface-low rounded flex items-center justify-center mb-6 border border-outline">
-                  <Icon size={24} className="text-primary" />
+              <div key={idx} className="group bg-surface border border-outline rounded p-8 sm:p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-secondary flex flex-col items-center text-center">
+                <div className="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center mb-6 border border-outline group-hover:bg-secondary/10 group-hover:border-secondary/30 transition-colors duration-300">
+                  <Icon size={28} className="text-primary group-hover:text-secondary transition-colors duration-300" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-on-surface">{val.title}</h3>
                 <p className="text-on-surface-muted leading-[1.6] break-keep">{val.description}</p>
@@ -635,24 +637,28 @@ function StatsClientsSection() {
       <div className="border-b border-primary-container px-4 md:px-6 py-20">
         <div className="max-w-[1200px] mx-auto grid md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-primary-container">
           <div className="py-8 md:py-0 px-6 md:px-8 text-center" ref={experience.ref}>
-            <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">EXPERIENCE</h3>
-            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{experience.count}<span className="text-4xl text-white">년+</span></div>
-            <p className="text-xl font-semibold mb-2">컨설팅 경력</p>
+            <div className="flex justify-center mb-3"><Clock size={28} className="text-secondary opacity-80" /></div>
+            <h3 className="text-secondary font-bold mb-3 text-sm tracking-widest">EXPERIENCE</h3>
+            <div className="text-5xl sm:text-6xl font-bold mb-3 text-blue-300">{experience.count}<span className="text-4xl text-white">년+</span></div>
+            <p className="text-xl font-semibold">컨설팅 경력</p>
           </div>
           <div className="py-8 md:py-0 px-6 md:px-8 text-center" ref={projects.ref}>
-            <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">SUCCESS TRACK</h3>
-            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{projects.count}여 <span className="text-4xl text-white">건</span></div>
-            <p className="text-xl font-semibold mb-2">누적 프로젝트 수행</p>
+            <div className="flex justify-center mb-3"><Target size={28} className="text-secondary opacity-80" /></div>
+            <h3 className="text-secondary font-bold mb-3 text-sm tracking-widest">SUCCESS TRACK</h3>
+            <div className="text-5xl sm:text-6xl font-bold mb-3 text-blue-300">{projects.count}여 <span className="text-4xl text-white">건</span></div>
+            <p className="text-xl font-semibold">누적 프로젝트 수행</p>
           </div>
           <div className="py-8 md:py-0 px-6 md:px-8 text-center" ref={retention.ref}>
-            <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">RETENTION</h3>
-            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{retention.count}%+</div>
-            <p className="text-xl font-semibold mb-2">기존 고객 재계약률</p>
+            <div className="flex justify-center mb-3"><RefreshCw size={28} className="text-secondary opacity-80" /></div>
+            <h3 className="text-secondary font-bold mb-3 text-sm tracking-widest">RETENTION</h3>
+            <div className="text-5xl sm:text-6xl font-bold mb-3 text-blue-300">{retention.count}%+</div>
+            <p className="text-xl font-semibold">기존 고객 재계약률</p>
           </div>
           <div className="py-8 md:py-0 px-6 md:px-8 text-center" ref={lectures.ref}>
-            <h3 className="text-secondary font-bold mb-4 text-sm tracking-widest">LECTURE</h3>
-            <div className="text-5xl sm:text-6xl font-bold mb-4 text-blue-300">{lectures.count}여 <span className="text-4xl text-white">건</span></div>
-            <p className="text-xl font-semibold mb-2">풍부한 전문 강의 실적</p>
+            <div className="flex justify-center mb-3"><Mic size={28} className="text-secondary opacity-80" /></div>
+            <h3 className="text-secondary font-bold mb-3 text-sm tracking-widest">LECTURE</h3>
+            <div className="text-5xl sm:text-6xl font-bold mb-3 text-blue-300">{lectures.count}여 <span className="text-4xl text-white">건</span></div>
+            <p className="text-xl font-semibold">풍부한 전문 강의 실적</p>
           </div>
         </div>
       </div>
@@ -908,9 +914,13 @@ function CTASection() {
   };
 
   return (
-    <section id="contact" className="bg-surface-low py-24 px-4 border-y border-outline">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">조직의 미래를 함께 설계하시겠습니까?</h2>
+    <section id="contact" className="relative bg-primary py-24 px-4 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.04]" style={{backgroundImage: 'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)', backgroundSize: '24px 24px'}} />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-secondary opacity-[0.08] -translate-x-1/2 -translate-y-1/2" />
+      <div className="relative max-w-4xl mx-auto text-center">
+        <p className="text-secondary font-bold text-sm tracking-widest uppercase mb-4">Contact Us</p>
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">조직의 미래를 함께 설계하시겠습니까?</h2>
+        <p className="text-white/60 text-[15px] mb-8">귀사의 HR 고민을 엘레브앤컴퍼니와 함께 풀어보세요.<br/>전문 컨설턴트가 직접 상담해드립니다.</p>
         {!isFormVisible && !isSuccess && (
           <button onClick={() => setIsFormVisible(true)} className="bg-secondary text-white px-10 py-5 rounded font-bold shadow-lg hover:bg-[#004f9b] transition-colors text-lg">
             상담 문의하기
