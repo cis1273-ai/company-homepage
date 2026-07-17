@@ -211,6 +211,18 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     }
   };
 
+  const [filter, setFilter] = useState<'전체' | '신규 문의' | '연락 중' | '최근 7일'>('전체');
+
+  const filteredInquiries = inquiries.filter(i => {
+    if (filter === '신규 문의') return i.status === '신규 문의';
+    if (filter === '연락 중') return i.status === '연락 중';
+    if (filter === '최근 7일') {
+      const d = new Date(i.date);
+      return !isNaN(d.getTime()) && (Date.now() - d.getTime()) < 7 * 24 * 60 * 60 * 1000;
+    }
+    return true;
+  });
+
   const total = inquiries.length;
   const newCount = inquiries.filter(i => i.status === '신규 문의').length;
   const doneCount = inquiries.filter(i => i.status === '답변 완료').length;
@@ -246,10 +258,25 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* 목록 테이블 */}
           <div className="flex-1 bg-white rounded-xl shadow-sm overflow-hidden">
+            {/* 필터 버튼 */}
+            <div className="flex gap-2 p-4 border-b border-gray-100 flex-wrap">
+              {(['전체', '신규 문의', '연락 중', '최근 7일'] as const).map(f => (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                    filter === f ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+              <span className="ml-auto text-xs text-gray-400 self-center">{filteredInquiries.length}건</span>
+            </div>
             {loading ? (
               <div className="p-12 text-center text-gray-400">불러오는 중...</div>
-            ) : inquiries.length === 0 ? (
-              <div className="p-12 text-center text-gray-400">문의 내역이 없습니다.</div>
+            ) : filteredInquiries.length === 0 ? (
+              <div className="p-12 text-center text-gray-400">해당 문의 내역이 없습니다.</div>
             ) : (
               <table className="w-full text-sm">
                 <thead className="bg-gray-50 border-b">
@@ -261,7 +288,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {inquiries.map(inq => (
+                  {filteredInquiries.map(inq => (
                     <tr
                       key={inq.rowIndex}
                       onClick={() => setSelected(inq)}
