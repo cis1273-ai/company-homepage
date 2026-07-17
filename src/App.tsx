@@ -6,6 +6,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck } from 'lucide-react';
 import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
+import { ADMIN_PASSWORD } from './admin-config';
 
 const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
@@ -26,6 +27,15 @@ function Ticker() {
 }
 
 export default function App() {
+  const [hash, setHash] = useState(window.location.hash);
+  useEffect(() => {
+    const onHash = () => setHash(window.location.hash);
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  if (hash === '#admin') return <AdminPage />;
+
   return (
     <div className="font-sans min-h-screen text-on-surface bg-background">
       <Ticker />
@@ -42,6 +52,71 @@ export default function App() {
         <CTASection />
       </main>
       <Footer />
+    </div>
+  );
+}
+
+function AdminPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(() => sessionStorage.getItem('adminAuth') === 'true');
+  const [pw, setPw] = useState('');
+  const [error, setError] = useState(false);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pw === ADMIN_PASSWORD) {
+      sessionStorage.setItem('adminAuth', 'true');
+      setIsLoggedIn(true);
+    } else {
+      setError(true);
+      setPw('');
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('adminAuth');
+    setIsLoggedIn(false);
+  };
+
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl shadow-lg p-10 w-full max-w-sm">
+          <div className="text-center mb-8">
+            <h1 className="text-xl font-bold text-gray-800">관리자 로그인</h1>
+            <p className="text-sm text-gray-400 mt-2">엘레브앤컴퍼니</p>
+          </div>
+          <form onSubmit={handleLogin}>
+            <input
+              type="password"
+              value={pw}
+              onChange={e => { setPw(e.target.value); setError(false); }}
+              placeholder="비밀번호를 입력하세요"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-400 mb-3"
+              autoFocus
+            />
+            {error && <p className="text-red-500 text-sm mb-3">비밀번호가 올바르지 않습니다.</p>}
+            <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors">
+              로그인
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 px-4 py-12">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-bold text-gray-800">관리자 대시보드</h1>
+          <button onClick={handleLogout} className="text-sm text-gray-500 hover:text-gray-700 border border-gray-300 px-4 py-2 rounded-lg transition-colors">
+            로그아웃
+          </button>
+        </div>
+        <div className="bg-white rounded-2xl shadow p-8 text-center text-gray-400">
+          <p className="text-lg">대시보드 준비 중입니다.</p>
+        </div>
+      </div>
     </div>
   );
 }
