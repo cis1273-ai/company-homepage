@@ -4,7 +4,8 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck, Clock, Target, RefreshCw, Mic } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck, Clock, Target, RefreshCw, Mic, Building2, BrainCircuit, Search } from 'lucide-react';
 import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
 import { ADMIN_PASSWORD } from './admin-config';
 
@@ -13,6 +14,20 @@ const IconMap: Record<string, React.FC<any>> = {
 };
 
 const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인적자원관리 분야 25년 경력 · 네모파트너즈 이사 역임 · 前 서울특별시·인천광역시 출자출연기관 경영평가 위원 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 46회 이상 · 저서 『알기 쉬운 조사방법론』';
+
+function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 function Ticker() {
   const repeated = `${TICKER_TEXT}　　　　　${TICKER_TEXT}`;
@@ -459,7 +474,7 @@ function Hero() {
 function GreetingSection() {
   return (
     <section className="py-24 bg-surface-low px-4 md:px-6 border-b border-outline">
-      <div className="max-w-[900px] mx-auto">
+      <FadeIn className="max-w-[900px] mx-auto">
         <h2 className="text-2xl md:text-3xl lg:text-[32px] font-bold text-on-surface mb-6 leading-tight break-keep">
           사람을 향한 진심, <br className="hidden sm:block"/> 상생을 이끄는 고객중심의 정교한 전략.
         </h2>
@@ -483,7 +498,7 @@ function GreetingSection() {
             <span className="font-bold text-lg md:text-[19px] text-on-surface">엘레브앤컴퍼니 대표 전인식 올림</span>
           </div>
         </div>
-      </div>
+      </FadeIn>
     </section>
   );
 }
@@ -520,13 +535,15 @@ function CoreValuesSection() {
           {coreValues.map((val, idx) => {
             const Icon = IconMap[val.icon] || Users;
             return (
-              <div key={idx} className="group bg-surface border border-outline rounded p-8 sm:p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-secondary flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center mb-6 border border-outline group-hover:bg-secondary/10 group-hover:border-secondary/30 transition-colors duration-300">
-                  <Icon size={28} className="text-primary group-hover:text-secondary transition-colors duration-300" />
+              <FadeIn key={idx} delay={idx * 0.12}>
+                <div className="group bg-surface border border-outline rounded-xl p-8 sm:p-10 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-secondary flex flex-col items-center text-center h-full" style={{background: 'linear-gradient(160deg, #ffffff 60%, #f0f6ff 100%)'}}>
+                  <div className="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center mb-6 border border-outline group-hover:bg-secondary/10 group-hover:border-secondary/30 transition-colors duration-300">
+                    <Icon size={28} className="text-primary group-hover:text-secondary transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 text-on-surface">{val.title}</h3>
+                  <p className="text-on-surface-muted leading-[1.6] break-keep">{val.description}</p>
                 </div>
-                <h3 className="text-xl font-bold mb-4 text-on-surface">{val.title}</h3>
-                <p className="text-on-surface-muted leading-[1.6] break-keep">{val.description}</p>
-              </div>
+              </FadeIn>
             );
           })}
         </div>
@@ -535,24 +552,44 @@ function CoreValuesSection() {
   );
 }
 
+const MODEL_ICONS: Record<string, React.FC<any>> = {
+  '01': Building2,
+  '02': BrainCircuit,
+  '03': Search,
+};
+const MODEL_ACCENT: Record<string, string> = {
+  '01': 'bg-blue-50 text-secondary border-blue-100',
+  '02': 'bg-indigo-50 text-indigo-600 border-indigo-100',
+  '03': 'bg-sky-50 text-sky-600 border-sky-100',
+};
+
 function BusinessModelSection() {
   return (
     <section id="services" className="py-24 bg-surface-low px-4 md:px-6">
       <div className="max-w-[1200px] mx-auto">
-        <div className="text-center mb-16 flex flex-col items-center">
+        <FadeIn className="text-center mb-16 flex flex-col items-center">
           <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2 mb-6">Services</h2>
           <p className="text-on-surface-muted max-w-2xl px-4 leading-[1.6] break-keep">
             엘레브앤컴퍼니의 세 가지 핵심 사업 영역은 유기적으로 통합되어, 기업의 인사 문제를 근본적으로 해결하고 최적의 고객 가치를 창출합니다.
           </p>
-        </div>
+        </FadeIn>
         <div className="grid md:grid-cols-3 gap-8">
-          {businessModels.map((model) => (
-            <div key={model.id} className="bg-surface border border-outline rounded p-10 flex flex-col items-center text-center transition-all duration-300 hover:border-secondary">
-              <span className="text-secondary font-bold text-2xl mb-6">{model.id}</span>
-              <h3 className="text-xl font-bold mb-4 break-keep">{model.title}</h3>
-              <p className="text-on-surface-muted leading-[1.6] break-keep">{model.description}</p>
-            </div>
-          ))}
+          {businessModels.map((model, idx) => {
+            const Icon = MODEL_ICONS[model.id] || Building2;
+            const accent = MODEL_ACCENT[model.id] || MODEL_ACCENT['01'];
+            return (
+              <FadeIn key={model.id} delay={idx * 0.12}>
+                <div className="bg-surface border border-outline rounded-xl p-10 flex flex-col items-center text-center transition-all duration-300 hover:border-secondary hover:-translate-y-1 hover:shadow-lg h-full">
+                  <div className={`w-20 h-20 rounded-2xl border flex items-center justify-center mb-6 ${accent}`}>
+                    <Icon size={36} />
+                  </div>
+                  <span className="text-secondary font-bold text-sm tracking-widest mb-3">{model.id}</span>
+                  <h3 className="text-xl font-bold mb-4 break-keep">{model.title}</h3>
+                  <p className="text-on-surface-muted leading-[1.6] break-keep">{model.description}</p>
+                </div>
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -783,6 +820,7 @@ const caseStudies = [
     num: '01',
     client: '금융감독원',
     year: '2008',
+    tag: '금융감독',
     title: '글로벌 금융기관 조직 재설계',
     problem: '글로벌 금융위기 속 국가 금융감독 시스템의 공공성·전문성 동시 강화 필요',
     approach: '경영혁신안 마련 → 조직 기능 통폐합 및 구조 개편 자문',
@@ -792,6 +830,7 @@ const caseStudies = [
     num: '02',
     client: '외교부',
     year: '2018',
+    tag: '공공행정',
     title: '재외공관장 성과평가 체계 고도화',
     problem: '외교 업무 특수성으로 인해 기존 성과 평가지표의 객관성·타당성 부족',
     approach: '재외공관장 성과평가 제도 합리화 → 외교 업무 특수성 반영 지표 타당성 검토',
@@ -801,6 +840,7 @@ const caseStudies = [
     num: '03',
     client: 'LH주거복지정보',
     year: '2023',
+    tag: '주거복지',
     title: '조직 기능 고도화 및 경영성과 체계 구축',
     problem: '조직 비전과 하부 실행 과제 간 정렬(Alignment) 부재, 주거복지 서비스 기능 비효율',
     approach: '조직 기능 정밀 진단 → 비전-실행 과제 연계성 분석 → 핵심 기능 재편안 도출',
@@ -810,6 +850,7 @@ const caseStudies = [
     num: '04',
     client: '한국공항보안',
     year: '2023',
+    tag: '항공보안',
     title: '경영진단',
     problem: '\'20년 위탁업무 개시 이후 끊임없이 노사이슈가 발생하고 있고, 이에 따른 경영 불안이 심화되고 있는 상황임',
     approach: '경영관리 체계 진단 및 개선 → 현장관리체계 진단 및 개선 → 조직문화 진단 및 갈등 개선 → 안정적인 항공보안서비스 제공 위한 경영관리 체계 진단 및 재구축',
@@ -819,6 +860,7 @@ const caseStudies = [
     num: '05',
     client: '경상남도사회서비스원',
     year: '2025',
+    tag: '사회서비스',
     title: '현장 중심 직무 인사시스템 구축',
     problem: '돌봄 서비스 종사자의 직무 난이도·책임 수준이 보상에 반영되지 않아 직무 몰입도 저하',
     approach: '현장 중심 직무 인사 시스템 설계 → 직무 난이도·책임 수준별 보상 체계 정교화',
@@ -828,6 +870,7 @@ const caseStudies = [
     num: '06',
     client: '서울시자원봉사센터',
     year: '2026',
+    tag: 'AI·HR',
     title: 'AI 기반 인사평가 시스템 구축',
     problem: '조직업적(전략KPI) 및 개인업적(고유PI) 평가를 한 담당자가 수기로 관리하여 업무부담 가중 및 효율성 저하',
     approach: '바이브코딩을 통한 웹 기반 조직·개인업적 평가 지표개발 → 실적보고서 작성 → 평가자 평가 → 이의신청 → 최종점수 및 등급 확정까지 실시간 모니터링 및 운영관리 구현',
@@ -845,41 +888,52 @@ function CaseStudySection() {
           <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2">Case Studies</h2>
           <p className="text-on-surface-muted mt-6 text-[15px]">대표 프로젝트 수행 사례</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-12 max-w-[860px] mx-auto">
-          {caseStudies.map((cs, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActive(idx)}
-              className={`p-5 rounded-lg border-2 text-left transition-all duration-200 ${
-                active === idx
-                  ? 'border-secondary bg-secondary/5 shadow-md'
-                  : 'border-outline bg-surface hover:border-secondary/40 hover:shadow-sm'
-              }`}
-            >
-              <span className={`text-xs font-bold tracking-widest mb-2 block ${active === idx ? 'text-secondary' : 'text-on-surface-muted'}`}>{cs.num}</span>
-              <p className={`font-bold text-[15px] break-keep leading-snug ${active === idx ? 'text-primary' : 'text-on-surface'}`}>{cs.client}</p>
-              <p className={`text-xs mt-1.5 ${active === idx ? 'text-secondary' : 'text-on-surface-muted'}`}>{cs.year}</p>
-            </button>
-          ))}
-        </div>
-        <div className="bg-surface-low border border-outline rounded p-8 md:p-12 max-w-[860px] mx-auto">
-          <div className="mb-8 pb-6 border-b border-outline">
-            <p className="text-secondary font-bold text-sm tracking-widest mb-2">{c.client} · {c.year}</p>
-            <h3 className="text-xl md:text-2xl font-bold text-on-surface break-keep">{c.title}</h3>
-          </div>
-          <div className="space-y-5">
-            {[
-              { label: '문제', text: c.problem },
-              { label: '접근', text: c.approach },
-              { label: '결과', text: c.result },
-            ].map((row, i) => (
-              <div key={i} className="flex gap-4 items-start">
-                <span className="font-bold text-[13px] tracking-widest text-secondary border border-secondary/30 bg-surface px-2 py-0.5 rounded flex-shrink-0 mt-0.5">{row.label}</span>
-                <p className="text-on-surface-muted text-[15px] leading-relaxed break-keep">{row.text}</p>
-              </div>
+        <FadeIn>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-12 max-w-[860px] mx-auto">
+            {caseStudies.map((cs, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActive(idx)}
+                className={`p-5 rounded-lg border-2 text-left transition-all duration-200 ${
+                  active === idx
+                    ? 'border-secondary bg-secondary/5 shadow-md'
+                    : 'border-outline bg-surface hover:border-secondary/40 hover:shadow-sm'
+                }`}
+              >
+                <span className={`text-xs font-bold tracking-widest mb-2 block ${active === idx ? 'text-secondary' : 'text-on-surface-muted'}`}>{cs.num}</span>
+                <p className={`font-bold text-[15px] break-keep leading-snug ${active === idx ? 'text-primary' : 'text-on-surface'}`}>{cs.client}</p>
+                <div className="flex items-center gap-2 mt-2 flex-wrap">
+                  <p className={`text-xs ${active === idx ? 'text-secondary' : 'text-on-surface-muted'}`}>{cs.year}</p>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${active === idx ? 'bg-secondary/10 text-secondary border-secondary/30' : 'bg-surface-low text-on-surface-muted border-outline'}`}>{cs.tag}</span>
+                </div>
+              </button>
             ))}
           </div>
-        </div>
+        </FadeIn>
+        <FadeIn delay={0.1}>
+          <div className="bg-surface-low border border-outline rounded-xl p-8 md:p-12 max-w-[860px] mx-auto">
+            <div className="mb-8 pb-6 border-b border-outline">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-secondary/10 text-secondary border border-secondary/20">{c.tag}</span>
+                <p className="text-on-surface-muted font-medium text-sm">{c.year}</p>
+              </div>
+              <p className="text-secondary font-bold text-sm tracking-widest mb-2">{c.client}</p>
+              <h3 className="text-xl md:text-2xl font-bold text-on-surface break-keep">{c.title}</h3>
+            </div>
+            <div className="space-y-5">
+              {[
+                { label: '문제', text: c.problem },
+                { label: '접근', text: c.approach },
+                { label: '결과', text: c.result },
+              ].map((row, i) => (
+                <div key={i} className="flex gap-4 items-start">
+                  <span className="font-bold text-[13px] tracking-widest text-secondary border border-secondary/30 bg-surface px-2 py-0.5 rounded flex-shrink-0 mt-0.5">{row.label}</span>
+                  <p className="text-on-surface-muted text-[15px] leading-relaxed break-keep">{row.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
