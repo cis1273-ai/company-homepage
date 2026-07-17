@@ -228,63 +228,69 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const doneCount = inquiries.filter(i => i.status === '답변 완료').length;
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-800">관리자 대시보드</h1>
-          <button onClick={onLogout} className="text-sm text-gray-500 hover:text-gray-700 border border-gray-300 px-4 py-2 rounded-lg transition-colors">로그아웃</button>
+    <div className="min-h-screen bg-[#fbf9f8]">
+      {/* 헤더 */}
+      <div className="bg-[#001736] px-6 py-4 flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <img src="/logo.png" alt="엘레브앤컴퍼니" className="h-10 w-auto object-contain brightness-0 invert" />
+          <span className="text-white text-sm font-medium tracking-wide border-l border-white/20 pl-3">관리자 대시보드</span>
         </div>
+        <button onClick={onLogout} className="text-white/60 hover:text-white text-sm transition-colors">로그아웃</button>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 py-8">
         {/* 통계 카드 */}
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
-            <p className="text-xs text-gray-400 mb-2 font-medium tracking-wide">전체 문의</p>
-            <p className="text-4xl font-bold text-gray-800">{total}</p>
-            <p className="text-xs text-gray-400 mt-2">건</p>
+          <div className="bg-white rounded border border-[#e4e2e2] p-6">
+            <p className="text-xs text-[#747780] mb-3 font-medium tracking-widest uppercase">전체 문의</p>
+            <p className="text-4xl font-bold text-[#001736]">{total}</p>
+            <p className="text-xs text-[#747780] mt-2">건</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-orange-400">
-            <p className="text-xs text-gray-400 mb-2 font-medium tracking-wide">신규 문의</p>
-            <p className="text-4xl font-bold text-orange-500">{newCount}</p>
-            <p className="text-xs text-gray-400 mt-2">건</p>
+          <div className="bg-white rounded border border-[#e4e2e2] p-6 border-t-2 border-t-[#005db6]">
+            <p className="text-xs text-[#747780] mb-3 font-medium tracking-widest uppercase">신규 문의</p>
+            <p className="text-4xl font-bold text-[#005db6]">{newCount}</p>
+            <p className="text-xs text-[#747780] mt-2">건</p>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-green-500">
-            <p className="text-xs text-gray-400 mb-2 font-medium tracking-wide">답변 완료</p>
-            <p className="text-4xl font-bold text-green-600">{doneCount}</p>
-            <p className="text-xs text-gray-400 mt-2">건</p>
+          <div className="bg-white rounded border border-[#e4e2e2] p-6 border-t-2 border-t-[#001736]">
+            <p className="text-xs text-[#747780] mb-3 font-medium tracking-widest uppercase">답변 완료</p>
+            <p className="text-4xl font-bold text-[#001736]">{doneCount}</p>
+            <p className="text-xs text-[#747780] mt-2">건</p>
           </div>
         </div>
 
         {/* 목록 + 상세 */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* 목록 테이블 */}
-          <div className="flex-1 bg-white rounded-xl shadow-sm overflow-hidden">
+          <div className="flex-1 bg-white rounded border border-[#e4e2e2] overflow-hidden">
             {/* 필터 버튼 */}
-            <div className="flex gap-2 p-4 border-b border-gray-100 flex-wrap">
+            <div className="flex gap-2 px-4 py-3 border-b border-[#e4e2e2] flex-wrap items-center">
               {(['전체', '신규 문의', '연락 중', '최근 7일'] as const).map(f => (
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                    filter === f ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                  className={`px-4 py-1.5 text-xs font-medium transition-colors rounded ${
+                    filter === f
+                      ? 'bg-[#005db6] text-white'
+                      : 'bg-[#f5f3f3] text-[#747780] hover:bg-[#e4e2e2]'
                   }`}
                 >
                   {f}
                 </button>
               ))}
-              <span className="ml-auto text-xs text-gray-400 self-center">{filteredInquiries.length}건</span>
+              <span className="ml-auto text-xs text-[#747780]">{filteredInquiries.length}건</span>
             </div>
             {loading ? (
-              <div className="p-12 text-center text-gray-400">불러오는 중...</div>
+              <div className="p-12 text-center text-[#747780] text-sm">불러오는 중...</div>
             ) : filteredInquiries.length === 0 ? (
-              <div className="p-12 text-center text-gray-400">해당 문의 내역이 없습니다.</div>
+              <div className="p-12 text-center text-[#747780] text-sm">해당 문의 내역이 없습니다.</div>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-50 border-b">
+                <thead className="bg-[#f5f3f3] border-b border-[#e4e2e2]">
                   <tr>
-                    <th className="px-4 py-3 text-left text-gray-400 font-medium text-xs">날짜</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-medium text-xs">회사명</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-medium text-xs">담당자</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-medium text-xs">상태</th>
+                    <th className="px-4 py-3 text-left text-[#747780] font-medium text-xs tracking-wide">날짜</th>
+                    <th className="px-4 py-3 text-left text-[#747780] font-medium text-xs tracking-wide">회사명</th>
+                    <th className="px-4 py-3 text-left text-[#747780] font-medium text-xs tracking-wide">담당자</th>
+                    <th className="px-4 py-3 text-left text-[#747780] font-medium text-xs tracking-wide">상태</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -292,13 +298,13 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                     <tr
                       key={inq.rowIndex}
                       onClick={() => setSelected(inq)}
-                      className={`border-b cursor-pointer hover:bg-blue-50 transition-colors ${selected?.rowIndex === inq.rowIndex ? 'bg-blue-50' : ''}`}
+                      className={`border-b border-[#e4e2e2] cursor-pointer transition-colors ${selected?.rowIndex === inq.rowIndex ? 'bg-[#005db6]/5' : 'hover:bg-[#f5f3f3]'}`}
                     >
-                      <td className="px-4 py-3 text-gray-400 text-xs">{inq.date ? new Date(inq.date).toLocaleDateString('ko-KR') : '-'}</td>
-                      <td className="px-4 py-3 font-semibold text-gray-800">{inq.company}</td>
-                      <td className="px-4 py-3 text-gray-600">{inq.name}</td>
+                      <td className="px-4 py-3 text-[#747780] text-xs">{inq.date ? new Date(inq.date).toLocaleDateString('ko-KR') : '-'}</td>
+                      <td className="px-4 py-3 font-semibold text-[#1b1c1c]">{inq.company}</td>
+                      <td className="px-4 py-3 text-[#747780]">{inq.name}</td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${STATUS_STYLE[inq.status] || 'bg-gray-100 text-gray-500'}`}>{inq.status}</span>
+                        <span className={`px-2 py-1 rounded text-xs font-medium ${STATUS_STYLE[inq.status] || 'bg-[#f5f3f3] text-[#747780]'}`}>{inq.status}</span>
                       </td>
                     </tr>
                   ))}
@@ -309,74 +315,74 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 
           {/* 상세 패널 */}
           {selected && (
-            <div className="w-full lg:w-80 bg-white rounded-xl shadow-sm p-6 flex-shrink-0">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <h2 className="font-bold text-gray-800 text-lg">{selected.company}</h2>
-                  <p className="text-sm text-gray-400 mt-0.5">{selected.name}</p>
+            <div className="w-full lg:w-80 flex-shrink-0 flex flex-col gap-4">
+              {/* 기본 정보 */}
+              <div className="bg-white rounded border border-[#e4e2e2] overflow-hidden">
+                <div className="bg-[#001736] px-5 py-4 flex justify-between items-start">
+                  <div>
+                    <h2 className="font-bold text-white text-base">{selected.company}</h2>
+                    <p className="text-white/60 text-xs mt-0.5">{selected.name}</p>
+                  </div>
+                  <button onClick={() => setSelected(null)} className="text-white/40 hover:text-white transition-colors text-lg leading-none">✕</button>
                 </div>
-                <button onClick={() => setSelected(null)} className="text-gray-300 hover:text-gray-500 text-lg leading-none">✕</button>
+                <div className="p-5 space-y-3 text-sm border-b border-[#e4e2e2]">
+                  {[
+                    { label: '연락처', value: selected.contact },
+                    { label: '이메일', value: selected.email },
+                    { label: '접수 시각', value: selected.date ? new Date(selected.date).toLocaleString('ko-KR') : '-' },
+                  ].map(({ label, value }) => (
+                    <div key={label}>
+                      <p className="text-xs text-[#747780] mb-0.5">{label}</p>
+                      <p className="font-medium text-[#1b1c1c] text-sm">{value}</p>
+                    </div>
+                  ))}
+                  <div>
+                    <p className="text-xs text-[#747780] mb-0.5">문의 내용</p>
+                    <p className="font-medium text-[#1b1c1c] text-sm whitespace-pre-wrap leading-relaxed">{selected.message}</p>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <label className="text-xs text-[#747780] block mb-1.5">상태 변경</label>
+                  <select
+                    value={selected.status}
+                    onChange={e => handleStatusChange(e.target.value)}
+                    disabled={statusSaving}
+                    className="w-full border border-[#e4e2e2] rounded px-3 py-2 text-sm focus:outline-none focus:border-[#005db6] text-[#1b1c1c]"
+                  >
+                    {STATUS_OPTIONS.map(s => <option key={s}>{s}</option>)}
+                  </select>
+                  {statusSaving && <p className="text-xs text-[#005db6] mt-1">저장 중...</p>}
+                </div>
               </div>
 
-              <div className="space-y-4 mb-6 text-sm border-b pb-6">
-                <div>
-                  <p className="text-xs text-gray-400 mb-0.5">연락처</p>
-                  <p className="font-medium text-gray-800">{selected.contact}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400 mb-0.5">이메일</p>
-                  <p className="font-medium text-gray-800">{selected.email}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400 mb-0.5">접수 시각</p>
-                  <p className="font-medium text-gray-800">{selected.date ? new Date(selected.date).toLocaleString('ko-KR') : '-'}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400 mb-0.5">문의 내용</p>
-                  <p className="font-medium text-gray-800 whitespace-pre-wrap leading-relaxed">{selected.message}</p>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <label className="text-xs text-gray-400 block mb-1.5">상태 변경</label>
-                <select
-                  value={selected.status}
-                  onChange={e => handleStatusChange(e.target.value)}
-                  disabled={statusSaving}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
-                >
-                  {STATUS_OPTIONS.map(s => <option key={s}>{s}</option>)}
-                </select>
-                {statusSaving && <p className="text-xs text-blue-400 mt-1">저장 중...</p>}
-              </div>
-
-              <div>
-                <label className="text-xs text-gray-400 block mb-1.5">관리자 메모</label>
+              {/* 메모 */}
+              <div className="bg-white rounded border border-[#e4e2e2] p-5">
+                <label className="text-xs text-[#747780] block mb-1.5 font-medium tracking-wide">관리자 메모</label>
                 <textarea
                   value={memo}
                   onChange={e => setMemo(e.target.value)}
                   rows={4}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400 resize-none"
+                  className="w-full border border-[#e4e2e2] rounded px-3 py-2 text-sm focus:outline-none focus:border-[#005db6] resize-none text-[#1b1c1c]"
                   placeholder="메모를 입력하세요"
                 />
                 <button
                   onClick={handleMemoSave}
                   disabled={memoSaving}
-                  className="mt-2 w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300"
+                  className="mt-2 w-full bg-[#001736] text-white py-2 rounded text-sm font-medium hover:bg-[#002b5c] transition-colors disabled:bg-[#e4e2e2] disabled:text-[#747780]"
                 >
                   {memoSaving ? '저장 중...' : memoSaved ? '✓ 저장됨' : '메모 저장'}
                 </button>
               </div>
 
               {/* 답장 */}
-              <div className="mt-4 pt-4 border-t border-gray-100">
-                <p className="text-xs font-semibold text-gray-500 mb-2">답장 보내기</p>
-                <p className="text-xs text-gray-400 mb-2">받는 사람: {selected.email}</p>
+              <div className="bg-white rounded border border-[#e4e2e2] p-5">
+                <p className="text-xs font-medium text-[#747780] mb-1 tracking-wide">답장 보내기</p>
+                <p className="text-xs text-[#747780] mb-2">받는 사람: {selected.email}</p>
                 <textarea
                   value={replyText}
                   onChange={e => { setReplyText(e.target.value); setReplyResult(null); }}
                   rows={5}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400 resize-none"
+                  className="w-full border border-[#e4e2e2] rounded px-3 py-2 text-sm focus:outline-none focus:border-[#005db6] resize-none text-[#1b1c1c]"
                   placeholder="답장 내용을 입력하세요"
                 />
                 {replyResult === 'success' && <p className="text-xs text-green-600 mt-1">✓ 답장을 성공적으로 보냈습니다.</p>}
@@ -384,7 +390,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                 <button
                   onClick={handleReply}
                   disabled={replySending || !replyText.trim()}
-                  className="mt-2 w-full bg-green-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors disabled:bg-gray-300"
+                  className="mt-2 w-full bg-[#005db6] text-white py-2 rounded text-sm font-medium hover:bg-[#004f9b] transition-colors disabled:bg-[#e4e2e2] disabled:text-[#747780]"
                 >
                   {replySending ? '발송 중...' : '답장 보내기'}
                 </button>
