@@ -5,7 +5,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
 
 const IconMap: Record<string, React.FC<any>> = {
