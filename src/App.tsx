@@ -667,20 +667,26 @@ function StatsClientsSection() {
             <h2 className="text-sm tracking-widest font-bold text-gray-400 mb-2">TRUSTED BY</h2>
             <h3 className="text-2xl font-bold tracking-widest">CLIENT TRUST</h3>
           </div>
-          <div className="grid md:grid-cols-2 gap-16">
+          <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h4 className="text-blue-300 font-bold mb-6 text-lg border-b border-primary-container pb-4">공공 부문</h4>
+              <div className="flex items-center justify-between mb-5 pb-4 border-b border-primary-container">
+                <h4 className="text-blue-300 font-bold text-lg">공공 부문</h4>
+                <span className="text-xs font-bold bg-blue-900/60 text-blue-300 border border-blue-700/40 px-3 py-1 rounded-full tracking-wide">{publicClients.length}건+</span>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {publicClients.map((client, idx) => (
-                  <span key={idx} className="bg-[#111c2e] border border-[#1e2f47] text-gray-300 text-sm py-1.5 px-3 rounded text-center">{client.trim().replace(/ 등$/, '')}</span>
+                  <span key={idx} className="bg-[#0a1628] border border-[#1a3254] text-blue-200 text-sm py-1.5 px-3 rounded-full hover:bg-[#1a3254] transition-colors">{client.trim().replace(/ 등$/, '')}</span>
                 ))}
               </div>
             </div>
             <div>
-              <h4 className="text-blue-300 font-bold mb-6 text-lg border-b border-primary-container pb-4">민간 부문</h4>
+              <div className="flex items-center justify-between mb-5 pb-4 border-b border-primary-container">
+                <h4 className="text-slate-300 font-bold text-lg">민간 부문</h4>
+                <span className="text-xs font-bold bg-slate-700/60 text-slate-300 border border-slate-600/40 px-3 py-1 rounded-full tracking-wide">{privateClients.length}건+</span>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {privateClients.map((client, idx) => (
-                  <span key={idx} className="bg-[#111c2e] border border-[#1e2f47] text-gray-300 text-sm py-1.5 px-3 rounded text-center">{client.trim().replace(/ 등$/, '')}</span>
+                  <span key={idx} className="bg-[#141e2e] border border-[#2a3548] text-slate-300 text-sm py-1.5 px-3 rounded-full hover:bg-[#2a3548] transition-colors">{client.trim().replace(/ 등$/, '')}</span>
                 ))}
               </div>
             </div>
