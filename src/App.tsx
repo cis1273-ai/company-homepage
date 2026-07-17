@@ -100,27 +100,29 @@ function AdminPage() {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-2xl shadow-lg p-10 w-full max-w-sm">
-          <div className="text-center mb-8">
-            <h1 className="text-xl font-bold text-gray-800">관리자 로그인</h1>
-            <p className="text-sm text-gray-400 mt-2">엘레브앤컴퍼니</p>
-          </div>
+      <div className="min-h-screen bg-[#001736] flex flex-col items-center justify-center px-4">
+        <div className="mb-8 text-center">
+          <img src="/logo.png" alt="엘레브앤컴퍼니" className="h-14 w-auto object-contain brightness-0 invert mx-auto mb-4" />
+          <p className="text-white/40 text-xs tracking-widest">ADMIN</p>
+        </div>
+        <div className="bg-white w-full max-w-sm rounded p-8">
+          <h1 className="text-base font-bold text-[#001736] mb-6 text-center">관리자 로그인</h1>
           <form onSubmit={handleLogin}>
             <input
               type="password"
               value={pw}
               onChange={e => { setPw(e.target.value); setError(false); }}
               placeholder="비밀번호를 입력하세요"
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-blue-400 mb-3"
+              className="w-full px-4 py-3 border border-[#e4e2e2] rounded text-sm focus:outline-none focus:border-[#005db6] mb-3 text-[#1b1c1c]"
               autoFocus
             />
-            {error && <p className="text-red-500 text-sm mb-3">비밀번호가 올바르지 않습니다.</p>}
-            <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-sm hover:bg-blue-700 transition-colors">
+            {error && <p className="text-red-500 text-xs mb-3">비밀번호가 올바르지 않습니다.</p>}
+            <button type="submit" className="w-full bg-[#005db6] text-white py-3 rounded font-semibold text-sm hover:bg-[#004f9b] transition-colors">
               로그인
             </button>
           </form>
         </div>
+        <p className="text-white/20 text-xs mt-8">© 2026 Ellev&Company</p>
       </div>
     );
   }
