@@ -102,9 +102,7 @@ function AdminPage() {
     return (
       <div className="min-h-screen bg-[#001736] flex flex-col items-center justify-center px-4">
         <div className="mb-8 text-center">
-          <div className="bg-white rounded px-4 py-2 inline-flex items-center mx-auto mb-4">
-            <img src="/logo.png" alt="엘레브앤컴퍼니" className="h-12 w-auto object-contain" />
-          </div>
+          <p className="text-white font-bold text-2xl tracking-widest mb-2">ELLEV&amp;COMPANY</p>
           <p className="text-white/40 text-xs tracking-widest">ADMIN</p>
         </div>
         <div className="bg-white w-full max-w-sm rounded p-8">
@@ -236,10 +234,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
       {/* 헤더 */}
       <div className="bg-[#001736] px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="bg-white rounded px-3 py-1 flex items-center">
-            <img src="/logo.png" alt="엘레브앤컴퍼니" className="h-8 w-auto object-contain" />
-          </div>
-          <span className="text-white text-sm font-medium tracking-wide border-l border-white/20 pl-3">관리자 대시보드</span>
+          <span className="text-white font-bold text-lg tracking-wide">관리자 대시보드</span>
         </div>
         <button onClick={onLogout} className="text-white/60 hover:text-white text-sm transition-colors">로그아웃</button>
       </div>
