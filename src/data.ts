@@ -24,8 +24,8 @@ export const businessModels = [
   },
   {
     id: '02',
-    title: '교육(Learning)',
-    description: '직무 역량 강화 및 리더십 함양을 위한 맞춤형 오프라인 교육 프로그램을 운영합니다.'
+    title: 'AI E-HR 시스템',
+    description: 'AX 도입에 따른 AI 기반 HR 시스템을 구축합니다.'
   },
   {
     id: '03',
