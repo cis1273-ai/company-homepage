@@ -136,6 +136,9 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const [memo, setMemo] = useState('');
   const [memoSaving, setMemoSaving] = useState(false);
   const [memoSaved, setMemoSaved] = useState(false);
+  const [replyText, setReplyText] = useState('');
+  const [replySending, setReplySending] = useState(false);
+  const [replyResult, setReplyResult] = useState<'success' | 'error' | null>(null);
 
   const fetchData = async () => {
     setLoading(true);
@@ -178,6 +181,34 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     setMemoSaving(false);
     setMemoSaved(true);
     setTimeout(() => setMemoSaved(false), 2000);
+  };
+
+  const handleReply = async () => {
+    if (!selected || !replyText.trim()) return;
+    setReplySending(true);
+    setReplyResult(null);
+    try {
+      const params = new URLSearchParams({
+        action: 'sendReply',
+        toEmail: selected.email,
+        subject: 'Re: [' + selected.company + '] 문의 건',
+        body: replyText,
+        rowIndex: String(selected.rowIndex),
+      });
+      const res = await fetch(`${SCRIPT_URL}?${params}`);
+      const result = await res.json();
+      if (result.success) {
+        setReplyResult('success');
+        setReplyText('');
+        await fetchData();
+      } else {
+        setReplyResult('error');
+      }
+    } catch {
+      setReplyResult('error');
+    } finally {
+      setReplySending(false);
+    }
   };
 
   const total = inquiries.length;
@@ -307,6 +338,28 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   className="mt-2 w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300"
                 >
                   {memoSaving ? '저장 중...' : memoSaved ? '✓ 저장됨' : '메모 저장'}
+                </button>
+              </div>
+
+              {/* 답장 */}
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                <p className="text-xs font-semibold text-gray-500 mb-2">답장 보내기</p>
+                <p className="text-xs text-gray-400 mb-2">받는 사람: {selected.email}</p>
+                <textarea
+                  value={replyText}
+                  onChange={e => { setReplyText(e.target.value); setReplyResult(null); }}
+                  rows={5}
+                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400 resize-none"
+                  placeholder="답장 내용을 입력하세요"
+                />
+                {replyResult === 'success' && <p className="text-xs text-green-600 mt-1">✓ 답장을 성공적으로 보냈습니다.</p>}
+                {replyResult === 'error' && <p className="text-xs text-red-500 mt-1">발송에 실패했습니다. 다시 시도해주세요.</p>}
+                <button
+                  onClick={handleReply}
+                  disabled={replySending || !replyText.trim()}
+                  className="mt-2 w-full bg-green-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors disabled:bg-gray-300"
+                >
+                  {replySending ? '발송 중...' : '답장 보내기'}
                 </button>
               </div>
             </div>
