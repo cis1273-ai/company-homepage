@@ -541,7 +541,7 @@ function BusinessModelSection() {
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-16 flex flex-col items-center">
           <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2 mb-6">Services</h2>
-          <p className="text-on-surface-muted max-w-2xl px-4 leading-[1.6]">
+          <p className="text-on-surface-muted max-w-2xl px-4 leading-[1.6] break-keep">
             엘레브앤컴퍼니의 세 가지 핵심 사업 영역은 유기적으로 통합되어, 기업의 인사 문제를 근본적으로 해결하고 최적의 고객 가치를 창출합니다.
           </p>
         </div>
