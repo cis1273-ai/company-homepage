@@ -845,16 +845,20 @@ function CaseStudySection() {
           <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2">Case Studies</h2>
           <p className="text-on-surface-muted mt-6 text-[15px]">대표 프로젝트 수행 사례</p>
         </div>
-        <div className="flex flex-wrap border-b border-outline mb-12 w-full max-w-[860px] mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-12 max-w-[860px] mx-auto">
           {caseStudies.map((cs, idx) => (
             <button
               key={idx}
               onClick={() => setActive(idx)}
-              className={`py-4 px-4 font-bold text-[14px] sm:text-[15px] border-b-2 transition-colors flex-1 text-center whitespace-nowrap ${
-                active === idx ? 'border-secondary text-primary' : 'border-transparent text-on-surface-muted hover:text-on-surface'
+              className={`p-5 rounded-lg border-2 text-left transition-all duration-200 ${
+                active === idx
+                  ? 'border-secondary bg-secondary/5 shadow-md'
+                  : 'border-outline bg-surface hover:border-secondary/40 hover:shadow-sm'
               }`}
             >
-              {cs.num}. {cs.client}
+              <span className={`text-xs font-bold tracking-widest mb-2 block ${active === idx ? 'text-secondary' : 'text-on-surface-muted'}`}>{cs.num}</span>
+              <p className={`font-bold text-[15px] break-keep leading-snug ${active === idx ? 'text-primary' : 'text-on-surface'}`}>{cs.client}</p>
+              <p className={`text-xs mt-1.5 ${active === idx ? 'text-secondary' : 'text-on-surface-muted'}`}>{cs.year}</p>
             </button>
           ))}
         </div>
