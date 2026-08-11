@@ -284,6 +284,46 @@
             color: var(--border);
         }
 
+        /* 상세 자료 링크 버튼 */
+        .detail-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 48px 0;
+        }
+
+        .detail-btn {
+            display: inline-block;
+            width: 320px;
+            padding: 16px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 15px;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .detail-btn.filled {
+            background: var(--primary);
+            color: var(--bg-deep);
+        }
+
+        .detail-btn.filled:hover {
+            background: var(--secondary);
+        }
+
+        .detail-btn.outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--secondary);
+        }
+
+        .detail-btn.outline:hover {
+            background: rgba(184, 147, 62, 0.1);
+        }
+
         /* 인쇄 및 PDF 저장 시 레이아웃 깨짐 방지 스타일 */
         @media print {
             body {
@@ -317,6 +357,10 @@
             }
             body {
                 padding: 20px 10px;
+            }
+            .detail-btn {
+                width: 100%;
+                max-width: 320px;
             }
         }
     </style>
@@ -435,6 +479,12 @@
             <h4>🚀 수기 행정 오류 제로, 시스템 책임 보증</h4>
             <p>수기 입력 실수로 발생하는 민원과 업무 번복을 없애고, <br>인사 담당자는 이제 '단순 행정' 이 아닌 '전략적 인적 자원 관리'에 집중하십시오.</p>
         </div>
+    </div>
+
+    <!-- 상세 자료 -->
+    <div class="detail-links">
+        <a class="detail-btn outline" href="/hr-one/brochure.html" target="_blank" rel="noopener noreferrer">HR One 상세 보기 →</a>
+        <a class="detail-btn outline" href="/hr-intelligence-suite/brochure.html" target="_blank" rel="noopener noreferrer">HR Intelligence Suite 상세 보기 →</a>
     </div>
 
     <!-- Footer -->

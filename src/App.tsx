@@ -589,26 +589,6 @@ function BusinessModelSection() {
                   <span className="text-secondary font-bold text-sm tracking-widest mb-3">{model.id}</span>
                   <h3 className="text-xl font-bold mb-4 break-keep">{model.title}</h3>
                   <p className="text-on-surface-muted leading-[1.6] break-keep">{model.description}</p>
-                  {model.id === '02' && (
-                    <div className="flex flex-col gap-3 mt-6 w-full">
-                      <a
-                        href="/hr-one/brochure.html"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
-                      >
-                        HR One
-                      </a>
-                      <a
-                        href="/hr-intelligence-suite/brochure.html"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
-                      >
-                        HR Intelligence Suite
-                      </a>
-                    </div>
-                  )}
                 </div>
               </FadeIn>
             );
