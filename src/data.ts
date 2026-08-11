@@ -26,11 +26,6 @@ export const businessModels = [
     id: '02',
     title: 'AI HR One Intelligence Suite',
     description: 'AX 도입에 따른 AI 기반 HR 시스템을 구축합니다.'
-  },
-  {
-    id: '03',
-    title: '헤드헌팅(Head Hunting)',
-    description: '전문 네트워크를 활용하여 기업 성장의 핵심이 될 최적의 인재를 발굴하고 추천합니다.'
   }
 ];
 

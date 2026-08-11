@@ -466,7 +466,7 @@ function Hero() {
           최적의 인적 자원 전략과 실행력을 제공합니다.
         </h1>
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <a href="/ai-hr-system.html" target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block">AI HR System</a>
+          <a href="/ai-hr-system.html" target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block">AI-Powered HR Platform</a>
         </div>
       </div>
     </section>
@@ -572,10 +572,10 @@ function BusinessModelSection() {
         <FadeIn className="text-center mb-16 flex flex-col items-center">
           <h2 className="text-2xl font-bold inline-block border-b-[3px] border-secondary pb-2 mb-6">Services</h2>
           <p className="text-on-surface-muted max-w-2xl px-4 leading-[1.6] break-keep">
-            엘레브앤컴퍼니의 세 가지 핵심 사업 영역은 유기적으로 통합되어, 기업의 인사 문제를 근본적으로 해결하고 최적의 고객 가치를 창출합니다.
+            엘레브앤컴퍼니의 두 가지 핵심 사업 영역은 유기적으로 통합되어, 기업의 인사 문제를 근본적으로 해결하고 최적의 고객 가치를 창출합니다.
           </p>
         </FadeIn>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
           {businessModels.map((model, idx) => {
             const Icon = MODEL_ICONS[model.id] || Building2;
             const accent = MODEL_ACCENT[model.id] || MODEL_ACCENT['01'];
@@ -591,20 +591,20 @@ function BusinessModelSection() {
                   {model.id === '02' && (
                     <div className="flex flex-col gap-3 mt-6 w-full">
                       <a
-                        href="/hr-intelligence-suite/brochure.html"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
-                      >
-                        HR Intelligence Suite 상세 보기 →
-                      </a>
-                      <a
                         href="/hr-one/brochure.html"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
                       >
-                        HR One 상세 보기 →
+                        HR One
+                      </a>
+                      <a
+                        href="/hr-intelligence-suite/brochure.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
+                      >
+                        HR Intelligence Suite
                       </a>
                     </div>
                   )}
