@@ -422,7 +422,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 bg-surface border-b border-outline">
+    <header className="sticky top-0 z-50 bg-surface border-b border-outline overflow-x-hidden">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 h-24 flex items-center justify-between">
         <div className="flex items-center cursor-pointer py-2 -ml-8 md:-ml-14">
           <picture>
