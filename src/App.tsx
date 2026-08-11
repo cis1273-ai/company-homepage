@@ -465,6 +465,7 @@ function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
           <a href="#contact" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block">상담 문의하기</a>
           <a href="/company_profile.pdf" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block">회사 소개서</a>
+          <a href="/ai-hr-system.pdf" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block">AI HR System</a>
         </div>
       </div>
     </section>
