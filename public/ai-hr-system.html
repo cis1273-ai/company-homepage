@@ -284,19 +284,18 @@
             color: var(--border);
         }
 
-        /* 상세 자료 링크 버튼 */
+        /* 상세 자료 링크 버튼 — strengths-grid와 동일한 2열 그리드로 폭을 맞춤 */
         .detail-links {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
             margin: 0 0 48px;
             padding-top: 8px;
         }
 
         .detail-btn {
-            display: inline-block;
-            width: 320px;
+            display: block;
+            width: 100%;
             padding: 16px 20px;
             border-radius: 6px;
             font-weight: 700;
@@ -304,6 +303,7 @@
             text-align: center;
             text-decoration: none;
             transition: background 0.2s, color 0.2s;
+            box-sizing: border-box;
         }
 
         .detail-btn.filled {
@@ -350,7 +350,7 @@
         }
 
         @media (max-width: 768px) {
-            .brand-hero-grid, .grid, .strengths-grid {
+            .brand-hero-grid, .grid, .strengths-grid, .detail-links {
                 grid-template-columns: 1fr;
             }
             .container {
@@ -358,10 +358,6 @@
             }
             body {
                 padding: 20px 10px;
-            }
-            .detail-btn {
-                width: 100%;
-                max-width: 320px;
             }
         }
     </style>
