@@ -425,7 +425,10 @@ function Header() {
     <header className="sticky top-0 z-50 bg-surface border-b border-outline">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 h-24 flex items-center justify-between">
         <div className="flex items-center cursor-pointer py-2 -ml-8 md:-ml-14">
-          <img src="/logo.png" alt="엘레브앤컴퍼니 Logo" className="h-16 md:h-20 w-auto object-contain object-left" />
+          <picture>
+            <source srcSet="/logo.webp" type="image/webp" />
+            <img src="/logo.png" alt="엘레브앤컴퍼니 Logo" className="h-16 md:h-20 w-auto object-contain object-left" />
+          </picture>
         </div>
         <nav className="hidden md:flex gap-10 items-center font-medium text-[15px] md:-mr-8">
           <a href="#about" className="text-on-surface hover:text-secondary transition-colors">회사소개</a>
@@ -740,7 +743,10 @@ function ProfileSection() {
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
-            <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
+            <picture>
+              <source srcSet="/Profile.webp" type="image/webp" />
+              <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
+            </picture>
           </div>
           <div className="lg:col-span-7 order-2 lg:order-1 space-y-8">
             <div>
