@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>HR Intelligence Suite · 통합 브로슈어</title>
+<style>
+/* =========================================================
+   [통합 브로슈어 디자인 시스템 - 하단 여백 완벽 제거 & 가독성 최적화]
+   ========================================================= */
+:root {
+  /* Colors - Primary Navy */
+  --navy-900: #0B2545;
+  --navy-800: #13315C;
+  --navy-700: #1C4072;
+  --navy-600: #2D5A8F;
+  
+  /* Colors - Accent Gold */
+  --gold-600: #8D6E28;
+  --gold-500: #B8933E;
+  --gold-400: #D4AF37;
+  
+  /* Colors - Steel / Grey Tone */
+  --steel-500: #5F7FA6;
+  --steel-400: #8DA9C4;
+  --steel-300: #A9BED3;
+  --grey-100: #E9ECEF;
+  --grey-50:  #F8F9FA;
+  
+  /* Colors - Text & Neutral */
+  --white:    #FFFFFF;
+  --ink-700:  #2B2D42;
+  --ink-500:  #4A5061;
+  --ink-400:  #8D99AE;
+  --line:     #D5DCE5;
+  --success:  #2E7D32;
+
+  /* Typography System */
+  --font-serif: 'Playfair Display', 'Noto Serif KR', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+body {
+  background: #DDE3EC;
+  padding: 40px 0;
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink-700);
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.brochures {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.a4 {
+  width: 1240px;
+  height: 1754px;
+  background: var(--white);
+  box-shadow: 0 8px 40px rgba(11, 37, 69, 0.15);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* Header Section */
+.bro-head {
+  height: 220px;
+  background: var(--navy-900) !important;
+  color: var(--white);
+  padding: 40px 60px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.bro-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 90% 30%, rgba(184, 147, 62, 0.18), transparent 55%);
+}
+.bro-head .top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.bro-head .brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+.bro-head .brand-mark {
+  width: 32px; height: 32px;
+  background: var(--gold-500);
+  color: var(--navy-900);
+  display: grid; place-items: center;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 16px;
+}
+.bro-head .sys-tag {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--gold-400);
+  font-weight: 600;
+}
+.bro-head .title-block {
+  position: relative;
+  z-index: 2;
+}
+.bro-head h1 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--white);
+  word-break: keep-all;
+}
+.bro-head .tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 21px;
+  color: var(--gold-400);
+  margin-top: 8px;
+  font-weight: 400;
+  word-break: keep-all;
+}
+
+/* Body Section */
+.bro-body {
+  flex: 1;
+  padding: 44px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.bro-intro {
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-700);
+  max-width: 100%;
+  margin: 0;
+  word-break: keep-all;
+}
+.bro-intro strong {
+  color: var(--navy-900);
+  font-weight: 700;
+}
+
+/* Features grid */
+.bro-features-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.bro-features-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.bro-feature {
+  background: var(--grey-50);
+  padding: 24px 22px;
+  border-top: 4px solid var(--gold-500);
+  display: flex;
+  flex-direction: column;
+}
+
+.bro-features-4 .bro-feature:nth-child(3),
+.bro-features-4 .bro-feature:nth-child(4) {
+  border-top: none;
+  border-bottom: 4px solid var(--gold-500);
+}
+
+.bro-feature .fn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gold-600);
+  letter-spacing: 0.16em;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.bro-feature .ft {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--navy-900);
+  margin-bottom: 10px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+.bro-feature .fd {
+  font-size: 15px;
+  color: var(--ink-500);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+.bro-feature .fd strong {
+  color: var(--navy-800);
+  font-weight: 700;
+}
+
+/* Process strip */
+.bro-process {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.bro-process .p-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gold-600);
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+.bro-process .p-label strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  color: var(--navy-900);
+  font-weight: 700;
+  margin-top: 6px;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+.bro-process .p-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+.p-step {
+  padding: 18px 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  position: relative;
+}
+.p-step .n {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold-600);
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.p-step .t {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--navy-900);
+  margin-bottom: 6px;
+  line-height: 1.3;
+  word-break: keep-all;
+}
+.p-step .d {
+  font-size: 13px;
+  color: var(--ink-500);
+  line-height: 1.5;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+/* Effects strip */
+.bro-effects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.bro-effect {
+  padding: 24px 22px;
+  background: var(--navy-900) !important;
+  color: var(--white);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.bro-effect .en {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 38px;
+  color: var(--gold-400);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.bro-effect .et {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 6px;
+  word-break: keep-all;
+}
+.bro-effect .ed {
+  font-size: 14px;
+  color: var(--steel-300);
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+/* Highlight quote block */
+.bro-quote {
+  background: linear-gradient(135deg, var(--grey-50), var(--white));
+  border-left: 5px solid var(--gold-500);
+  padding: 22px 28px;
+  margin: 2px 0;
+}
+.bro-quote .q {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--navy-900);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+.bro-quote .q strong {
+  color: var(--gold-600);
+  font-weight: 700;
+}
+
+/* Dashboard preview */
+.mini-dash-preview {
+  background: var(--grey-50);
+  border: 1px solid var(--line);
+  padding: 28px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+.mini-dash-preview > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.mini-dash-preview h4 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--navy-900);
+  margin: 0 0 16px 0;
+  font-weight: 700;
+  line-height: 1.2;
+  word-break: keep-all;
+}
+
+/* Bar Chart */
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 2px;
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+.bar-row .lbl {
+  width: 105px;
+  font-weight: 600;
+  color: var(--navy-900);
+  white-space: nowrap;
+  font-size: 13px;
+}
+.bar-row .track {
+  flex: 1;
+  height: 16px;
+  background-color: var(--grey-100);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-row .fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.bar-row .val {
+  width: 40px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--navy-900);
+  font-size: 13px;
+}
+
+/* Strengths Grid for Overview */
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.strength-item {
+  background: var(--grey-50);
+  border: 1px solid var(--line);
+  padding: 22px 24px;
+  border-left: 4px solid var(--navy-800);
+}
+.strength-item h4 {
+  color: var(--navy-900);
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  word-break: keep-all;
+}
+.strength-item p {
+  font-size: 14px;
+  color: var(--ink-500);
+  margin: 0;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+/* Footer */
+.bro-foot {
+  padding: 22px 60px;
+  background: var(--grey-100) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-500);
+  letter-spacing: 0.08em;
+  border-top: 3px solid var(--navy-900);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.bro-foot .brand-line {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--navy-900);
+  font-weight: 700;
+}
+.bro-foot .brand-line .m {
+  width: 24px; height: 24px;
+  background: var(--navy-900);
+  color: var(--gold-400);
+  display: grid; place-items: center;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 13px;
+}
+.bro-foot .contact-details {
+  font-size: 12px;
+  color: var(--navy-900);
+  font-weight: 500;
+}
+
+/* Matrix & Tables */
+.mini-matrix {
+  display: grid;
+  grid-template-columns: 32px repeat(5, 1fr);
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  width: 100%;
+}
+.mini-matrix .yl { color: var(--ink-500); text-align: right; align-self: center; padding-right: 6px; font-weight: 700; }
+.mini-matrix .xl { color: var(--ink-500); text-align: center; padding-top: 6px; font-size: 10px; font-weight: 600; }
+.mini-matrix .cell {
+  aspect-ratio: 1.4 / 1;
+  display: grid; place-items: center;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.cell.bg-steel-400 { background: var(--steel-400); }
+.cell.bg-navy-600  { background: var(--navy-600); }
+.cell.bg-navy-800  { background: var(--navy-800); }
+.cell.bg-navy-900  { background: var(--navy-900); }
+.cell.bg-gold-500  { background: var(--gold-500); }
+.cell.bg-steel-300 { background: var(--steel-300); color: var(--ink-700); }
+.cell.bg-steel-500 { background: var(--steel-500); }
+
+.mini-scores {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.mini-scores td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.mini-scores .rank { font-family: var(--font-mono); color: var(--ink-400); width: 24px; font-weight: 600; }
+.mini-scores .name { color: var(--navy-900); font-weight: 600; word-break: keep-all; }
+.mini-scores .score { font-family: var(--font-mono); font-weight: 700; text-align: right; color: var(--navy-800); }
+.mini-scores .tier {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  display: inline-block;
+}
+.tier.tier-s { background: var(--navy-900); color: var(--gold-400); }
+.tier.tier-a { background: var(--navy-600); color: var(--white); }
+.tier.tier-b { background: var(--gold-500); color: var(--white); }
+
+.mini-match {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.mini-match-row {
+  display: grid;
+  grid-template-columns: 38px 1fr 60px;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  align-items: center;
+}
+.mini-match-row .av {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy-600), var(--navy-900));
+  color: var(--gold-400);
+  display: grid; place-items: center;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 15px;
+}
+.mini-match-row .info .n { font-size: 14px; font-weight: 700; color: var(--navy-900); word-break: keep-all; }
+.mini-match-row .info .r { font-size: 12px; color: var(--ink-500); font-family: var(--font-mono); margin-top: 2px; word-break: keep-all; }
+.mini-match-row .sc {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--navy-900);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.weight-box {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--white);
+  border: 1px dashed var(--gold-500);
+  font-size: 13px;
+  color: var(--ink-700);
+  line-height: 1.45;
+  word-break: keep-all;
+}
+.weight-box strong {
+  color: var(--navy-900);
+  font-family: var(--font-serif);
+  font-size: 14px;
+}
+
+.scenario-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+}
+.scenario-card .sc-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-500);
+  font-weight: 600;
+}
+.scenario-card .sc-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy-900);
+  word-break: keep-all;
+}
+.scenario-card .sc-val {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--navy-900);
+}
+
+.scenario-card.recommended {
+  border-color: var(--gold-500);
+  border-width: 2px;
+}
+.scenario-card.recommended .sc-label,
+.scenario-card.recommended .sc-val {
+  color: var(--gold-600);
+}
+
+.mini-chart {
+  width: 100%;
+  height: 140px;
+}
+.metrics-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.metric-item .m-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-500);
+  font-weight: 600;
+  word-break: keep-all;
+}
+.metric-item .m-val {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--navy-900);
+}
+.metric-item .m-val.success { color: var(--success); }
+.metric-item .m-val.gold { color: var(--gold-600); }
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  html, body {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .brochures {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .a4 {
+    transform: none !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    page-break-after: always !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="brochures">
+
+  <!-- ============ PAGE 1 · PLATFORM OVERVIEW ============ -->
+  <div class="a4">
+    <div class="bro-head">
+      <div class="top-row">
+        <div class="brand-lockup">
+          <div class="brand-mark">H</div>
+          <span>HR Intelligence Suite</span>
+        </div>
+        <div class="sys-tag">OVERVIEW · AI HR PLATFORM</div>
+      </div>
+      <div class="title-block">
+        <h1>HR Intelligence Suite</h1>
+        <div class="tagline">"인사는 투명하게, 행정은 스마트하게, 조직은 유연하게"</div>
+      </div>
+    </div>
+
+    <div class="bro-body">
+      <p class="bro-intro">
+        <strong>HR Intelligence Suite</strong>는 공공기관 맞춤형 차세대 AI 인사행정 플랫폼입니다.<br>
+        단일 데이터 기반(One-Source)으로 수기 업무 및 행정 오류를 제로화하고, 인사행정의 투명성과 효율성을 대폭 향상시킵니다.
+      </p>
+
+      <div class="bro-quote">
+        <div class="q">
+          공공기관을 위한 <strong>예산 효율성, 무결점 데이터 관리, 완전한 운영 자율성</strong>을 보장하는 맞춤형 AI HR 솔루션
+        </div>
+      </div>
+
+      <div class="bro-features-4">
+        <div class="bro-feature">
+          <div class="fn">MODULE · 01</div>
+          <div class="ft">인력산정 시스템</div>
+          <div class="fd">
+            업무량 매트릭스 분석으로 <strong>인력의 질적 가치를 정량화</strong>하며, 과부하 및 저활용 영역의 균형 진단을 제공합니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">MODULE · 02</div>
+          <div class="ft">직무평가 시스템</div>
+          <div class="fd">
+            기관 맞춤형 요소 점수법 모델을 기반으로 <strong>실시간 가치를 자동 산출</strong>하고 객관적인 Tier 등급을 부여합니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">MODULE · 03</div>
+          <div class="ft">직무적합도 매칭</div>
+          <div class="fd">
+            직무기술서 기반 <strong>AI 최적 배치 추천</strong> 및 CDP·마일리지 가점을 반영하여 <strong>종합점수를 도출</strong>합니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">MODULE · 04</div>
+          <div class="ft">총인건비 시뮬레이터</div>
+          <div class="fd">
+            월별 실집행 모니터링 및 <strong>What-if 재정 시뮬레이션</strong>을 수행하고, 정부 지침 정산 보고서를 <strong>자동 발행</strong>합니다.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family: var(--font-serif); font-size: 21px; color: var(--navy-900); margin: 0 0 14px 0; font-weight: 700;">Why HR Intelligence Suite (차별화 포인트)</h4>
+        <div class="strengths-grid">
+          <div class="strength-item">
+            <h4>⚡ 예산 심의 통과를 위한 1/3 단축 기간·비용</h4>
+            <p>구축 지연과 예산 증액 걱정 없이, 기관 예산안에 즉시 반영 가능한 효율적이고 투명한 AI 패키지 솔루션입니다.</p>
+          </div>
+          <div class="strength-item">
+            <h4>🔒 정기 감사 대비 100% 무결점 데이터 로그</h4>
+            <p>인사 조치 하나하나가 실시간 로그로 남고, CSAP/GS 인증 기반으로 매년 반복되는 정기 감사에 완벽 대비합니다.</p>
+          </div>
+          <div class="strength-item">
+            <h4>🔓 벤더 종속성 제로(0)의 완전한 운영 자율성</h4>
+            <p>특정 업체 종속 없이 표준 웹 기술로 구축되어, 향후 타 업체 선정이나 자체 운영이 완전히 자유롭습니다.</p>
+          </div>
+          <div class="strength-item">
+            <h4>🚀 수기 행정 오류 제로, 시스템 책임 보증</h4>
+            <p>수기 입력 실수로 인한 민원과 업무 번복을 없애고, 담당자는 전략적 인적자원 관리에 집중할 수 있습니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-effects">
+        <div class="bro-effect">
+          <div class="en">01</div>
+          <div class="et">수기 작업 자동화</div>
+          <div class="ed">행정 절차 통합 및 오류 제로화</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">02</div>
+          <div class="et">투명한 감사 대응</div>
+          <div class="ed">3단 권한 제어 및 실시간 로그 확보</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">03</div>
+          <div class="et">전략적 HR 전환</div>
+          <div class="ed">AI 기반 인사 의사결정 체계 구축</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bro-foot">
+      <div class="brand-line"><div class="m">H</div>HR INTELLIGENCE SUITE</div>
+      <div class="contact-details">문의: aisystemgaebal@gmail.com | www.ellev.co.kr</div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 2 · WORKFORCE SIZING ============ -->
+  <div class="a4">
+    <div class="bro-head">
+      <div class="top-row">
+        <div class="brand-lockup">
+          <div class="brand-mark">H</div>
+          <span>HR Intelligence Suite</span>
+        </div>
+        <div class="sys-tag">SYSTEM · 01 · WORKFORCE SIZING</div>
+      </div>
+      <div class="title-block">
+        <h1>인력산정 시스템</h1>
+        <div class="tagline">"인력의 많고 적음이 아닌, 인력의 질적 가치를 도식화합니다."</div>
+      </div>
+    </div>
+
+    <div class="bro-body">
+      <p class="bro-intro">
+        직무분석과 직무평가가 결합된 인력산정 방식으로, 단순한 Headcount 판단이 아닌
+        <strong>업무량 매트릭스 분석을 통한 인력 분포 결과</strong>를 도출합니다.<br>
+        직무평가 결과와 연계된 업무량 매트릭스로 조직의 <strong>인력 질적 가치를 정량 시각화</strong>합니다.
+      </p>
+
+      <div class="bro-quote">
+        <div class="q">
+          "몇 명이 필요한가"가 아닌 <strong>"어떤 가치의 인력이 어디에 있어야 하는가"</strong>를 답하는 시스템.
+        </div>
+      </div>
+
+      <div class="bro-features-3">
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 01</div>
+          <div class="ft">직무평가 연계 매트릭스</div>
+          <div class="fd">
+            직무 가치(Y축) × 업무량(X축) 매트릭스에 <strong>실제 인력 분포를 매핑</strong>하여 조직의 인력 균형도를 사분면으로 진단합니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 02</div>
+          <div class="ft">업무량 정량 산정</div>
+          <div class="fd">
+            추정이 아닌 <strong>실측·설문·시스템 로그 기반</strong>의 업무량 데이터를 통합 분석하여 신뢰할 수 있는 근거를 확보합니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 03</div>
+          <div class="ft">과부하 · 저활용 진단</div>
+          <div class="fd">
+            사분면 분포로 조직의 <strong>불균형 영역을 한눈에 진단</strong>하고, 재배치 시뮬레이션으로 개선안을 사전 검증합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-dash-preview">
+        <div>
+          <h4>업무량 × 직무가치 매트릭스</h4>
+          <div class="mini-matrix">
+            <div class="yl">高</div>
+            <div class="cell bg-steel-400">18</div>
+            <div class="cell bg-navy-600">88</div>
+            <div class="cell bg-navy-800">124</div>
+            <div class="cell bg-navy-900">96</div>
+            <div class="cell bg-gold-500">54</div>
+
+            <div class="yl">中</div>
+            <div class="cell bg-steel-300">24</div>
+            <div class="cell bg-steel-400">142</div>
+            <div class="cell bg-steel-500">186</div>
+            <div class="cell bg-navy-600">128</div>
+            <div class="cell bg-navy-800">72</div>
+
+            <div class="yl">低</div>
+            <div class="cell bg-steel-300">32</div>
+            <div class="cell bg-steel-300">78</div>
+            <div class="cell bg-steel-400">92</div>
+            <div class="cell bg-steel-500">44</div>
+            <div class="cell bg-navy-600">22</div>
+
+            <div class="yl"></div>
+            <div class="xl">낮음</div>
+            <div class="xl">보통</div>
+            <div class="xl">높음</div>
+            <div class="xl">매우높음</div>
+            <div class="xl">과부하</div>
+          </div>
+        </div>
+        <div>
+          <h4>본부별 인력 분포</h4>
+          <div class="bar-chart">
+            <div class="bar-row"><span class="lbl">경영지원</span><div class="track"><div class="fill" style="width:78%; background:var(--navy-900)"></div></div><span class="val">248</span></div>
+            <div class="bar-row"><span class="lbl">전략기획</span><div class="track"><div class="fill" style="width:52%; background:var(--navy-600)"></div></div><span class="val">168</span></div>
+            <div class="bar-row"><span class="lbl">사업본부</span><div class="track"><div class="fill" style="width:92%; background:var(--navy-800)"></div></div><span class="val">296</span></div>
+            <div class="bar-row"><span class="lbl">IT시스템</span><div class="track"><div class="fill" style="width:44%; background:var(--steel-500)"></div></div><span class="val">142</span></div>
+            <div class="bar-row"><span class="lbl">고객서비스</span><div class="track"><div class="fill" style="width:68%; background:var(--navy-600)"></div></div><span class="val">218</span></div>
+            <div class="bar-row"><span class="lbl">기술개발</span><div class="track"><div class="fill" style="width:34%; background:var(--gold-500)"></div></div><span class="val">108</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-process">
+        <div class="p-label">
+          PROCESS
+          <strong>3단계 방법론</strong>
+        </div>
+        <div class="p-steps">
+          <div class="p-step">
+            <div class="n">STEP 01</div>
+            <div class="t">직무분석 · 업무량 실측</div>
+            <div class="d">단위업무 분해, 소요시간 실측·설문</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 02</div>
+            <div class="t">직무평가 결과 연계</div>
+            <div class="d">SYSTEM 02 데이터 자동 연동</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 03</div>
+            <div class="t">매트릭스 분포 · 시나리오</div>
+            <div class="d">재배치안 What-if 시뮬레이션</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 04</div>
+            <div class="t">보고서 발행</div>
+            <div class="d">경영진 보고 · 부서장 리포트</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-effects">
+        <div class="bro-effect">
+          <div class="en">01</div>
+          <div class="et">근거 있는 정원 협의</div>
+          <div class="ed">데이터로 뒷받침되는 정원 산정 논리 확보</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">02</div>
+          <div class="et">숨은 병목 발견</div>
+          <div class="ed">과부하·저활용 영역을 시각적으로 진단</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">03</div>
+          <div class="et">재배치 사전 검증</div>
+          <div class="ed">What-if 시뮬레이션으로 실행 리스크 최소화</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bro-foot">
+      <div class="brand-line"><div class="m">H</div>HR INTELLIGENCE SUITE · SYSTEM 01</div>
+      <div>WORKFORCE SIZING · 01 / 04</div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 3 · JOB EVALUATION ============ -->
+  <div class="a4">
+    <div class="bro-head">
+      <div class="top-row">
+        <div class="brand-lockup">
+          <div class="brand-mark">H</div>
+          <span>HR Intelligence Suite</span>
+        </div>
+        <div class="sys-tag">SYSTEM · 02 · JOB EVALUATION</div>
+      </div>
+      <div class="title-block">
+        <h1>직무평가 시스템</h1>
+        <div class="tagline">"객관적 가치 평가로 투명하고 공정한 인사 기틀을 만듭니다."</div>
+      </div>
+    </div>
+
+    <div class="bro-body">
+      <p class="bro-intro">
+        기관 특성에 맞춘 <strong>요소점수법(Point-Factor) 평가 모델</strong>을 구축하여 모든 직무의 가치를 객관적으로 측정합니다.<br>
+        실시간 평가 점수 도출 및 Tier 등급화를 통해 <strong>급여 설계, 적합도 매칭, 인력 산정의 기초 데이터</strong>로 활용됩니다.
+      </p>
+
+      <div class="bro-quote">
+        <div class="q">
+          주관적 평가를 배제하고 <strong>"직무 자체의 가치"를 정량화</strong>하여 인사의 투명성을 보장합니다.
+        </div>
+      </div>
+
+      <div class="bro-features-3">
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 01</div>
+          <div class="ft">유연한 평가 모델 설계</div>
+          <div class="fd">
+            전문성, 책임성, 난이도 등 <strong>기관 맞춤형 평가 요소 및 가중치</strong>를 자유롭게 설정할 수 있습니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 02</div>
+          <div class="ft">실시간 가치 자동 산출</div>
+          <div class="fd">
+            평가위원들의 입력 데이터를 <strong>실시간 합산·통계 분석</strong>하여 직무별 최종 점수와 등급을 도출합니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 03</div>
+          <div class="ft">Tier 등급화 & 연계</div>
+          <div class="fd">
+            평가 점수에 따라 <strong>직무 Tier를 자동으로 구간 분할</strong>하고 타 모듈(매칭·인력산정)과 실시간 연동합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-dash-preview">
+        <div>
+          <h4>직무별 평가 점수 & Tier</h4>
+          <table class="mini-scores">
+            <tr><td class="rank">01</td><td class="name">전략기획 직무</td><td class="score">92.4 pt</td><td><span class="tier tier-s">S</span></td></tr>
+            <tr><td class="rank">02</td><td class="name">IT시스템 운영</td><td class="score">85.1 pt</td><td><span class="tier tier-a">A</span></td></tr>
+            <tr><td class="rank">03</td><td class="name">재무/회계 관리</td><td class="score">81.8 pt</td><td><span class="tier tier-a">A</span></td></tr>
+            <tr><td class="rank">04</td><td class="name">고객지원 응대</td><td class="score">73.5 pt</td><td><span class="tier tier-b">B</span></td></tr>
+          </table>
+        </div>
+        <div>
+          <h4>평가요소별 가중치</h4>
+          <div class="bar-chart">
+            <div class="bar-row">
+              <span class="lbl">업무전문성</span>
+              <div class="track"><div class="fill" style="width: 88%; background: #0B2545;"></div></div>
+              <span class="val">22%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">관리적스킬</span>
+              <div class="track"><div class="fill" style="width: 72%; background: #0B2545;"></div></div>
+              <span class="val">18%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">커뮤니케이션</span>
+              <div class="track"><div class="fill" style="width: 68%; background: #1C4072;"></div></div>
+              <span class="val">17%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">업무복잡도</span>
+              <div class="track"><div class="fill" style="width: 60%; background: #2D5A8F;"></div></div>
+              <span class="val">15%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">문제해결 난이도</span>
+              <div class="track"><div class="fill" style="width: 48%; background: #8DA9C4;"></div></div>
+              <span class="val">12%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">성과책임</span>
+              <div class="track"><div class="fill" style="width: 36%; background: #8DA9C4;"></div></div>
+              <span class="val">9%</span>
+            </div>
+            <div class="bar-row">
+              <span class="lbl">조직공헌도</span>
+              <div class="track"><div class="fill" style="width: 28%; background: #B8933E;"></div></div>
+              <span class="val">7%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-process">
+        <div class="p-label">
+          PROCESS
+          <strong>평가 절차</strong>
+        </div>
+        <div class="p-steps">
+          <div class="p-step">
+            <div class="n">STEP 01</div>
+            <div class="t">지표/가중치 정의</div>
+            <div class="d">기관 맞춤 요소점수표 체계화</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 02</div>
+            <div class="t">평가단 실시간 심사</div>
+            <div class="d">온라인 평가 및 오차 자동 검증</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 03</div>
+            <div class="t">Tier 등급 확정</div>
+            <div class="d">직무가치 통계분석 및 등급 부여</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 04</div>
+            <div class="t">인사 모듈 연동</div>
+            <div class="d">인력산정·적합도 매칭 데이터 전달</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-effects">
+        <div class="bro-effect">
+          <div class="en">01</div>
+          <div class="et">평가 객관성 확보</div>
+          <div class="ed">정량적 평가 모델로 주관 및 편향 차단</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">02</div>
+          <div class="et">보상/배치 근거 마련</div>
+          <div class="ed">직무 가치에 부합하는 공정한 급여·인사 체계</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">03</div>
+          <div class="et">전사 인사 데이터화</div>
+          <div class="ed">모든 직무의 가치를 표준 수치로 자산화</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bro-foot">
+      <div class="brand-line"><div class="m">H</div>HR INTELLIGENCE SUITE · SYSTEM 02</div>
+      <div>JOB EVALUATION · 02 / 04</div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 4 · JOB MATCHING ============ -->
+  <div class="a4">
+    <div class="bro-head">
+      <div class="top-row">
+        <div class="brand-lockup">
+          <div class="brand-mark">H</div>
+          <span>HR Intelligence Suite</span>
+        </div>
+        <div class="sys-tag">SYSTEM · 03 · JOB MATCHING</div>
+      </div>
+      <div class="title-block">
+        <h1>직무적합도 매칭</h1>
+        <div class="tagline">"AI가 추천하고, 데이터가 검증하는 개인별 최적 배치."</div>
+      </div>
+    </div>
+
+    <div class="bro-body">
+      <p class="bro-intro">
+        직무기술서를 바탕으로 <strong>AI가 Top-N 적합도를 추천</strong>하고,
+        CDP 경력개발경로, 기피부서 마일리지, 형평성 가점 등을 반영한 <strong>개인별 종합점수</strong>를 산출합니다.
+        감(感)이 아닌 <strong>데이터 기반의 과학적 배치 의사결정</strong>이 가능해집니다.
+      </p>
+
+      <div class="bro-quote">
+        <div class="q">
+          "누가 이 자리에 맞을까"의 답을 <strong>AI가 추천하고 규칙이 검증</strong>합니다.
+        </div>
+      </div>
+
+      <div class="bro-features-3">
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 01</div>
+          <div class="ft">AI 기반 적합도 추천</div>
+          <div class="fd">
+            직무기술서·이력·평가데이터를 학습한 모델이 <strong>개인별 Top-N 추천 직무</strong>를 자동 제시합니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 02</div>
+          <div class="ft">CDP & 마일리지 가점</div>
+          <div class="fd">
+            경력개발경로와 <strong>기피부서 마일리지 및 형평성 가점</strong>을 합산하여 종합 판단합니다.
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 03</div>
+          <div class="ft">가중치 자율 조정</div>
+          <div class="fd">
+            기관 인사 원칙에 맞춰 <strong>구성요소 비율을 자체 구성</strong>하고 상시 조정이 가능합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-dash-preview">
+        <div>
+          <h4>공석 직무 · AI 추천 후보</h4>
+          <div class="mini-match">
+            <div class="mini-match-row">
+              <div class="av">김</div>
+              <div class="info">
+                <div class="n">김O수 · 부장</div>
+                <div class="r">전략기획실 · CDP 일치</div>
+              </div>
+              <div class="sc">94.2</div>
+            </div>
+            <div class="mini-match-row">
+              <div class="av">이</div>
+              <div class="info">
+                <div class="n">이O진 · 차장</div>
+                <div class="r">기피부서 마일리지 +8</div>
+              </div>
+              <div class="sc">89.5</div>
+            </div>
+            <div class="mini-match-row">
+              <div class="av">박</div>
+              <div class="info">
+                <div class="n">박O민 · 차장</div>
+                <div class="r">형평성 가점 +5</div>
+              </div>
+              <div class="sc">86.3</div>
+            </div>
+            <div class="mini-match-row">
+              <div class="av">최</div>
+              <div class="info">
+                <div class="n">최O우 · 차장</div>
+                <div class="r">CDP 부분 일치</div>
+              </div>
+              <div class="sc">82.7</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>점수 구성요소</h4>
+          <div class="bar-chart">
+            <div class="bar-row"><span class="lbl">AI 적합도</span><div class="track"><div class="fill" style="width:78%; background:var(--navy-900)"></div></div><span class="val">40%</span></div>
+            <div class="bar-row"><span class="lbl">CDP 경로</span><div class="track"><div class="fill" style="width:56%; background:var(--navy-600)"></div></div><span class="val">30%</span></div>
+            <div class="bar-row"><span class="lbl">마일리지</span><div class="track"><div class="fill" style="width:36%; background:var(--gold-500)"></div></div><span class="val">18%</span></div>
+            <div class="bar-row"><span class="lbl">형평성</span><div class="track"><div class="fill" style="width:24%; background:var(--steel-500)"></div></div><span class="val">12%</span></div>
+          </div>
+          <div class="weight-box">
+            <strong>가중치 커스터마이징</strong><br>
+            기관별 인사원칙에 따라 4대 구성요소 비율을 자체 조정
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-process">
+        <div class="p-label">
+          PROCESS
+          <strong>배치 의사결정</strong>
+        </div>
+        <div class="p-steps">
+          <div class="p-step">
+            <div class="n">STEP 01</div>
+            <div class="t">공석 직무 등록</div>
+            <div class="d">직무기술서 · 요건 기반 정의</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 02</div>
+            <div class="t">AI 후보 추천</div>
+            <div class="d">Top-N 후보군 자동 산출</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 03</div>
+            <div class="t">인사위원회 심의</div>
+            <div class="d">종합점수 근거로 배치 결정</div>
+          </div>
+          <div class="p-step">
+            <div class="n">STEP 04</div>
+            <div class="t">사후 검증 · 학습</div>
+            <div class="d">배치 결과로 모델 지속 학습</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-effects">
+        <div class="bro-effect">
+          <div class="en">01</div>
+          <div class="et">공정한 배치 근거</div>
+          <div class="ed">종합점수로 배치 결정의 논리 확보</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">02</div>
+          <div class="et">CDP · 조직 요구 균형</div>
+          <div class="ed">개인 성장과 조직 니즈의 접점 도출</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">03</div>
+          <div class="et">지속적 정확도 향상</div>
+          <div class="ed">배치·성과 데이터로 모델 지속 진화</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bro-foot">
+      <div class="brand-line"><div class="m">H</div>HR INTELLIGENCE SUITE · SYSTEM 03</div>
+      <div>JOB MATCHING · 03 / 04</div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE 5 · LABOR COST SIMULATOR ============ -->
+  <div class="a4">
+    <div class="bro-head">
+      <div class="top-row">
+        <div class="brand-lockup">
+          <div class="brand-mark">H</div>
+          <span>HR Intelligence Suite</span>
+        </div>
+        <div class="sys-tag">SYSTEM · 04 · LABOR COST SIMULATOR</div>
+      </div>
+      <div class="title-block">
+        <h1>총인건비 시뮬레이터</h1>
+        <div class="tagline">"선제적 재정 대응과 세심한 예산 관리를 하나로."</div>
+      </div>
+    </div>
+
+    <div class="bro-body">
+      <p class="bro-intro">
+        급여·회계 연동으로 <strong>매월 실집행액을 모니터링</strong>하고, 성과급·복리후생 옵션별 <strong>What-if 재정 시뮬레이션</strong>을 수행합니다.<br>
+        정부지침 양식 인상률 요약표 및 정산 보고서를 자동 발행하여 <strong>안정적 예산 운영을 지원</strong>합니다.
+      </p>
+
+      <div class="bro-quote">
+        <div class="q">
+          연말에 몰아 정산하지 않고 <strong>매월 재정을 선제적으로 점검 및 관리</strong>합니다.
+        </div>
+      </div>
+
+      <div class="bro-features-3">
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 01</div>
+          <div class="ft">매월 집행 모니터링</div>
+          <div class="fd">
+            급여 및 회계 연동으로 매월 실집행액을 취합하고, <strong>위험 임계치 경보</strong> 및 만근자/비만근자 인상률 요약표를 <strong>자동 생성합니다.</strong>
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 02</div>
+          <div class="ft">여유 재원 What-if</div>
+          <div class="fd">
+            성과급, 복리후생 등 <strong>옵션별 재정 영향도를 시뮬레이션하여</strong> 연말 재정 대응력을 선제적으로 <strong>확보합니다.</strong>
+          </div>
+        </div>
+        <div class="bro-feature">
+          <div class="fn">FEATURE · 03</div>
+          <div class="ft">정부지침 정산 보고서</div>
+          <div class="fd">
+            총인건비 가이드라인에 따른 <strong>표준 증빙 양식 및 보고서 자동 추출로</strong> 감사 대응을 최적화하고 업무 효율을 <strong>높입니다.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-dash-preview">
+        <div>
+          <h4>월별 집행 추이 & 모니터링</h4>
+          <svg viewBox="0 0 400 150" class="mini-chart" preserveAspectRatio="none">
+            <g stroke="#E5EBF3" stroke-width="0.5">
+              <line x1="20" y1="20" x2="400" y2="20"/>
+              <line x1="20" y1="55" x2="400" y2="55"/>
+              <line x1="20" y1="90" x2="400" y2="90"/>
+              <line x1="20" y1="125" x2="400" y2="125"/>
+            </g>
+            <line x1="20" y1="25" x2="400" y2="128" stroke="var(--gold-500)" stroke-width="1.5" stroke-dasharray="3 3" />
+            <text x="335" y="18" font-family="var(--font-mono)" font-size="10" fill="var(--gold-500)" font-weight="bold">승인예산</text>
+            <polyline points="20,28 55,38 90,50 125,58 160,68 195,78 230,88" fill="none" stroke="var(--navy-900)" stroke-width="2.5" />
+            <g fill="var(--navy-900)">
+              <circle cx="20" cy="28" r="3"/>
+              <circle cx="55" cy="38" r="3"/>
+              <circle cx="90" cy="50" r="3"/>
+              <circle cx="125" cy="58" r="3"/>
+              <circle cx="160" cy="68" r="3"/>
+              <circle cx="195" cy="78" r="3"/>
+            </g>
+            <polyline points="230,88 265,98 300,108 335,118 385,125" fill="none" stroke="var(--steel-400)" stroke-width="2" stroke-dasharray="3 3" />
+            <circle cx="230" cy="88" r="4" fill="var(--gold-500)"/>
+            <text x="235" y="80" font-family="var(--font-mono)" font-size="10" fill="var(--navy-900)" font-weight="bold">현재 · JUL</text>
+            <g font-family="var(--font-mono)" font-size="9" fill="var(--ink-400)" font-weight="bold">
+              <text x="18" y="145">1</text><text x="53" y="145">3</text><text x="88" y="145">5</text><text x="123" y="145">7</text><text x="158" y="145">9</text><text x="193" y="145">11</text><text x="383" y="145">12</text>
+            </g>
+          </svg>
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <div class="m-label">누적 집행률</div>
+              <div class="m-val">58.6%</div>
+            </div>
+            <div class="metric-item">
+              <div class="m-label">연말 예상</div>
+              <div class="m-val success">98.7%</div>
+            </div>
+            <div class="metric-item">
+              <div class="m-label">여유 재원</div>
+              <div class="m-val gold">1.16억</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>여유 재원 활용 시나리오</h4>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="scenario-card">
+              <div class="sc-label">SCENARIO · A</div>
+              <div class="sc-name">성과급 재원 활용</div>
+              <div class="sc-val">+ 0.72 억</div>
+            </div>
+            <div class="scenario-card">
+              <div class="sc-label">SCENARIO · B</div>
+              <div class="sc-name">복리후생 강화</div>
+              <div class="sc-val">+ 0.98 억</div>
+            </div>
+            <div class="scenario-card recommended">
+              <div class="sc-label">SCENARIO · C · 추천</div>
+              <div class="sc-name">혼합안 (A+B)</div>
+              <div class="sc-val">+ 1.15 억</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-process">
+        <div class="p-label">
+          PROCESS
+          <strong>재정 체계</strong>
+        </div>
+        <div class="p-steps">
+          <div class="p-step">
+            <div class="n">MONTHLY</div>
+            <div class="t">실집행 자동 취합</div>
+            <div class="d">급여·회계 시스템 연동</div>
+          </div>
+          <div class="p-step">
+            <div class="n">QUARTERLY</div>
+            <div class="t">시나리오 분석</div>
+            <div class="d">여유재원 활용 What-if</div>
+          </div>
+          <div class="p-step">
+            <div class="n">YEAR-END</div>
+            <div class="t">정산 요약표 발행</div>
+            <div class="d">정부지침 양식 자동 산출</div>
+          </div>
+          <div class="p-step">
+            <div class="n">ALWAYS</div>
+            <div class="t">예산 준수 관리</div>
+            <div class="d">이상 지출 감지 및 대시보드</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bro-effects">
+        <div class="bro-effect">
+          <div class="en">01</div>
+          <div class="et">사전 재정 대응</div>
+          <div class="ed">연말 몰아치기 정산 대신 매월 집행 모니터링</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">02</div>
+          <div class="et">경영평가 대응</div>
+          <div class="ed">정부지침 양식 인상률 요약표 자동 발행</div>
+        </div>
+        <div class="bro-effect">
+          <div class="en">03</div>
+          <div class="et">리딩 타임 단축</div>
+          <div class="ed">재정 시뮬레이션을 통한 즉각적 인건비 예측</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bro-foot">
+      <div class="brand-line"><div class="m">H</div>HR INTELLIGENCE SUITE · SYSTEM 04</div>
+      <div>LABOR COST SIMULATOR · 04 / 04</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

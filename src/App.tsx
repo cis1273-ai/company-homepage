@@ -588,6 +588,26 @@ function BusinessModelSection() {
                   <span className="text-secondary font-bold text-sm tracking-widest mb-3">{model.id}</span>
                   <h3 className="text-xl font-bold mb-4 break-keep">{model.title}</h3>
                   <p className="text-on-surface-muted leading-[1.6] break-keep">{model.description}</p>
+                  {model.id === '02' && (
+                    <div className="flex flex-col gap-3 mt-6 w-full">
+                      <a
+                        href="/hr-intelligence-suite/brochure.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
+                      >
+                        HR Intelligence Suite 상세 보기 →
+                      </a>
+                      <a
+                        href="/hr-one/brochure.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
+                      >
+                        HR One 상세 보기 →
+                      </a>
+                    </div>
+                  )}
                 </div>
               </FadeIn>
             );
@@ -620,52 +640,14 @@ function DetailedServicesSection() {
               </button>
             ))}
           </div>
-          {detailedServices[activeTab].id === 'hr-education' ? (
-            <div className="flex flex-col gap-10 min-h-[200px]">
-              {[
-                {
-                  items: detailedServices[activeTab].items.slice(0, 2),
-                  label: 'HR Intelligence Suite 상세 보기',
-                  href: '/hr-intelligence-suite/deck.html'
-                },
-                {
-                  items: detailedServices[activeTab].items.slice(2, 4),
-                  label: 'HR One 상세 보기',
-                  href: '/hr-one/brochure.html'
-                }
-              ].map((group) => (
-                <div key={group.href} className="border border-outline rounded-xl p-6 sm:p-8">
-                  <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6">
-                    {group.items.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-4 bg-background p-6 rounded-lg shadow-sm border border-outline hover:border-secondary transition-all hover:-translate-y-1">
-                        <CheckCircle2 size={24} className="text-secondary flex-shrink-0" />
-                        <span className="text-lg font-medium">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex justify-center mt-6">
-                    <a
-                      href={group.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
-                    >
-                      {group.label} →
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 min-h-[200px]">
-              {detailedServices[activeTab].items.map((item, idx) => (
-                <div key={idx} className="flex items-center gap-4 bg-background p-6 rounded-lg shadow-sm border border-outline hover:border-secondary transition-all hover:-translate-y-1">
-                  <CheckCircle2 size={24} className="text-secondary flex-shrink-0" />
-                  <span className="text-lg font-medium">{item}</span>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 min-h-[200px]">
+            {detailedServices[activeTab].items.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-4 bg-background p-6 rounded-lg shadow-sm border border-outline hover:border-secondary transition-all hover:-translate-y-1">
+                <CheckCircle2 size={24} className="text-secondary flex-shrink-0" />
+                <span className="text-lg font-medium">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
