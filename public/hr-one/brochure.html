@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>인사평가 & 복무관리 시스템 브로슈어</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;700;900&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F2;
+    --ink:#1E2A44;
+    --ink-soft:#3B475F;
+    --muted:#6B7280;
+    --line:#E5DFD3;
+    --coral:#D97757;
+    --coral-soft:#F4E4DA;
+    --sage:#7A8B6F;
+    --sage-soft:#EEF1E9;
+    --gold:#B8935A;
+    --page-w:210mm;
+    --page-h:297mm;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{
+    background:#E8E4DC;
+    font-family:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    color:var(--ink);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  body{padding:24px 0;}
+  .serif{font-family:'Noto Serif KR', serif;}
+  .mono{font-family: ui-monospace, "SF Mono", Menlo, monospace;}
+
+  .page{
+    width:var(--page-w);
+    height:var(--page-h);
+    background:var(--paper);
+    margin:16px auto;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 10px 40px rgba(30,42,68,.12);
+    page-break-after:always;
+  }
+  .pad{padding:22mm 20mm;height:100%;position:relative;}
+
+  /* ------- COVER (p1) ------- */
+  .cover{
+    background:
+      radial-gradient(circle at 85% 15%, rgba(217,119,87,.10), transparent 45%),
+      radial-gradient(circle at 10% 90%, rgba(122,139,111,.08), transparent 50%),
+      var(--paper);
+  }
+  .cover-mark{
+    position:absolute;top:22mm;left:20mm;
+    display:flex;align-items:center;gap:10px;
+    font-size:11px;letter-spacing:.22em;color:var(--ink-soft);
+    text-transform:uppercase;
+  }
+  .cover-mark::before{content:"";width:24px;height:1px;background:var(--coral);}
+  .cover-brand{
+    position:absolute;top:22mm;right:20mm;
+    font-size:10px;letter-spacing:.18em;color:var(--muted);
+  }
+  .cover-h{
+    position:absolute;top:65mm;left:20mm;right:20mm;
+  }
+  .cover-eyebrow{
+    font-size:13px;color:var(--coral);letter-spacing:.05em;margin-bottom:14px;font-weight:600;
+  }
+  .cover-title{
+    font-family:'Noto Serif KR', serif;
+    font-weight:700;
+    font-size:56px;
+    line-height:1.18;
+    letter-spacing:-.02em;
+    color:var(--ink);
+  }
+  .cover-title em{font-style:normal;color:var(--coral);font-weight:900;}
+  .cover-sub{
+    margin-top:22px;
+    font-size:16px;line-height:1.7;color:var(--ink-soft);
+    max-width:150mm;
+  }
+  .cover-illust{
+    position:absolute;left:20mm;right:20mm;bottom:45mm;
+    height:75mm;
+    border-radius:4px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:#f4f1ea;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .cover-illust-container{
+    width:100%;height:100%;
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;
+    background:linear-gradient(135deg, var(--coral-soft), var(--sage-soft));
+  }
+  .cover-img-box{
+    width:100%;height:100%;overflow:hidden;border-radius:2px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);border:1px solid rgba(255,255,255,0.8);
+    display:flex;align-items:flex-start;justify-content:center;background:#fff;
+    padding:6px;
+  }
+  .cover-img-box img{
+    width:100%;height:100%;
+    object-fit:contain;
+    object-position:top center;
+  }
+
+  .cover-foot{
+    position:absolute;left:20mm;right:20mm;bottom:22mm;
+    display:flex;justify-content:space-between;align-items:flex-end;
+    padding-top:14px;border-top:1px solid var(--line);
+  }
+  .cover-foot .co{font-family:'Noto Serif KR',serif;font-weight:700;font-size:18px;}
+  .cover-foot .yr{font-family:ui-monospace,monospace;font-size:11px;color:var(--muted);letter-spacing:.15em;}
+  .cover-foot .tag{font-size:11px;color:var(--ink-soft);letter-spacing:.14em;text-transform:uppercase;}
+
+  /* ------- SHARED ------- */
+  .p-header{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:24px;
+  }
+  .p-num{font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.2em;color:var(--muted);}
+  .p-cat{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral);font-weight:600;}
+  .p-cat.sage-tag{color:var(--sage);}
+  .p-title{
+    font-family:'Noto Serif KR',serif;font-weight:700;
+    font-size:34px;line-height:1.25;letter-spacing:-.02em;
+    color:var(--ink);
+    margin-bottom:10px;
+  }
+  .p-title em{font-style:normal;color:var(--coral);}
+  .p-title em.sage-txt{color:var(--sage);}
+  .p-lede{
+    font-size:14px;line-height:1.75;color:var(--ink-soft);
+    max-width:170mm;text-wrap:pretty;
+  }
+  .section-label{
+    display:inline-block;font-size:10px;letter-spacing:.2em;color:var(--muted);
+    text-transform:uppercase;margin-bottom:10px;
+  }
+  .rule{height:1px;background:var(--line);margin:20px 0;}
+  .p-foot{
+    position:absolute;left:20mm;right:20mm;bottom:12mm;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:9px;color:var(--muted);letter-spacing:.15em;
+    padding-top:8px;border-top:1px solid var(--line);
+  }
+
+  /* ------- PAGE 2: PROBLEM ------- */
+  .problem-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;
+  }
+  .p-card{
+    background:#fff;border:1px solid var(--line);border-radius:2px;
+    padding:20px 18px;position:relative;
+  }
+  .p-card .num{
+    font-family:'Noto Serif KR',serif;font-weight:700;color:var(--coral);
+    font-size:22px;line-height:1;margin-bottom:12px;display:block;
+  }
+  .p-card h4{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:16px;
+    color:var(--ink);margin-bottom:8px;letter-spacing:-.01em;
+  }
+  .p-card p{font-size:12.5px;line-height:1.7;color:var(--ink-soft);}
+  .stat-strip{
+    margin-top:22px;background:var(--ink);color:#fff;
+    padding:22px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-radius:2px;
+  }
+  .stat-strip .s{padding:0 14px;border-right:1px solid rgba(255,255,255,.15);}
+  .stat-strip .s:last-child{border-right:none;}
+  .stat-strip .n{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:32px;
+    color:var(--coral-soft);letter-spacing:-.02em;
+  }
+  .stat-strip .l{
+    font-size:11px;color:rgba(255,255,255,.72);margin-top:4px;letter-spacing:.05em;
+  }
+  .quote-block{
+    margin-top:22px;padding:16px 20px;
+    background:var(--coral-soft);border-left:3px solid var(--coral);
+    font-family:'Gowun Batang',serif;font-size:14px;line-height:1.8;color:var(--ink);
+  }
+
+  /* ------- PAGE 3: SOLUTION ------- */
+  .two-in-one{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px;
+  }
+  .sys-card{
+    background:#fff;border:1px solid var(--line);padding:22px 20px;
+    position:relative;min-height:110mm;
+  }
+  .sys-card.coral{background:linear-gradient(180deg,#fff, var(--coral-soft));}
+  .sys-card.sage{background:linear-gradient(180deg,#fff, var(--sage-soft));}
+  .sys-tag{
+    font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;
+  }
+  .sys-name{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:22px;
+    margin-top:8px;color:var(--ink);letter-spacing:-.01em;
+  }
+  .sys-en{font-family:ui-monospace,monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:.1em;}
+  .sys-desc{font-size:12.5px;line-height:1.75;color:var(--ink-soft);margin-top:14px;}
+  .sys-feats{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);}
+  .sys-feats li{
+    list-style:none;font-size:12px;line-height:1.7;color:var(--ink);
+    padding-left:18px;position:relative;margin-bottom:6px;
+  }
+  .sys-feats li::before{
+    content:"";position:absolute;left:0;top:9px;width:8px;height:1px;background:var(--coral);
+  }
+  .sys-card.sage .sys-feats li::before{background:var(--sage);}
+  .integration-note{
+    margin-top:20px;padding:16px 20px;background:var(--ink);color:#fff;
+    display:flex;justify-content:space-between;align-items:center;border-radius:2px;
+  }
+  .integration-note .l{font-family:'Noto Serif KR',serif;font-size:14px;letter-spacing:-.01em;}
+  .integration-note .r{font-family:ui-monospace,monospace;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.15em;}
+
+  /* ------- PAGE 4/5: DETAIL ------- */
+  .detail-head{
+    display:flex;flex-direction:column;gap:14px;margin-bottom:20px;
+  }
+  .detail-illu-grid{
+    height:65mm;
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;
+    padding:6px;
+    background:var(--coral-soft);
+    border:1px solid var(--line);border-radius:2px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  }
+  .detail-illu-grid.sage{
+    background:var(--sage-soft);
+  }
+  .detail-illu-grid .img-box{
+    width:100%;height:100%;overflow:hidden;border-radius:2px;
+    background:#fff;border:1px solid rgba(0,0,0,0.05);
+    display:flex;
+    align-items:flex-start; /* 상단 정렬로 변경하여 수직 위치 맞춤 */
+    justify-content:center;
+    padding:4px;
+  }
+  .detail-illu-grid img{
+    width:100%;height:100%;
+    object-fit:contain;
+    object-position:top center; /* 이미지가 상단 기준 위치하도록 정렬 */
+  }
+
+  .feat-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px;
+  }
+  .feat{
+    padding:16px 16px 16px 18px;border-left:2px solid var(--coral);
+    background:#fff;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .feat.sage{border-left-color:var(--sage);}
+  .feat .k{
+    font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.2em;color:var(--muted);margin-bottom:6px;
+  }
+  .feat h5{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:14px;
+    color:var(--ink);margin-bottom:6px;letter-spacing:-.01em;
+  }
+  .feat p{font-size:11.5px;line-height:1.7;color:var(--ink-soft);}
+  .cycle-row{
+    margin-top:20px;padding:16px 18px;background:#fff;border:1px solid var(--line);
+    display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
+  }
+  .cycle-row .lbl{
+    font-family:ui-monospace,monospace;font-size:10px;color:var(--muted);letter-spacing:.2em;
+  }
+  .cycle-steps{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .cycle-steps .st{
+    font-family:'Noto Serif KR',serif;font-weight:500;font-size:13px;color:var(--ink);
+    padding:6px 12px;background:var(--coral-soft);border-radius:2px;
+  }
+  .cycle-steps .arr{color:var(--coral);font-size:12px;}
+  .cycle-row.sage .cycle-steps .st{background:var(--sage-soft);}
+  .cycle-row.sage .cycle-steps .arr{color:var(--sage);}
+
+  /* ------- PAGE 6: DIFFERENTIATION ------- */
+  .diff-grid-3col{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;
+  }
+  .diff-grid-2col{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px;
+  }
+  .diff{
+    background:#fff;border:1px solid var(--line);padding:18px 16px;position:relative;
+  }
+  .diff .idx{
+    font-family:ui-monospace,monospace;font-size:10px;color:var(--coral);letter-spacing:.2em;
+  }
+  .diff h4{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:17px;
+    color:var(--ink);margin:8px 0 6px;letter-spacing:-.02em;line-height:1.3;
+  }
+  .diff p{font-size:11.5px;line-height:1.65;color:var(--ink-soft);}
+  .diff .metric{
+    margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);
+    display:flex;justify-content:space-between;align-items:baseline;gap:6px;
+  }
+  .diff .metric .v{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:16px;color:var(--coral);letter-spacing:-.02em;white-space:nowrap;
+  }
+  .diff .metric .lb{font-size:10px;color:var(--muted);letter-spacing:.05em;white-space:nowrap;}
+  .compare-tab{
+    margin-top:18px;background:var(--ink);color:#fff;padding:18px;border-radius:2px;
+  }
+  .compare-tab h5{
+    font-family:'Noto Serif KR',serif;font-size:13px;font-weight:500;
+    color:var(--coral-soft);margin-bottom:6px;letter-spacing:.02em;
+  }
+  .compare-tab table{width:100%;border-collapse:collapse;font-size:11px;}
+  .compare-tab th,.compare-tab td{
+    text-align:left;padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .compare-tab th{font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.08em;font-size:10px;text-transform:uppercase;}
+  .compare-tab td.ours{color:var(--coral-soft);font-weight:500;}
+  .compare-tab td.them{color:rgba(255,255,255,.55);}
+
+  /* ------- PAGE 7: PROOF ------- */
+  .case-hero{
+    margin-top:14px;padding:26px 24px;background:#fff;border:1px solid var(--line);
+    position:relative;
+  }
+  .case-tag{
+    font-size:10px;letter-spacing:.22em;color:var(--coral);text-transform:uppercase;
+    font-weight:600;margin-bottom:12px;
+  }
+  .case-name{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:24px;
+    color:var(--ink);letter-spacing:-.02em;margin-bottom:8px;
+  }
+  .case-meta{font-size:11px;color:var(--muted);letter-spacing:.05em;margin-bottom:16px;}
+  .case-body{
+    font-family:'Gowun Batang',serif;font-size:13px;line-height:1.9;color:var(--ink-soft);
+    padding-top:14px;border-top:1px solid var(--line);text-wrap:pretty;
+  }
+  .kpi-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;
+  }
+  .kpi{
+    padding:20px 16px;border:1px solid var(--line);background:var(--paper);
+    text-align:left;
+  }
+  .kpi .v{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:32px;
+    color:var(--ink);letter-spacing:-.03em;line-height:1;
+  }
+  .kpi .v em{font-style:normal;color:var(--coral);font-size:20px;margin-left:2px;}
+  .kpi .lb{font-size:11px;color:var(--ink-soft);margin-top:8px;letter-spacing:.02em;line-height:1.5;}
+  .kpi.dark{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .kpi.dark .v{color:var(--coral-soft);}
+  .kpi.dark .lb{color:rgba(255,255,255,.72);}
+  .voice-strip{
+    margin-top:18px;padding:14px 18px;background:var(--coral-soft);border-radius:2px;
+    display:flex;gap:14px;align-items:center;
+  }
+  .voice-strip .q{
+    font-family:'Gowun Batang',serif;font-size:12.5px;line-height:1.75;color:var(--ink);flex:1;
+  }
+  .voice-strip .who{
+    font-size:10px;color:var(--muted);letter-spacing:.05em;white-space:nowrap;
+  }
+
+  /* ------- PAGE 8: CTA ------- */
+  .cta-page{
+    background:
+      radial-gradient(circle at 100% 0%, rgba(217,119,87,.14), transparent 50%),
+      var(--paper);
+  }
+  .cta-hero{
+    margin-top:24px;
+  }
+  .cta-h{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:44px;
+    line-height:1.2;letter-spacing:-.03em;color:var(--ink);
+  }
+  .cta-h em{font-style:normal;color:var(--coral);}
+  .cta-sub{
+    margin-top:18px;font-size:14px;line-height:1.75;color:var(--ink-soft);max-width:150mm;
+  }
+  .journey{
+    margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  }
+  .jstep{
+    background:#fff;border:1px solid var(--line);padding:20px 18px;position:relative;
+  }
+  .jstep .step{
+    font-family:ui-monospace,monospace;font-size:10px;color:var(--coral);letter-spacing:.2em;
+  }
+  .jstep h5{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:16px;
+    color:var(--ink);margin:8px 0 8px;letter-spacing:-.01em;
+  }
+  .jstep p{font-size:11.5px;line-height:1.7;color:var(--ink-soft);}
+  .jstep .dur{margin-top:12px;font-family:ui-monospace,monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;}
+  .cta-cards{
+    margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  }
+  .cta-card{
+    padding:22px 22px;border:1px solid var(--line);
+  }
+  .cta-card.primary{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .cta-card .lb{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--coral);font-weight:600;
+  }
+  .cta-card.primary .lb{color:var(--coral-soft);}
+  .cta-card h4{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:20px;
+    margin:10px 0 8px;letter-spacing:-.01em;
+  }
+  .cta-card p{font-size:12px;line-height:1.7;color:var(--ink-soft);}
+  .cta-card.primary p{color:rgba(255,255,255,.75);}
+  .cta-card .btn{
+    display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+    padding:10px 16px;border-radius:2px;
+    font-size:12px;font-weight:600;letter-spacing:.05em;
+    background:var(--coral);color:#fff;
+  }
+  .cta-card.primary .btn{background:var(--coral);color:#fff;}
+  .cta-card .btn::after{content:"→";}
+  .contact-blk{
+    margin-top:24px;padding-top:20px;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;
+  }
+  .contact-blk .k{
+    font-family:ui-monospace,monospace;font-size:9px;color:var(--muted);letter-spacing:.2em;margin-bottom:6px;
+  }
+  .contact-blk .v{font-size:12.5px;color:var(--ink);letter-spacing:-.01em;}
+
+  .logo-mark{
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .logo-mark .dot{
+    width:22px;height:22px;background:var(--coral);
+    border-radius:50%;position:relative;
+  }
+  .logo-mark .dot::after{
+    content:"";position:absolute;inset:5px;background:var(--paper);border-radius:50%;
+  }
+  .logo-mark .name{
+    font-family:'Noto Serif KR',serif;font-weight:700;font-size:15px;letter-spacing:-.01em;
+  }
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .page{margin:0;box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 COVER -->
+<section class="page cover" data-screen-label="01 표지">
+  <div class="cover-mark"><span>BROCHURE · 2026</span></div>
+  <div class="cover-brand">FOR PUBLIC INSTITUTIONS</div>
+
+  <div class="logo-mark" style="position:absolute;top:45mm;left:20mm;">
+    <div class="dot"></div>
+    <div class="name">HR One</div>
+  </div>
+
+  <div class="cover-h">
+    <div class="cover-eyebrow">사람 중심 인사행정의 새로운 표준</div>
+    <h1 class="cover-title">
+      평가는 <em>공정하게</em>,<br>
+      복무는 <em>가볍게</em>.
+    </h1>
+    <p class="cover-sub">
+      공공기관 인사·복무 업무를 자동화 시스템으로.<br>
+      AI가 평가 피드백을 쓰고, 모바일이 결재를 처리합니다.<br>
+      담당자는 사람에게, 조직은 성과에 다시 집중합니다.
+    </p>
+  </div>
+
+  <div class="cover-illust">
+    <div class="cover-illust-container">
+      <div class="cover-img-box">
+        <img src="eval-dashboard.png" alt="인사평가시스템 지표관리 화면 목업">
+      </div>
+      <div class="cover-img-box">
+        <img src="attend-dashboard.png" alt="복무관리시스템 대시보드 화면 목업">
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-foot">
+    <div class="co">HR One · 인사평가 & 복무관리 자동화 솔루션</div>
+    <div style="text-align:right;">
+      <div class="tag">Public HR Suite</div>
+      <div class="yr" style="margin-top:6px;">EDITION 2026.08</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2 PROBLEM -->
+<section class="page" data-screen-label="02 문제 정의">
+  <div class="pad">
+    <div class="p-header">
+      <span class="p-num">02 / 08</span>
+      <span class="p-cat">The Reality</span>
+    </div>
+
+    <div class="section-label">공공기관 인사·복무의 오늘</div>
+    <h2 class="p-title">
+      담당자는 <em>수기</em>에 지치고,<br>
+      조직은 <em>지표</em>에 목마릅니다.
+    </h2>
+    <p class="p-lede">
+      두 개의 부서에서 두 명의 담당자가 엑셀과 종이로 관리하는 인사평가와 복무 데이터.
+      집계는 늦어지고, <br>결재는 사라지고, 담당자는 사람이 아닌 서류에 매여 있습니다.
+    </p>
+
+    <div class="problem-grid">
+      <div class="p-card">
+        <span class="num">01</span>
+        <h4>이원화된 담당 · 이중 관리 부담</h4>
+        <p>인사평가와 복무관리가 서로 다른 부서에서 별도 담당자에 의해 운영되어 자료가 흩어지고, 대사와 검증에 <br>반복적인 시간이 투입됩니다.</p>
+      </div>
+      <div class="p-card">
+        <span class="num">02</span>
+        <h4>수기 집계의 오류와 지연</h4>
+        <p>엑셀 취합 · 이메일 결재 · 종이 대장으로 이루어지는 업무는 오류 가능성과 처리 지연을 구조적으로 안고 있으며, 기관장 보고의 신뢰도를 낮춥니다.</p>
+      </div>
+      <div class="p-card">
+        <span class="num">03</span>
+        <h4>지표 · 반영비율의 재계산 반복</h4>
+        <p>업적 · 역량 · 다면평가의 직급별 반영비율을 매년 손으로 다시 계산해야 하며, 내규가 바뀔 때마다 전체 산식을 <br>재작성해야 합니다.</p>
+      </div>
+      <div class="p-card">
+        <span class="num">04</span>
+        <h4>실시간 현황 파악 불가</h4>
+        <p>누가 어디에서 근무 중인지, 이번 달 초과근무는 얼마인지 관리자는 월말이 되어야 확인이 가능하고, <br>법정 보관의무 대응도 어렵습니다.</p>
+      </div>
+    </div>
+
+    <div class="stat-strip">
+      <div class="s">
+        <div class="n">2개 부서</div>
+        <div class="l">인사평가 · 복무관리 이원화 운영</div>
+      </div>
+      <div class="s">
+        <div class="n">수작업</div>
+        <div class="l">지표 개발 → 집계 → 통보 全 과정</div>
+      </div>
+      <div class="s">
+        <div class="n">월 단위</div>
+        <div class="l">현황 파악까지 소요되는 시간</div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      "결국 인사담당자의 야근으로 굴러가는 시스템입니다.<br>
+      사람을 다루는 부서가, 정작 사람에게 쓸 시간이 가장 부족합니다."
+    </div>
+
+    <div class="p-foot">
+      <span>HR ONE · BROCHURE 2026</span>
+      <span>THE REALITY</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3 SOLUTION -->
+<section class="page" data-screen-label="03 솔루션 개요">
+  <div class="pad">
+    <div class="p-header">
+      <span class="p-num">03 / 08</span>
+      <span class="p-cat">The Solution</span>
+    </div>
+
+    <div class="section-label">Two Systems, One Platform</div>
+    <h2 class="p-title">
+      두 시스템, <em>하나의 인사행정</em>.
+    </h2>
+    <p class="p-lede">
+      인사평가와 복무관리를 하나의 계정 · 하나의 조직도 · 하나의 데이터 기반 위에.
+      담당자는 이중 입력에서 해방되고, <br>관리자는 하나의 화면에서 조직 전체를 봅니다.
+    </p>
+
+    <div class="two-in-one">
+      <div class="sys-card coral">
+        <div class="sys-tag">SYSTEM 01</div>
+        <div class="sys-name">인사평가시스템</div>
+        <div class="sys-en">Performance Evaluation Suite</div>
+        <p class="sys-desc">
+          업적 · 역량 · 다면 3종 평가를 하나의 시스템으로 <br>통합하고,
+          성과편람 · 근무평정 내규에 따라 반영비율을 자동 산출합니다.
+          AI가 평가 피드백을 작성하고 <br>전 직원에게 자동 송부합니다.
+        </p>
+        <ul class="sys-feats">
+          <li>업적 · 역량 · 다면평가 통합 관리</li>
+          <li>내규 반영비율 자동 산출 · 적용</li>
+          <li>AI 기반 평가 피드백 자동 작성</li>
+          <li>연간 평가 사이클 3단계 표준화</li>
+          <li>마스터관리자 · 평가자 · 팀원 3단 권한</li>
+        </ul>
+      </div>
+
+      <div class="sys-card sage">
+        <div class="sys-tag">SYSTEM 02</div>
+        <div class="sys-name">복무관리시스템</div>
+        <div class="sys-en">Attendance & Approval Suite</div>
+        <p class="sys-desc">
+          출퇴근 · 연차 · 외근 · 초과근무 신청부터 결재까지 <br>모바일 하나로.
+          팀장 → 부장 → 기관장 3단계 자동 결재와 GPS 기반 출퇴근 기록,
+          실시간 대시보드로 조직 전체 현황을 한눈에 파악합니다.
+        </p>
+        <ul class="sys-feats">
+          <li>모바일 3단계 전자결재</li>
+          <li>GPS 기반 출퇴근 · 범위이탈 표시</li>
+          <li>실시간 현황 대시보드</li>
+          <li>통계 자동 집계 · 법정 보관 충족</li>
+          <li>출퇴근 · 결재 · 통계 · 알림 4대 기능</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="integration-note">
+      <div class="l">하나의 조직도 · 하나의 계정 · 하나의 데이터 · 하나의 대시보드</div>
+      <div class="r">ONE HR · ONE TRUTH</div>
+    </div>
+
+    <div class="p-foot">
+      <span>HR ONE · BROCHURE 2026</span>
+      <span>THE SOLUTION</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4 DETAIL -->
+<section class="page" data-screen-label="04 인사평가 상세">
+  <div class="pad">
+    <div class="p-header">
+      <span class="p-num">04 / 08</span>
+      <span class="p-cat">System 01 · Evaluation</span>
+    </div>
+
+    <div class="section-label">인사평가시스템 · 성과관리의 표준</div>
+    <h2 class="p-title">
+      3종 평가를 하나로, <em>AI가 피드백까지</em>.
+    </h2>
+
+    <div class="detail-head">
+      <p class="p-lede">
+        지표 확정부터 자기평가, 채점, 결과 공개, 이의신청까지 —
+        연간 평가 사이클을 하나의 시스템에서 자동화합니다.<br>
+        내규가 바뀌어도 반영비율은 시스템이 다시 계산합니다.
+      </p>
+      <div class="detail-illu-grid">
+        <div class="img-box">
+          <img src="eval-period.png" alt="근무성적평정 시스템 - 평가 기간 설정">
+        </div>
+        <div class="img-box">
+          <img src="eval-ai.png" alt="FeedbackRefine AI - 360도 피드백 다듬기">
+        </div>
+      </div>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="k">FEATURE · 01</div>
+        <h5>3종 평가 통합</h5>
+        <p>업적 · 역량 · 다면평가를 하나의 시스템에서 관리하고 직급별 반영비율을 자동 산출합니다.</p>
+      </div>
+      <div class="feat">
+        <div class="k">FEATURE · 02</div>
+        <h5>AI 평가 피드백</h5>
+        <p>평가 결과를 기반으로 개인별 피드백을 AI가 작성하고, 전 직원에게 이메일로 자동 송부합니다.</p>
+      </div>
+      <div class="feat">
+        <div class="k">FEATURE · 03</div>
+        <h5>내규 자동 반영</h5>
+        <p>성과편람 · 근무평정 내규 변경 시 반영비율과 산식이 <br>자동 갱신되어 재작성 부담이 없습니다.</p>
+      </div>
+      <div class="feat">
+        <div class="k">FEATURE · 04</div>
+        <h5>3단 권한 · 개인정보 암호화</h5>
+        <p>마스터관리자 · 평가자 · 팀원 3단 권한과 주요 민감 데이터 <br>암호화, 감사로그로 오남용을 차단합니다.</p>
+      </div>
+    </div>
+
+    <div class="cycle-row">
+      <div class="lbl">평가 사이클</div>
+      <div class="cycle-steps">
+        <span class="st">지표 확정</span>
+        <span class="arr">→</span>
+        <span class="st">자기평가 · 채점</span>
+        <span class="arr">→</span>
+        <span class="st">결과 공개 · 이의신청</span>
+      </div>
+    </div>
+
+    <div class="p-foot">
+      <span>HR ONE · BROCHURE 2026</span>
+      <span>EVALUATION SYSTEM</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5 DETAIL -->
+<section class="page" data-screen-label="05 복무관리 상세">
+  <div class="pad">
+    <div class="p-header">
+      <span class="p-num">05 / 08</span>
+      <span class="p-cat sage-tag">System 02 · Attendance</span>
+    </div>
+
+    <div class="section-label">복무관리시스템 · 모바일 전자결재</div>
+    <h2 class="p-title">
+      모바일 하나로, <em class="sage-txt">3단계 결재까지</em>.
+    </h2>
+
+    <div class="detail-head">
+      <p class="p-lede">
+        출근 버튼 한 번으로 GPS 좌표가 기록되고,
+        연차 · 외근 · 초과근무 신청은 팀장 → 부장 → 기관장 3단계로 <br>자동 결재됩니다.
+        종이 없는 결재 · 실시간 현황 파악 · 법정 보관의무를 동시에 충족합니다.
+      </p>
+      <div class="detail-illu-grid sage">
+        <div class="img-box">
+          <img src="attend-dashboard2.png" alt="복무관리시스템 대시보드 화면">
+        </div>
+        <div class="img-box">
+          <img src="attend-mobile.png" alt="복무관리시스템 모바일 사용자 화면">
+        </div>
+      </div>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat sage">
+        <div class="k">FEATURE · 01</div>
+        <h5>GPS 출퇴근 기록</h5>
+        <p>버튼 클릭 한 번으로 위치 기반 출퇴근을 기록하고, 지정 범위 이탈 시 자동 표시합니다.</p>
+      </div>
+      <div class="feat sage">
+        <div class="k">FEATURE · 02</div>
+        <h5>3단계 자동 결재</h5>
+        <p>연차 · 외근 · 초과근무 신청이 팀장 → 부장 → 기관장으로 <br>자동 라우팅되어 지연과 누락을 해소합니다.</p>
+      </div>
+      <div class="feat sage">
+        <div class="k">FEATURE · 03</div>
+        <h5>실시간 통계 · 대시보드</h5>
+        <p>관리자는 대시보드 하나에서 근무 현황 · 초과근무 · <br>연차 잔여를 실시간으로 확인합니다.</p>
+      </div>
+      <div class="feat sage">
+        <div class="k">FEATURE · 04</div>
+        <h5>규정 준수 · 법정 보관</h5>
+        <p>근태 · 결재 이력이 자동 보관되어 감사 대응과 국가 보안 기준 기반의 기록 관리를 완비합니다.</p>
+      </div>
+    </div>
+
+    <div class="cycle-row sage">
+      <div class="lbl">결재 흐름</div>
+      <div class="cycle-steps">
+        <span class="st">신청 (직원)</span>
+        <span class="arr">→</span>
+        <span class="st">1차 결재 (팀장)</span>
+        <span class="arr">→</span>
+        <span class="st">2차 결재 (부장)</span>
+        <span class="arr">→</span>
+        <span class="st">최종 결재 (기관장)</span>
+      </div>
+    </div>
+
+    <div class="p-foot">
+      <span>HR ONE · BROCHURE 2026</span>
+      <span>ATTENDANCE SYSTEM</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6 DIFFERENTIATION -->
+<section class="page" data-screen-label="06 차별점">
+  <div class="pad">
+    <div class="p-header">
+      <span class="p-num">06 / 08</span>
+      <span class="p-cat">Why HR One</span>
+    </div>
+
+    <div class="section-label">공공기관 예산과 보안 현실에 맞춘 선택</div>
+    <h2 class="p-title">
+      가장 <em>가볍게</em> 시작해,<br>
+      가장 <em>안전하게</em> 씁니다.
+    </h2>
+    <p class="p-lede">
+      대형 HRM 패키지 대비 구축 비용과 기간은 획기적으로 줄이고,
+      공공기관에 필수적인 보안 준수 체계와 유연한 <br>클라우드 확장성을 함께 제공합니다.
+    </p>
+
+    <div class="diff-grid-3col">
+      <div class="diff">
+        <div class="idx">DIFF · 01</div>
+        <h4>AI 기반<br>신속 · 저비용 구축</h4>
+        <p>기획부터 UI, 백엔드 개발까지 AI 활용으로 기존 SI 대비 구축 기간과 비용을 단축합니다.</p>
+        <div class="metric">
+          <span class="v">1/3 수준</span>
+          <span class="lb">기존 SI 대비 구축비</span>
+        </div>
+      </div>
+      <div class="diff">
+        <div class="idx">DIFF · 02</div>
+        <h4>클라우드 기반<br>최적 운영 비용</h4>
+        <p>초기 도입 부담을 낮춘 가벼운 SaaS 구조 지원 및 공공 전용 클라우드로의 유연한 확장을 지원합니다.</p>
+        <div class="metric">
+          <span class="v">유연성</span>
+          <span class="lb">전용 클라우드 확장 지원</span>
+        </div>
+      </div>
+      <div class="diff">
+        <div class="idx">DIFF · 03</div>
+        <h4>표준 웹 스택<br>유지보수 자유도</h4>
+        <p>React · Next.js 표준 스택 적용으로 특정 벤더 종속(Lock-in) 없이 <br>자체 유지보수가 가능합니다.</p>
+        <div class="metric">
+          <span class="v">Vendor-free</span>
+          <span class="lb">특정사 락인 없음</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="diff-grid-2col">
+      <div class="diff">
+        <div class="idx">DIFF · 04</div>
+        <h4>3단계 빠른 온보딩</h4>
+        <p>계정 발급 → 조직 및 내규 세팅 → 정식 운영으로 이어지는 압축 프로세스로 신속하게 시작합니다.</p>
+        <div class="metric">
+          <span class="v">단기간</span>
+          <span class="lb">계정 발급부터 정식 운영까지</span>
+        </div>
+      </div>
+      <div class="diff">
+        <div class="idx">DIFF · 05</div>
+        <h4>보안 & 규정 준수 (Compliance)</h4>
+        <p>개인정보보호법 및 국정원 보안 가이드라인 준수, GS/CSAP <br>인증 기준에 부합하는 보안 설계를 탑재했습니다.</p>
+        <div class="metric">
+          <span class="v">Compliance</span>
+          <span class="lb">공공 보안 가이드라인 충족</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-tab">
+      <h5>기존 방식 대비 · HR One이 다른 지점</h5>
+      <table>
+        <thead>
+          <tr><th style="width:22%;">항목</th><th style="width:38%;">기존 (수기 · 대형 SI)</th><th style="width:40%;">HR One</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>구축 방식</td><td class="them">SI 개발 · 커스터마이징</td><td class="ours">AI 기반 신속 구축</td></tr>
+          <tr><td>인프라 / 운영비</td><td class="them">고정 라이선스 · 전용 서버 구축비</td><td class="ours">초기 부담을 줄인 가벼운 SaaS / 확장형</td></tr>
+          <tr><td>보안 및 내규</td><td class="them">수작업 대사 · 별도 보안 설정</td><td class="ours">공공 보안 준수 · 내규 자동 산출</td></tr>
+          <tr><td>평가 피드백</td><td class="them">담당자 수동 작성 · 이메일</td><td class="ours">AI 작성 · 자동 송부</td></tr>
+          <tr><td>유지보수 종속성</td><td class="them">벤더 락인</td><td class="ours">표준 스택 · 자체 유지 가능</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="p-foot">
+      <span>HR ONE · BROCHURE 2026</span>
+      <span>WHY HR ONE</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 7 PROOF -->
+<section class="page" data-screen-label="07 도입 사례">
+  <div class="pad">
+    <div class="p-header">
+      <span class="p-num">07 / 08</span>
+      <span class="p-cat">Reference Case</span>
+    </div>
+
+    <div class="section-label">실제 운영 중인 공공 레퍼런스</div>
+    <h2 class="p-title">
+      이미 <em>공공 현장</em>에서<br>
+      돌아가고 있습니다.
+    </h2>
+
+    <div class="case-hero">
+      <div class="case-tag">CASE STUDY · IN OPERATION</div>
+      <div class="case-name">서울시 출자·출연기관(A기관)</div>
+      <div class="case-meta">인사평가 및 복무관리시스템 구축 · 운영 중</div>
+      <div class="case-body">
+        두 개 부서에 나뉘어 있던 인사평가와 복무 업무를 자동화 시스템으로 통합했습니다.
+        수기 집계에서 벗어나, <br>지표 개발부터 실적 집계까지 자동화되면서
+        담당자의 업무 효율성이 눈에 띄게 향상되었고,
+        복무 처리 시간은 <br>크게 단축되었으며,
+        관리자는 실시간으로 조직 전체의 근무 현황을 파악할 수 있게 되었습니다.
+      </div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="v">2 → 1<em>시스템</em></div>
+        <div class="lb">이원 관리 → 통합 운영<br>담당 인력 재배치 효과</div>
+      </div>
+      <div class="kpi dark">
+        <div class="v">자동화</div>
+        <div class="lb">지표 개발부터 실적 집계까지<br>수기 업무 대체</div>
+      </div>
+      <div class="kpi">
+        <div class="v">실시간</div>
+        <div class="lb">월 단위 → 실시간<br>현황 파악 주기 단축</div>
+      </div>
+    </div>
+
+    <div class="voice-strip">
+      <div class="q">"수기 집계에서 벗어나 지표 개발부터 실적 집계까지 자동화되면서, 담당자들이 사람을 보는 일에 다시 집중할 수 있게 되었습니다."</div>
+      <div class="who">— 운영 담당자<br>Voice of Customer</div>
+    </div>
+
+    <div class="p-foot">
+      <span>HR ONE · BROCHURE 2026</span>
+      <span>REFERENCE</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 8 CTA -->
+<section class="page cta-page" data-screen-label="08 도입 안내">
+  <div class="pad">
+    <div class="p-header">
+      <span class="p-num">08 / 08</span>
+      <span class="p-cat">Get Started</span>
+    </div>
+
+    <div class="cta-hero">
+      <div class="section-label">3단계로 시작하는 인사행정의 전환</div>
+      <h2 class="cta-h">
+        지금, <em>가볍게</em> 시작하세요.<br>
+        저희가 함께 <em>세팅</em>합니다.
+      </h2>
+      <p class="cta-sub">
+        무료 시연으로 실제 화면을 먼저 확인하시고,
+        기관 현황에 맞춘 컨설팅 미팅을 통해 도입 범위와 일정을 <br>설계해 드립니다.
+      </p>
+    </div>
+
+    <div class="journey">
+      <div class="jstep">
+        <div class="step">STEP · 01</div>
+        <h5>계정 발급</h5>
+        <p>기관 정보와 관리자 계정을 발급하여 즉시 시스템에 접근할 수 있도록 <br>준비합니다.</p>
+        <div class="dur">≈ 1~2 영업일</div>
+      </div>
+      <div class="jstep">
+        <div class="step">STEP · 02</div>
+        <h5>조직 · 내규 세팅</h5>
+        <p>조직도 · 직급 체계 · 평가 반영비율 · 결재선을 기관 내규에 맞춰 <br>설정합니다.</p>
+        <div class="dur">≈ 1~2 주</div>
+      </div>
+      <div class="jstep">
+        <div class="step">STEP · 03</div>
+        <h5>정식 운영</h5>
+        <p>임직원 온보딩 교육과 함께 <br>정식 운영을 시작하고, 초기 안정화를 <br>지원합니다.</p>
+        <div class="dur">즉시 운영 개시</div>
+      </div>
+    </div>
+
+    <div class="cta-cards">
+      <div class="cta-card primary">
+        <div class="lb">CTA · 01</div>
+        <h4>무료 시연 신청</h4>
+        <p>실제 화면 · 실제 데이터로 30분간 데모를 진행하며, <br>기관 담당자 3~5인 참여를 권장합니다.</p>
+        <a class="btn">시연 신청하기</a>
+      </div>
+      <div class="cta-card">
+        <div class="lb">CTA · 02</div>
+        <h4>컨설팅 미팅 요청</h4>
+        <p>기관 현황 진단과 도입 로드맵을 함께 그리는 1:1 컨설팅 세션입니다.</p>
+        <a class="btn">미팅 요청하기</a>
+      </div>
+    </div>
+
+    <div class="contact-blk">
+      <div>
+        <div class="k">CONTACT</div>
+        <div class="v">aisystemgaebal@gmail.com</div>
+      </div>
+      <div>
+        <div class="k">PHONE</div>
+        <div class="v">010-7301-2073</div>
+      </div>
+      <div>
+        <div class="k">WEB</div>
+        <div class="v">www.ellev.co.kr</div>
+      </div>
+    </div>
+
+    <div class="p-foot">
+      <span>HR ONE · BROCHURE 2026</span>
+      <span>THANK YOU</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

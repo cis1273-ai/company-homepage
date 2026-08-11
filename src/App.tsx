@@ -636,7 +636,15 @@ function DetailedServicesSection() {
                 rel="noopener noreferrer"
                 className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
               >
-                발표자료 보기 →
+                HR Intelligence Suite 상세 보기 (인력산정·직무평가·직무매칭·총인건비시뮬레이터) →
+              </a>
+              <a
+                href="/hr-one/brochure.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-secondary text-secondary px-6 py-3 rounded font-semibold text-center hover:bg-secondary hover:text-white transition-colors"
+              >
+                HR One 상세 보기 (인사평가·복무관리) →
               </a>
             </div>
           )}
