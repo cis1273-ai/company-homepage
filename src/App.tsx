@@ -971,6 +971,20 @@ function CTASection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  useEffect(() => {
+    const openIfHashContact = () => {
+      if (window.location.hash === '#contact') {
+        setIsFormVisible(true);
+        setTimeout(() => {
+          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+      }
+    };
+    openIfHashContact();
+    window.addEventListener('hashchange', openIfHashContact);
+    return () => window.removeEventListener('hashchange', openIfHashContact);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
