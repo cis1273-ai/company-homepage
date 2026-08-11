@@ -631,14 +631,6 @@ function DetailedServicesSection() {
           {detailedServices[activeTab].id === 'hr-education' && (
             <div className="flex flex-col sm:flex-row gap-4 mt-10 justify-center">
               <a
-                href="/ai-hr-system.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-secondary text-white px-6 py-3 rounded font-semibold text-center hover:bg-[#004f9b] transition-colors"
-              >
-                서비스 상세 보기 →
-              </a>
-              <a
                 href="/hr-intelligence-suite/deck.html"
                 target="_blank"
                 rel="noopener noreferrer"
