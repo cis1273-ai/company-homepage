@@ -456,7 +456,7 @@ function Hero() {
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full bg-secondary opacity-[0.07] translate-x-1/3 translate-y-1/3" />
       <div className="relative max-w-[1200px] mx-auto flex flex-col gap-6 md:gap-8">
         <p className="text-lg md:text-xl font-medium tracking-wide">
-          조직과 사람, 그리고 변화를 잇는 <span className="font-bold">통합 HR 솔루션 파트너</span>
+          조직과 사람, 그리고 변화를 잇는 <span className="font-bold">통합 AI HR 솔루션 파트너</span>
         </p>
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-medium leading-[1.4] text-gray-200 tracking-tight break-keep">
           <span className="font-bold text-white">엘레브앤컴퍼니</span>는 기업의 지속 가능한 성장을 위한<br />
