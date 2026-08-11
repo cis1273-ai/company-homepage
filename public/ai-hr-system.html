@@ -21,15 +21,15 @@
     <meta name="twitter:image" content="https://ellev.co.kr/og-image.png" />
     <style>
         :root {
-            --bg-deep: #090D16;
-            --surface: #111827;
-            --surface-card: #1F2937;
-            --primary: #38BDF8;       /* 일렉트릭 블루 */
-            --secondary: #818CF8;     /* 인디고 퍼플 포인트 */
-            --accent: #2DD4BF;        /* 네온 틸 */
-            --text-main: #F3F4F6;
+            --bg-deep: #0B2545;
+            --surface: #111C2E;
+            --surface-card: #16233A;
+            --primary: #B8933E;       /* 골드 */
+            --secondary: #D4B368;     /* 라이트 골드 포인트 */
+            --accent: #D4B368;        /* 라이트 골드 */
+            --text-main: #FFFFFF;
             --text-sub: #9CA3AF;
-            --border: #374151;
+            --border: rgba(184, 147, 62, 0.25);
         }
 
         * {
@@ -67,14 +67,14 @@
 
         .badge {
             display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(184, 147, 62, 0.1);
             color: var(--primary);
             font-size: 14px;
             font-weight: 700;
             padding: 6px 16px;
             border-radius: 20px;
             margin-bottom: 16px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(184, 147, 62, 0.3);
         }
 
         header h1 {
@@ -193,11 +193,11 @@
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 18px;
-            background: rgba(45, 212, 191, 0.1);
+            background: rgba(212, 179, 104, 0.1);
             padding: 8px 14px;
             border-radius: 6px;
             display: inline-block;
-            border: 1px solid rgba(45, 212, 191, 0.2);
+            border: 1px solid rgba(212, 179, 104, 0.2);
         }
 
         .card ul {
@@ -258,7 +258,7 @@
 
         /* Footer / Contact */
         footer {
-            background: #090D16;
+            background: var(--bg-deep);
             color: #fff;
             padding: 32px 40px;
             border-radius: 12px;
@@ -287,7 +287,7 @@
         /* 인쇄 및 PDF 저장 시 레이아웃 깨짐 방지 스타일 */
         @media print {
             body {
-                background-color: #111827 !important;
+                background-color: #111C2E !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
                 padding: 0;
