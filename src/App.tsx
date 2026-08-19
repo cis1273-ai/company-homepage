@@ -466,7 +466,7 @@ function Hero() {
           최적의 인적 자원 전략과 실행력을 제공합니다.
         </h1>
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <a href="/ai-hr-system.html" target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block">AI-Powered HR Platform</a>
+          <a href="/ai-hr-system.html" target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block">AI HR Platform 소개</a>
           <a href="/company-profile.html" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block">회사 소개서</a>
         </div>
       </div>
