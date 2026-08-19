@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR One Intelligence Suite - 통합 브로슈어 | 엘레브앤컴퍼니 AI HR 시스템</title>
-    <meta name="description" content="인력산정, 직무평가, 인사평가, 직무적합도 매칭, 총인건비 시뮬레이터, 모바일 복무관리까지 아우르는 엘레브앤컴퍼니의 AI 기반 HR One Intelligence Suite를 소개합니다." />
+    <meta name="description" content="AI 인사규정 챗봇, 블라인드 채용면접평가, NCS JD 자동생성, 직무·인사평가, KPI-PI 설계, 인력산정, 복무관리, 총액인건비 시뮬레이터까지 아우르는 엘레브앤컴퍼니의 AI 기반 HR One Intelligence Suite를 소개합니다." />
     <link rel="canonical" href="https://ellev.co.kr/ai-hr-system.html" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="엘레브앤컴퍼니" />
     <meta property="og:title" content="HR One Intelligence Suite - 통합 브로슈어 | 엘레브앤컴퍼니 AI HR 시스템" />
-    <meta property="og:description" content="인력산정, 직무평가, 인사평가, 직무적합도 매칭, 총인건비 시뮬레이터, 모바일 복무관리까지 아우르는 AI 기반 HR 플랫폼." />
+    <meta property="og:description" content="AI 인사규정 챗봇, 블라인드 채용면접평가, NCS JD 자동생성, 직무·인사평가, KPI-PI 설계, 인력산정, 복무관리, 총액인건비 시뮬레이터까지 아우르는 AI 기반 HR 플랫폼." />
     <meta property="og:url" content="https://ellev.co.kr/ai-hr-system.html" />
     <meta property="og:image" content="https://ellev.co.kr/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -17,7 +17,7 @@
     <meta property="og:locale" content="ko_KR" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="HR One Intelligence Suite - 통합 브로슈어 | 엘레브앤컴퍼니 AI HR 시스템" />
-    <meta name="twitter:description" content="인력산정, 직무평가, 인사평가, 직무적합도 매칭, 총인건비 시뮬레이터, 모바일 복무관리까지 아우르는 AI 기반 HR 플랫폼." />
+    <meta name="twitter:description" content="AI 인사규정 챗봇, 블라인드 채용면접평가, NCS JD 자동생성, 직무·인사평가, KPI-PI 설계, 인력산정, 복무관리, 총액인건비 시뮬레이터까지 아우르는 AI 기반 HR 플랫폼." />
     <meta name="twitter:image" content="https://ellev.co.kr/og-image.png" />
     <style>
         :root {
@@ -256,10 +256,10 @@
             line-height: 1.6;
         }
 
-        /* 상세 자료 링크 버튼 — strengths-grid와 동일한 2열 그리드로 폭을 맞춤 */
+        /* 상세 자료 링크 버튼 */
         .detail-links {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin: 0 0 48px;
             padding-top: 8px;
@@ -364,18 +364,40 @@
     <div class="grid">
         <!-- 모듈 1 -->
         <div class="card">
-            <h3>1. 인력산정 시스템 (Workforce Sizing)</h3>
-            <div class="value-prop">인력의 질적 가치를 정량 시각화</div>
+            <h3>1. AI 인사규정 챗봇 (HR Policy Assistant)</h3>
+            <div class="value-prop">24시간 즉시 응대, 근거 조항까지 함께 제시</div>
             <ul>
-                <li><strong>직무평가 연계 매트릭스:</strong> 직무가치(Y축) × 업무량(X축) 사분면 진단</li>
-                <li><strong>업무량 정량 산정:</strong> 실측, 설문, 시스템 로그 기반의 정밀 근거 확보</li>
-                <li><strong>재배치 시뮬레이션:</strong> What-if 시나리오를 통한 과부하·저활용 영역 개선</li>
+                <li><strong>근거 조항 원문 + 신뢰도 점수:</strong> 모든 답변에 인용된 규정 조항 원문과 신뢰도 점수를 함께 제시</li>
+                <li><strong>PDF 업로드만으로 자동 반영:</strong> 최신 취업규칙 PDF를 올리면 조항을 자동 파싱·보정</li>
+                <li><strong>버전 관리 & 감사 로그:</strong> 업로드 → 검수 → 게시 전 과정 이력 추적, 역할 기반 관리자 권한 분리</li>
             </ul>
         </div>
 
-        <!-- 모듈 2 (수정 반영) -->
+        <!-- 모듈 2 -->
         <div class="card">
-            <h3>2. 직무평가 시스템 (Job Evaluation)</h3>
+            <h3>2. 블라인드 채용면접평가 시스템 (Blind Recruit Evaluation)</h3>
+            <div class="value-prop">이력서 유출 위험 없이, AI 수준의 면접 가이드</div>
+            <ul>
+                <li><strong>100% 클라이언트사이드 처리:</strong> 서버·DB 없는 정적 웹앱으로 이력서 원문 유출 경로 원천 차단</li>
+                <li><strong>자동 개인정보 마스킹:</strong> 이름·연락처·생년월일 등 정규식 자동 치환 후 담당자가 최종 검수</li>
+                <li><strong>STAR 기반 질문·루브릭 자동생성:</strong> 역량별 질문과 평가기준표 자동 산출, NCS 블라인드 채용 특화</li>
+            </ul>
+        </div>
+
+        <!-- 모듈 3 -->
+        <div class="card">
+            <h3>3. AI NCS JD Studio (직무기술서 자동생성)</h3>
+            <div class="value-prop">NCS 선택만으로 5분 안에 완성되는 직무기술서</div>
+            <ul>
+                <li><strong>NCS 3단계 드릴다운:</strong> 대분류 → 중분류 → 세분류 선택만으로 초안 자동생성</li>
+                <li><strong>35개 직무 전문가 큐레이션:</strong> 실무 판단이 반영된 표준 문구 기본 제공, 100% 자유 편집</li>
+                <li><strong>공문서 수준 산출물:</strong> 공식 인쇄 레이아웃과 PDF 원클릭 출력 지원</li>
+            </ul>
+        </div>
+
+        <!-- 모듈 4 -->
+        <div class="card">
+            <h3>4. 직무분석 및 직무평가 시스템 (Job Evaluation)</h3>
             <div class="value-prop">수기 작업에서 자동화로, 표준에서 커스터마이징으로</div>
             <ul>
                 <li><strong>기관 맞춤형 모델 설계:</strong> 평가요소(7~12개), 가중치, 척도를 기관 특성에 맞게 자체 설계 및 시뮬레이션</li>
@@ -384,9 +406,31 @@
             </ul>
         </div>
 
-        <!-- 모듈 3 (신규 분리) -->
+        <!-- 모듈 5 -->
         <div class="card">
-            <h3>3. 인사평가 시스템 (Performance Evaluation)</h3>
+            <h3>5. NCS 직무-CDP-교육 시스템 (Job-to-Learning & Career Path)</h3>
+            <div class="value-prop">직무기술서 한 장으로 교육과정과 경력경로까지 자동 연결</div>
+            <ul>
+                <li><strong>NCS 능력단위 자동 매칭:</strong> PDF·HWP·엑셀 등 혼재된 직무기술서를 업로드하면 NCS 세분류와 자동 연결</li>
+                <li><strong>결정론적 CDP 설계:</strong> LLM 임의생성 없이 공식 데이터로만 검증되는 경력개발경로 제공(Hallucination 0)</li>
+                <li><strong>재평가 이력 보존:</strong> 평가할 때마다 이전 기록과 Gap 변화량을 자동 비교</li>
+            </ul>
+        </div>
+
+        <!-- 모듈 6 -->
+        <div class="card">
+            <h3>6. AI KPI-PI Designer (전략과제·개인성과지표 자동설계)</h3>
+            <div class="value-prop">SMARTI 기준으로 검증된 KPI/PI 원스톱 산출</div>
+            <ul>
+                <li><strong>전략KPI·개인PI 분리 트랙:</strong> 팀장 전략과제와 개인 업무분장을 서로 다른 기준으로 설계</li>
+                <li><strong>7단계 자동 설계 파이프라인:</strong> 입력 → 전략 분석 → 성과논리 설계 → 검증 → 최종 선정까지 자동화</li>
+                <li><strong>SMARTI 기준 자동 검증:</strong> 원칙별 근거를 함께 제시, 다양한 문서 포맷 일괄 분석 지원</li>
+            </ul>
+        </div>
+
+        <!-- 모듈 7 -->
+        <div class="card">
+            <h3>7. 조직 및 개인평가 시스템 (Performance Evaluation)</h3>
             <div class="value-prop">평가 일원화 및 AI 피드백 자동화</div>
             <ul>
                 <li><strong>통합 평가 체계:</strong> 업적, 역량, 다면평가 등 기관 내 다양한 인사평가 프로세스 일원화</li>
@@ -395,36 +439,36 @@
             </ul>
         </div>
 
-        <!-- 모듈 4 -->
+        <!-- 모듈 8 -->
         <div class="card">
-            <h3>4. 직무적합도 매칭 (Job-Fit Matching)</h3>
-            <div class="value-prop">데이터 기반의 과학적 배치 의사결정</div>
+            <h3>8. 인력산정 시스템 (Workforce Sizing)</h3>
+            <div class="value-prop">인력의 질적 가치를 정량 시각화</div>
             <ul>
-                <li><strong>AI 적합도 추천:</strong> 직무기술서·이력·평가 데이터 학습 기반 Top-N 추천</li>
-                <li><strong>CDP & 마일리지 가점:</strong> 경력개발경로, 기피부서 마일리지·형평성 가점 합산</li>
-                <li><strong>가중치 자율 조정:</strong> 기관 인사 원칙에 맞춘 구성요소 비율 자체 구성</li>
+                <li><strong>직무평가 연계 매트릭스:</strong> 직무가치(Y축) × 업무량(X축) 사분면 진단</li>
+                <li><strong>업무량 정량 산정:</strong> 실측, 설문, 시스템 로그 기반의 정밀 근거 확보</li>
+                <li><strong>재배치 시뮬레이션:</strong> What-if 시나리오를 통한 과부하·저활용 영역 개선</li>
             </ul>
         </div>
 
-        <!-- 모듈 5 -->
+        <!-- 모듈 9 -->
         <div class="card">
-            <h3>5. 총인건비 시뮬레이터 (Total Labor Cost Simulator)</h3>
-            <div class="value-prop">매월 모니터링 및 선제적 재정 대응</div>
-            <ul>
-                <li><strong>실집행액 모니터링:</strong> 급여·회계 연동 매월 집행액 취합 및 위험 경보</li>
-                <li><strong>여유 재원 What-if 시나리오:</strong> 성과급, 복리후생 옵션별 재정 영향도 비교</li>
-                <li><strong>정부지침 양식 자동화:</strong> 만근자/비만근자 인상률 요약표 자동 산출</li>
-            </ul>
-        </div>
-
-        <!-- 모듈 6 -->
-        <div class="card" style="grid-column: 1 / -1;">
-            <h3>6. 모바일 복무관리 시스템 (Attendance & Approval)</h3>
+            <h3>9. 복무관리 시스템 (Attendance & Approval)</h3>
             <div class="value-prop">종이 없는 전자결재와 실시간 근태 파악</div>
             <ul>
                 <li><strong>GPS 출퇴근 기록:</strong> 원터치 위치 기록 및 지정 범위 이탈 자동 체크</li>
                 <li><strong>3단계 자동 결재:</strong> 팀장 → 부장 → 기관장 자동 승인 라우팅</li>
                 <li><strong>실시간 대시보드 & 컴플라이언스:</strong> 연차 residual, 초과근무 모니터링 및 법정 보관 기준 충족</li>
+            </ul>
+        </div>
+
+        <!-- 모듈 10 -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <h3>10. 총액인건비 시뮬레이터 (Total Labor Cost Simulator)</h3>
+            <div class="value-prop">매월 모니터링 및 선제적 재정 대응</div>
+            <ul>
+                <li><strong>실집행액 모니터링:</strong> 급여·회계 연동 매월 집행액 취합 및 위험 경보</li>
+                <li><strong>여유 재원 What-if 시나리오:</strong> 성과급, 복리후생 옵션별 재정 영향도 비교</li>
+                <li><strong>정부지침 양식 자동화:</strong> 만근자/비만근자 인상률 요약표 자동 산출</li>
             </ul>
         </div>
     </div>
@@ -455,6 +499,7 @@
     <div class="detail-links">
         <a class="detail-btn outline" href="/hr-one/brochure.html" target="_blank" rel="noopener noreferrer">HR One 상세 보기 →</a>
         <a class="detail-btn outline" href="/hr-intelligence-suite/brochure.html" target="_blank" rel="noopener noreferrer">HR Intelligence Suite 상세 보기 →</a>
+        <a class="detail-btn outline" href="/hr-ai-lab.html" target="_blank" rel="noopener noreferrer">HR AI Lab 상세 보기 →</a>
     </div>
 
 </div>
