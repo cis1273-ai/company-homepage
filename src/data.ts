@@ -43,7 +43,7 @@ export const detailedServices = [
   {
     id: 'hr-education',
     title: 'AI HR Platform',
-    items: ['AI 인사규정 챗봇', '블라인드 채용면접 시스템', 'NCS 기반 직무기술서 작성', '직무분석 및 직무평가 시스템', 'NCS 직무-CDP-교육 시스템', 'AI KPI·PI 생성', '조직 및 개인평가 시스템', '인력산정 시스템', '복무관리 시스템', '총액인건비 시뮬레이터']
+    items: ['AI 인사규정 챗봇', '블라인드 채용면접평가 시스템', 'NCS 기반 직무기술서 작성', '직무분석 및 직무평가 시스템', 'NCS 직무-CDP-교육 시스템', 'AI KPI·PI 생성', '조직 및 개인평가 시스템', '인력산정 시스템', '복무관리 시스템', '총액인건비 시뮬레이터']
   },
   {
     id: 'change-management',
