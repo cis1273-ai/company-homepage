@@ -6,25 +6,34 @@
 <title>HR AI Lab · 엘레브앤컴퍼니 AI HR Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+KR:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #FFFFFF;
-    --ink-2: #D7DBE0;
-    --ink-3: #9CA3AF;
-    --ink-4: #6B7280;
-    --line: rgba(184, 147, 62, 0.28);
-    --line-2: rgba(184, 147, 62, 0.16);
-    --paper: #0B2545;
-    --paper-2: #111C2E;
-    --cream: #16233A;
-    --gold: #B8933E;
-    --gold-2: #D4B368;
-    --deep: #050F1F;
-    --serif: 'Noto Serif KR', 'Cormorant Garamond', serif;
-    --serif-en: 'Cormorant Garamond', 'Noto Serif KR', serif;
-    --sans: 'Noto Sans KR', 'Manrope', system-ui, sans-serif;
-    --sans-en: 'Manrope', 'Noto Sans KR', system-ui, sans-serif;
+    /* HR Intelligence Suite 브로슈어(public/hr-intelligence-suite/brochure.html)는
+       전체가 밝은 문서(흰 배경 + 네이비/골드 포인트)이므로 이 페이지도 동일하게
+       기본은 밝은 테마로 두고, 헤더/히어로/Impact만 브로슈어의 navy-900 강조 밴드로 유지한다. */
+    --ink: #0B2545;        /* 기본 헤딩 색 = navy-900 */
+    --ink-2: #2B2D42;      /* ink-700, 보조 강조 텍스트 */
+    --ink-3: #4A5061;      /* ink-500, 본문 텍스트 */
+    --ink-4: #8D99AE;      /* ink-400, 라벨/캡션 */
+    --line: #D5DCE5;       /* 중립 헤어라인 */
+    --line-2: #E9ECEF;     /* grey-100, 더 옅은 헤어라인 */
+    --paper: #FFFFFF;      /* 기본 배경 = white */
+    --paper-2: #F8F9FA;    /* grey-50 */
+    --cream: #F8F9FA;      /* grey-50, Why 섹션 등 밝은 대체 배경 */
+    --gold: #B8933E;       /* gold-500, 라인/보더 강조 */
+    --gold-2: #8D6E28;     /* gold-600, 밝은 배경 위 골드 텍스트 */
+    --gold-bright: #D4AF37;/* gold-400, 어두운(navy) 배경 위 골드 텍스트 */
+    --deep: #0B2545;       /* navy-900, 헤더/히어로/Impact 강조 밴드 배경 */
+    --on-dark: #FFFFFF;
+    --on-dark-2: #D5DCE5;
+    --on-dark-3: #A9BED3;
+    --on-dark-4: #8DA9C4;
+    --serif: 'Playfair Display', 'Noto Serif KR', serif;
+    --serif-en: 'Playfair Display', 'Noto Serif KR', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --sans-en: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'JetBrains Mono', 'Fira Code', monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -66,10 +75,10 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(11, 37, 69, 0.85);
+    background: rgba(11, 37, 69, 0.92);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--line-2);
+    border-bottom: 1px solid rgba(184, 147, 62, 0.25);
   }
   .topbar-inner {
     display: flex;
@@ -103,13 +112,13 @@
     font-weight: 600;
     font-size: 18px;
     letter-spacing: 0.04em;
-    color: var(--ink);
+    color: var(--on-dark);
   }
   .logo-text .ko {
     font-family: var(--sans);
     font-size: 10px;
     letter-spacing: 0.24em;
-    color: var(--ink-3);
+    color: var(--on-dark-3);
     margin-top: 2px;
     text-transform: uppercase;
   }
@@ -119,16 +128,16 @@
     gap: 34px;
     font-family: var(--sans);
     font-size: 13px;
-    color: var(--ink-2);
+    color: var(--on-dark-2);
   }
   .nav a {
-    color: var(--ink-2);
+    color: var(--on-dark-2);
     text-decoration: none;
     letter-spacing: 0.02em;
     position: relative;
     transition: color 0.2s;
   }
-  .nav a:hover { color: var(--gold-2); }
+  .nav a:hover { color: var(--gold-bright); }
   .nav a::after {
     content: "";
     position: absolute;
@@ -153,6 +162,8 @@
 
   /* ============ Hero ============ */
   .hero {
+    background: var(--deep);
+    color: var(--on-dark);
     padding: 120px 0 140px;
     position: relative;
     overflow: hidden;
@@ -170,7 +181,7 @@
     font-family: var(--sans-en);
     font-size: 11px;
     letter-spacing: 0.32em;
-    color: var(--gold-2);
+    color: var(--gold-bright);
     text-transform: uppercase;
     margin-bottom: 32px;
     font-weight: 500;
@@ -186,24 +197,24 @@
     font-size: 68px;
     line-height: 1.15;
     letter-spacing: -0.02em;
-    color: var(--ink);
+    color: var(--on-dark);
     margin-bottom: 32px;
   }
   .hero h1 .accent {
     font-style: italic;
     font-family: var(--serif-en);
     font-weight: 500;
-    color: var(--gold-2);
+    color: var(--gold-bright);
   }
   .hero h1 .thin {
     font-weight: 300;
-    color: var(--ink-2);
+    color: var(--on-dark-2);
   }
   .hero-sub {
     font-family: var(--sans);
     font-size: 17px;
     line-height: 1.8;
-    color: var(--ink-3);
+    color: var(--on-dark-3);
     max-width: 520px;
     margin-bottom: 44px;
     font-weight: 400;
@@ -212,7 +223,7 @@
     display: flex;
     gap: 40px;
     padding-top: 32px;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
   }
   .hero-meta-item {
     display: flex;
@@ -222,19 +233,19 @@
     font-family: var(--serif-en);
     font-size: 42px;
     font-weight: 500;
-    color: var(--ink);
+    color: var(--on-dark);
     line-height: 1;
   }
   .hero-meta-item .num .plus {
     font-size: 24px;
-    color: var(--gold-2);
+    color: var(--gold-bright);
     vertical-align: super;
   }
   .hero-meta-item .lbl {
     font-family: var(--sans);
     font-size: 11px;
     letter-spacing: 0.16em;
-    color: var(--ink-4);
+    color: var(--on-dark-4);
     margin-top: 8px;
     text-transform: uppercase;
   }
@@ -254,7 +265,7 @@
     font-family: var(--sans-en);
     font-size: 10px;
     letter-spacing: 0.4em;
-    color: var(--ink-4);
+    color: var(--on-dark-4);
   }
   .hero-visual::after {
     content: "SINCE 2010 · ELLEV";
@@ -263,7 +274,7 @@
     font-family: var(--sans-en);
     font-size: 10px;
     letter-spacing: 0.4em;
-    color: var(--ink-4);
+    color: var(--on-dark-4);
   }
 
   /* ============ Section base ============ */
@@ -627,16 +638,6 @@
   }
 
   /* ============ Comparison table ============ */
-  .compare {
-    background: var(--deep);
-    color: var(--ink);
-  }
-  .compare .section-title { color: var(--ink); }
-  .compare .section-title .it { color: #D4B368; }
-  .compare .section-num { color: #D4B368; }
-  .compare .section-num::before { background: #D4B368; }
-  .compare .section-lede { color: rgba(245,241,232,0.7); }
-
   .compare-table {
     width: 100%;
     border-collapse: collapse;
@@ -646,7 +647,7 @@
   .compare-table th, .compare-table td {
     text-align: left;
     padding: 20px 20px;
-    border-bottom: 1px solid rgba(212,169,118,0.2);
+    border-bottom: 1px solid var(--line);
     vertical-align: top;
   }
   .compare-table th {
@@ -654,9 +655,9 @@
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #D4B368;
+    color: var(--gold-2);
     font-weight: 600;
-    border-bottom: 1px solid rgba(212,169,118,0.5);
+    border-bottom: 1px solid var(--gold);
     padding-bottom: 16px;
   }
   .compare-table .sol-name {
@@ -669,35 +670,39 @@
     font-family: var(--serif-en);
     font-style: italic;
     font-size: 12px;
-    color: #D4B368;
+    color: var(--gold-2);
     display: block;
     margin-top: 4px;
   }
-  .compare-table td { color: rgba(245,241,232,0.75); line-height: 1.6; }
-  .compare-table tr:hover td { background: rgba(212,169,118,0.05); }
+  .compare-table td { color: var(--ink-3); line-height: 1.6; }
+  .compare-table tr:hover td { background: var(--cream); }
   .compare-table .idx {
     font-family: var(--serif-en);
     font-style: italic;
-    color: #D4B368;
+    color: var(--gold-2);
     width: 40px;
   }
 
   /* ============ Impact ============ */
   .impact {
-    background: var(--cream);
-    border-top: 1px solid var(--line-2);
-    border-bottom: 1px solid var(--line-2);
+    background: var(--deep);
+    color: var(--on-dark);
   }
+  .impact .section-title { color: var(--on-dark); }
+  .impact .section-title .it { color: var(--gold-bright); }
+  .impact .section-num { color: var(--gold-bright); }
+  .impact .section-num::before { background: var(--gold-bright); }
+  .impact .section-lede { color: var(--on-dark-3); }
   .impact-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   }
   .impact-cell {
     padding: 48px 32px 48px 0;
-    border-right: 1px solid var(--line);
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
   }
   .impact-cell:last-child { border-right: none; padding-right: 0; }
   .impact-cell:not(:first-child) { padding-left: 32px; }
@@ -705,13 +710,13 @@
     font-family: var(--serif-en);
     font-size: 64px;
     font-weight: 500;
-    color: var(--ink);
+    color: var(--on-dark);
     line-height: 1;
     letter-spacing: -0.02em;
   }
   .impact-num .u {
     font-size: 24px;
-    color: var(--gold-2);
+    color: var(--gold-bright);
     margin-left: 4px;
     font-style: italic;
   }
@@ -719,14 +724,14 @@
     font-family: var(--serif);
     font-weight: 500;
     font-size: 15px;
-    color: var(--ink);
+    color: var(--on-dark);
     margin-top: 16px;
     margin-bottom: 6px;
   }
   .impact-desc {
     font-size: 12.5px;
     line-height: 1.6;
-    color: var(--ink-3);
+    color: var(--on-dark-3);
   }
 
   /* ============ CTA ============ */
@@ -753,7 +758,7 @@
   .cta h2 .it {
     font-family: var(--serif-en);
     font-style: italic;
-    color: #D4B368;
+    color: #D4AF37;
     font-weight: 500;
   }
   .cta-sub {
@@ -772,7 +777,7 @@
     font-family: var(--sans-en);
     font-size: 10px;
     letter-spacing: 0.28em;
-    color: #D4B368;
+    color: #D4AF37;
     text-transform: uppercase;
     font-weight: 600;
     margin-bottom: 24px;
@@ -803,7 +808,7 @@
     gap: 16px;
     margin-top: 32px;
     padding: 16px 28px;
-    background: #D4B368;
+    background: #D4AF37;
     color: var(--ink);
     font-family: var(--sans);
     font-size: 13px;
@@ -822,10 +827,10 @@
 
   /* ============ Footer ============ */
   footer {
-    background: var(--deep);
-    color: rgba(245,241,232,0.5);
+    background: var(--cream);
+    color: var(--ink-4);
     padding: 40px 0;
-    border-top: 1px solid rgba(212,169,118,0.15);
+    border-top: 1px solid var(--line);
     font-size: 12px;
   }
   .footer-inner {
@@ -838,7 +843,7 @@
   .footer-inner .brand {
     font-family: var(--serif-en);
     font-style: italic;
-    color: #D4B368;
+    color: var(--gold-2);
   }
 
   /* ============ Responsive ============ */
@@ -931,8 +936,8 @@
         <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="gg" cx="50%" cy="50%">
-              <stop offset="0%" stop-color="#111C2E"/>
-              <stop offset="100%" stop-color="#16233A" stop-opacity="0"/>
+              <stop offset="0%" stop-color="#13315C"/>
+              <stop offset="100%" stop-color="#1C4072" stop-opacity="0"/>
             </radialGradient>
           </defs>
           <circle cx="260" cy="260" r="240" fill="url(#gg)"/>
@@ -947,34 +952,34 @@
           <circle cx="260" cy="260" r="200" fill="none" stroke="#B8933E" stroke-width="0.5" stroke-dasharray="2 6" opacity="0.5"/>
 
           <!-- 6 nodes around -->
-          <g font-family="'Manrope',sans-serif" font-size="9" letter-spacing="1.5" fill="#9CA3AF">
+          <g font-family="-apple-system,'Segoe UI',sans-serif" font-size="9" letter-spacing="1.5" fill="#A9BED3">
             <g transform="translate(260,60)">
-              <circle r="6" fill="#16233A" stroke="#B8933E" stroke-width="1"/>
+              <circle r="6" fill="#1C4072" stroke="#B8933E" stroke-width="1"/>
               <circle r="2" fill="#B8933E"/>
               <text y="-14" text-anchor="middle">01 RECRUIT</text>
             </g>
             <g transform="translate(430,160)">
-              <circle r="6" fill="#16233A" stroke="#B8933E" stroke-width="1"/>
+              <circle r="6" fill="#1C4072" stroke="#B8933E" stroke-width="1"/>
               <circle r="2" fill="#B8933E"/>
               <text x="14" y="4">02 JD</text>
             </g>
             <g transform="translate(430,360)">
-              <circle r="6" fill="#16233A" stroke="#B8933E" stroke-width="1"/>
+              <circle r="6" fill="#1C4072" stroke="#B8933E" stroke-width="1"/>
               <circle r="2" fill="#B8933E"/>
               <text x="14" y="4">03 KPI</text>
             </g>
             <g transform="translate(260,460)">
-              <circle r="6" fill="#16233A" stroke="#B8933E" stroke-width="1"/>
+              <circle r="6" fill="#1C4072" stroke="#B8933E" stroke-width="1"/>
               <circle r="2" fill="#B8933E"/>
               <text y="20" text-anchor="middle">04 LEARNING</text>
             </g>
             <g transform="translate(90,360)">
-              <circle r="6" fill="#16233A" stroke="#B8933E" stroke-width="1"/>
+              <circle r="6" fill="#1C4072" stroke="#B8933E" stroke-width="1"/>
               <circle r="2" fill="#B8933E"/>
               <text x="-14" y="4" text-anchor="end">05 CDP</text>
             </g>
             <g transform="translate(90,160)">
-              <circle r="6" fill="#16233A" stroke="#B8933E" stroke-width="1"/>
+              <circle r="6" fill="#1C4072" stroke="#B8933E" stroke-width="1"/>
               <circle r="2" fill="#B8933E"/>
               <text x="-14" y="4" text-anchor="end">06 POLICY</text>
             </g>
@@ -982,8 +987,8 @@
 
           <!-- Center label -->
           <g transform="translate(260,260)">
-            <text font-family="'Cormorant Garamond',serif" font-style="italic" font-size="22" fill="#FFFFFF" text-anchor="middle" y="-4">HR</text>
-            <text font-family="'Cormorant Garamond',serif" font-style="italic" font-size="22" fill="#B8933E" text-anchor="middle" y="18">AI Lab</text>
+            <text font-family="'Playfair Display',serif" font-style="italic" font-size="22" fill="#FFFFFF" text-anchor="middle" y="-4">HR</text>
+            <text font-family="'Playfair Display',serif" font-style="italic" font-size="22" fill="#B8933E" text-anchor="middle" y="18">AI Lab</text>
           </g>
         </svg>
       </div>
@@ -1148,7 +1153,7 @@
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
             <circle cx="50" cy="38" r="14"/>
             <path d="M22 82c0-14 14-22 28-22s28 8 28 22"/>
-            <rect x="60" y="20" width="26" height="20" rx="1" fill="#16233A"/>
+            <rect x="60" y="20" width="26" height="20" rx="1" fill="#F8F9FA"/>
             <path d="M65 26h16M65 30h12M65 34h10" stroke-width="1.2"/>
             <path d="M75 42l4 4 6-8" stroke="#B8933E" stroke-width="1.6"/>
           </svg>
@@ -1205,7 +1210,7 @@
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
             <rect x="22" y="14" width="46" height="60" rx="1"/>
             <path d="M32 28h26M32 36h26M32 44h20M32 52h26M32 60h18" stroke-width="1.2"/>
-            <rect x="52" y="42" width="30" height="32" rx="1" fill="#16233A" stroke="#B8933E" stroke-width="1.2"/>
+            <rect x="52" y="42" width="30" height="32" rx="1" fill="#F8F9FA" stroke="#B8933E" stroke-width="1.2"/>
             <path d="M58 52h18M58 58h14M58 64h16" stroke="#B8933E" stroke-width="1.2"/>
           </svg>
         </div>
@@ -1260,10 +1265,10 @@
         <div class="sol-icon-large">
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
             <path d="M14 82V22M14 82h72"/>
-            <rect x="24" y="60" width="10" height="22" fill="#111C2E"/>
-            <rect x="40" y="46" width="10" height="36" fill="#111C2E"/>
+            <rect x="24" y="60" width="10" height="22" fill="#E9ECEF"/>
+            <rect x="40" y="46" width="10" height="36" fill="#E9ECEF"/>
             <rect x="56" y="34" width="10" height="48" fill="#B8933E" fill-opacity="0.3" stroke="#B8933E" stroke-width="1.2"/>
-            <rect x="72" y="26" width="10" height="56" fill="#111C2E"/>
+            <rect x="72" y="26" width="10" height="56" fill="#E9ECEF"/>
             <path d="M22 58L38 44L58 32L78 24" stroke="#B8933E" stroke-width="1.6"/>
             <circle cx="22" cy="58" r="2" fill="#B8933E"/>
             <circle cx="38" cy="44" r="2" fill="#B8933E"/>
@@ -1385,9 +1390,9 @@
             <circle cx="78" cy="22" r="6" stroke="#B8933E" stroke-width="1.4"/>
             <path d="M28 74L44 54M56 46L72 26" stroke-dasharray="3 3"/>
             <path d="M22 60V72M22 20v8M50 24v20M50 60v16M78 40v10M78 70v6" stroke-width="0.8" opacity="0.4"/>
-            <text x="22" y="88" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="8" fill="#9CA3AF">L1</text>
-            <text x="50" y="42" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="8" fill="#9CA3AF">L2</text>
-            <text x="78" y="14" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="8" fill="#B8933E">L3</text>
+            <text x="22" y="88" text-anchor="middle" font-family="Playfair Display" font-style="italic" font-size="8" fill="#5F7FA6">L1</text>
+            <text x="50" y="42" text-anchor="middle" font-family="Playfair Display" font-style="italic" font-size="8" fill="#5F7FA6">L2</text>
+            <text x="78" y="14" text-anchor="middle" font-family="Playfair Display" font-style="italic" font-size="8" fill="#B8933E">L3</text>
           </svg>
         </div>
       </div>
@@ -1442,7 +1447,7 @@
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
             <path d="M20 30h50c3 0 5 2 5 5v22c0 3-2 5-5 5H40l-14 12v-12h-6c-3 0-5-2-5-5V35c0-3 2-5 5-5z"/>
             <path d="M32 42h30M32 50h22" stroke-width="1.2"/>
-            <rect x="60" y="20" width="26" height="34" rx="1" fill="#16233A" stroke="#B8933E" stroke-width="1.2"/>
+            <rect x="60" y="20" width="26" height="34" rx="1" fill="#F8F9FA" stroke="#B8933E" stroke-width="1.2"/>
             <path d="M66 30h14M66 36h14M66 42h10" stroke="#B8933E" stroke-width="1.2"/>
             <path d="M62 46l4 4 6-8" stroke="#B8933E" stroke-width="1.6"/>
           </svg>
