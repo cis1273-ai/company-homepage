@@ -24,7 +24,7 @@ export const businessModels = [
   },
   {
     id: '02',
-    title: 'AI HR One Intelligence Suite',
+    title: 'AI HR Platform 시스템',
     description: 'AX 도입에 따른 AI 기반 HR 시스템을 구축합니다.'
   }
 ];
