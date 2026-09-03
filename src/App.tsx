@@ -99,7 +99,8 @@ function AdminPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (pw === ADMIN_PASSWORD) {
+    // ADMIN_PASSWORD 가 비어 있으면(빌드 시 VITE_ADMIN_PASSWORD 미설정) 항상 로그인 거부
+    if (ADMIN_PASSWORD !== '' && pw === ADMIN_PASSWORD) {
       sessionStorage.setItem('adminAuth', 'true');
       setIsLoggedIn(true);
     } else {
