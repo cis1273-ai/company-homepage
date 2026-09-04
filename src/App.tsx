@@ -161,7 +161,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${SCRIPT_URL}?action=getData`);
+      const res = await fetch(`${SCRIPT_URL}?action=getData&token=${encodeURIComponent(ADMIN_PASSWORD)}`);
       const data: Inquiry[] = await res.json();
       const sorted = [...data].reverse();
       setInquiries(sorted);
@@ -182,7 +182,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const handleStatusChange = async (newStatus: string) => {
     if (!selected) return;
     setStatusSaving(true);
-    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: newStatus, memo: selected.memo });
+    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: newStatus, memo: selected.memo, token: ADMIN_PASSWORD });
     new Image().src = `${SCRIPT_URL}?${params}`;
     await new Promise(r => setTimeout(r, 1500));
     await fetchData();
@@ -192,7 +192,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const handleMemoSave = async () => {
     if (!selected) return;
     setMemoSaving(true);
-    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: selected.status, memo });
+    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: selected.status, memo, token: ADMIN_PASSWORD });
     new Image().src = `${SCRIPT_URL}?${params}`;
     await new Promise(r => setTimeout(r, 1500));
     await fetchData();
@@ -212,6 +212,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
         subject: 'Re: [' + selected.company + '] 문의 건',
         body: replyText,
         rowIndex: String(selected.rowIndex),
+        token: ADMIN_PASSWORD,
       });
       const res = await fetch(`${SCRIPT_URL}?${params}`);
       const result = await res.json();
