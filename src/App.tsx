@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck, Clock, Target, RefreshCw, Mic, Building2, BrainCircuit, Search } from 'lucide-react';
 import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
-import { ADMIN_PASSWORD } from './admin-config';
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '';
 
 const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
@@ -93,60 +93,64 @@ type Inquiry = {
 };
 
 function AdminPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(() => sessionStorage.getItem('adminAuth') === 'true');
-  const [pw, setPw] = useState('');
-  const [error, setError] = useState(false);
+  const [idToken, setIdToken] = useState<string | null>(() => sessionStorage.getItem('adminToken'));
+  const btnRef = useRef<HTMLDivElement>(null);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    // ADMIN_PASSWORD 가 비어 있으면(빌드 시 VITE_ADMIN_PASSWORD 미설정) 항상 로그인 거부
-    if (ADMIN_PASSWORD !== '' && pw === ADMIN_PASSWORD) {
-      sessionStorage.setItem('adminAuth', 'true');
-      setIsLoggedIn(true);
-    } else {
-      setError(true);
-      setPw('');
-    }
-  };
+  useEffect(() => {
+    if (idToken || !GOOGLE_CLIENT_ID) return;
+    const gis = () => (window as any).google;
+    const render = () => {
+      if (!gis()?.accounts?.id) return;
+      gis().accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: (resp: { credential: string }) => {
+          sessionStorage.setItem('adminToken', resp.credential);
+          setIdToken(resp.credential);
+        },
+      });
+      if (btnRef.current) {
+        gis().accounts.id.renderButton(btnRef.current, { theme: 'outline', size: 'large', width: 280 });
+      }
+    };
+    if (gis()?.accounts?.id) { render(); return; }
+    const existing = document.getElementById('gis-client') as HTMLScriptElement | null;
+    if (existing) { existing.addEventListener('load', render); return; }
+    const s = document.createElement('script');
+    s.src = 'https://accounts.google.com/gsi/client';
+    s.async = true;
+    s.id = 'gis-client';
+    s.onload = render;
+    document.body.appendChild(s);
+  }, [idToken]);
 
   const handleLogout = () => {
-    sessionStorage.removeItem('adminAuth');
-    setIsLoggedIn(false);
+    sessionStorage.removeItem('adminToken');
+    setIdToken(null);
   };
 
-  if (!isLoggedIn) {
+  if (!idToken) {
     return (
       <div className="min-h-screen bg-[#001736] flex flex-col items-center justify-center px-4">
         <div className="mb-8 text-center">
           <p className="text-white font-bold text-2xl tracking-widest mb-2">ELLEV&amp;COMPANY</p>
           <p className="text-white/40 text-xs tracking-widest">ADMIN</p>
         </div>
-        <div className="bg-white w-full max-w-sm rounded p-8">
+        <div className="bg-white w-full max-w-sm rounded p-8 flex flex-col items-center">
           <h1 className="text-base font-bold text-[#001736] mb-6 text-center">관리자 로그인</h1>
-          <form onSubmit={handleLogin}>
-            <input
-              type="password"
-              value={pw}
-              onChange={e => { setPw(e.target.value); setError(false); }}
-              placeholder="비밀번호를 입력하세요"
-              className="w-full px-4 py-3 border border-[#e4e2e2] rounded text-sm focus:outline-none focus:border-[#005db6] mb-3 text-[#1b1c1c]"
-              autoFocus
-            />
-            {error && <p className="text-red-500 text-xs mb-3">비밀번호가 올바르지 않습니다.</p>}
-            <button type="submit" className="w-full bg-[#005db6] text-white py-3 rounded font-semibold text-sm hover:bg-[#004f9b] transition-colors">
-              로그인
-            </button>
-          </form>
+          {GOOGLE_CLIENT_ID
+            ? <div ref={btnRef}></div>
+            : <p className="text-red-500 text-xs text-center">로그인 설정이 필요합니다 (VITE_GOOGLE_CLIENT_ID 미설정).</p>}
+          <p className="text-[#747780] text-xs mt-4 text-center">허가된 구글 계정만 접근할 수 있습니다.</p>
         </div>
         <p className="text-white/20 text-xs mt-8">© 2026 Ellev&Company</p>
       </div>
     );
   }
 
-  return <AdminDashboard onLogout={handleLogout} />;
+  return <AdminDashboard idToken={idToken} onLogout={handleLogout} />;
 }
 
-function AdminDashboard({ onLogout }: { onLogout: () => void }) {
+function AdminDashboard({ idToken, onLogout }: { idToken: string; onLogout: () => void }) {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [selected, setSelected] = useState<Inquiry | null>(null);
   const [loading, setLoading] = useState(true);
@@ -161,9 +165,10 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${SCRIPT_URL}?action=getData&token=${encodeURIComponent(ADMIN_PASSWORD)}`);
-      const data: Inquiry[] = await res.json();
-      const sorted = [...data].reverse();
+      const res = await fetch(`${SCRIPT_URL}?action=getData&token=${encodeURIComponent(idToken)}`);
+      const data: any = await res.json();
+      if (!Array.isArray(data)) { onLogout(); return; }
+      const sorted = [...(data as Inquiry[])].reverse();
       setInquiries(sorted);
       if (selected) {
         const updated = sorted.find(i => i.rowIndex === selected.rowIndex);
@@ -182,7 +187,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const handleStatusChange = async (newStatus: string) => {
     if (!selected) return;
     setStatusSaving(true);
-    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: newStatus, memo: selected.memo, token: ADMIN_PASSWORD });
+    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: newStatus, memo: selected.memo, token: idToken });
     new Image().src = `${SCRIPT_URL}?${params}`;
     await new Promise(r => setTimeout(r, 1500));
     await fetchData();
@@ -192,7 +197,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const handleMemoSave = async () => {
     if (!selected) return;
     setMemoSaving(true);
-    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: selected.status, memo, token: ADMIN_PASSWORD });
+    const params = new URLSearchParams({ action: 'updateRow', rowIndex: String(selected.rowIndex), status: selected.status, memo, token: idToken });
     new Image().src = `${SCRIPT_URL}?${params}`;
     await new Promise(r => setTimeout(r, 1500));
     await fetchData();
@@ -212,7 +217,7 @@ function AdminDashboard({ onLogout }: { onLogout: () => void }) {
         subject: 'Re: [' + selected.company + '] 문의 건',
         body: replyText,
         rowIndex: String(selected.rowIndex),
-        token: ADMIN_PASSWORD,
+        token: idToken,
       });
       const res = await fetch(`${SCRIPT_URL}?${params}`);
       const result = await res.json();
