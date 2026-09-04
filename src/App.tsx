@@ -7,7 +7,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { Users, Lightbulb, Award, CheckCircle2, Menu, X, BookOpen, BarChart3, ShieldCheck, Clock, Target, RefreshCw, Mic, Building2, BrainCircuit, Search } from 'lucide-react';
 import { coreValues, businessModels, detailedServices, publicClients, privateClients } from './data';
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID ?? '';
+// 관리자 로그인용 Google OAuth 클라이언트 ID (공개 값 - 비밀 아님).
+// 프로젝트: hr-faq-chatbot-e9b05 / 승인된 원본: https://ellev.co.kr
+const GOOGLE_CLIENT_ID = '791913527750-pioe059ihric80qsl7co9tnvtkas0m94.apps.googleusercontent.com';
 
 const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
