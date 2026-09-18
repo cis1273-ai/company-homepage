@@ -883,7 +883,7 @@ const caseStudies = [
   },
   {
     num: '06',
-    client: '서울시자원봉사센터',
+    client: '서울시 출자·출연기관',
     year: '2026',
     tag: 'AI·HR',
     title: 'AI 기반 인사평가 시스템 구축',
