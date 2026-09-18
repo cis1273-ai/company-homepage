@@ -916,7 +916,7 @@ function CaseStudySection() {
                 }`}
               >
                 <span className={`text-xs font-bold tracking-widest mb-2 block ${active === idx ? 'text-secondary' : 'text-on-surface-muted'}`}>{cs.num}</span>
-                <p className={`font-bold text-[15px] break-keep leading-snug ${active === idx ? 'text-primary' : 'text-on-surface'}`}>{cs.client}</p>
+                <p className={`font-bold text-[12px] sm:text-[15px] whitespace-nowrap leading-snug tracking-tight ${active === idx ? 'text-primary' : 'text-on-surface'}`}>{cs.client}</p>
                 <div className="flex items-center gap-2 mt-2 flex-wrap">
                   <p className={`text-xs ${active === idx ? 'text-secondary' : 'text-on-surface-muted'}`}>{cs.year}</p>
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${active === idx ? 'bg-secondary/10 text-secondary border-secondary/30' : 'bg-surface-low text-on-surface-muted border-outline'}`}>{cs.tag}</span>
@@ -1011,7 +1011,7 @@ function CTASection() {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-secondary opacity-[0.08] -translate-x-1/2 -translate-y-1/2" />
       <div className="relative max-w-4xl mx-auto text-center">
         <p className="text-secondary font-bold text-sm tracking-widest uppercase mb-4">Contact Us</p>
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">조직의 미래를 함께 설계하시겠습니까?</h2>
+        <h2 className="text-xl sm:text-2xl md:text-3xl leading-relaxed font-bold mb-4 px-2 text-white break-keep">조직의 미래를 함께 설계하시겠습니까?</h2>
         <p className="text-white/60 text-[15px] mb-8">귀사의 HR 고민을 엘레브앤컴퍼니와 함께 풀어보세요.<br/>전문 컨설턴트가 직접 상담해드립니다.</p>
         {!isFormVisible && !isSuccess && (
           <button onClick={() => setIsFormVisible(true)} className="bg-secondary text-white px-10 py-5 rounded font-bold shadow-lg hover:bg-[#004f9b] transition-colors text-lg">
