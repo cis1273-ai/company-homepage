@@ -461,7 +461,25 @@ function Header() {
   );
 }
 
+function VideoModal({ src, title, onClose }: { src: string; title: string; onClose: () => void }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div className="relative w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-white font-semibold">{title}</p>
+          <button onClick={onClose} className="text-white/70 hover:text-white text-2xl leading-none">✕</button>
+        </div>
+        <video src={src} controls autoPlay className="w-full rounded shadow-2xl bg-black" />
+      </div>
+    </div>
+  );
+}
+
 function Hero() {
+  const [playingVideo, setPlayingVideo] = useState<'perf' | 'okr' | null>(null);
   return (
     <section className="relative bg-primary text-white py-24 md:py-36 px-4 md:px-6 overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04]" style={{backgroundImage: 'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)', backgroundSize: '24px 24px'}} />
@@ -474,11 +492,18 @@ function Hero() {
           <span className="font-bold text-white">엘레브앤컴퍼니</span>는 기업의 지속 가능한 성장을 위한<br />
           최적의 인적 자원 전략과 실행력을 제공합니다.
         </h1>
-        <div className="flex flex-col sm:flex-row gap-4 mt-8">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-8">
           <a href="/ai-hr-system.html" target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">AI HR Platform 소개</a>
-          <a href="/company-profile.pdf" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">회사 소개서</a>
+          <button onClick={() => setPlayingVideo('perf')} className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">성과관리 소개 동영상</button>
+          <button onClick={() => setPlayingVideo('okr')} className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">OKR 소개 동영상</button>
         </div>
       </div>
+      {playingVideo === 'perf' && (
+        <VideoModal src="/성과관리.mp4" title="성과관리 소개 동영상" onClose={() => setPlayingVideo(null)} />
+      )}
+      {playingVideo === 'okr' && (
+        <VideoModal src="/공공기관OKR소개.mp4" title="OKR 소개 동영상" onClose={() => setPlayingVideo(null)} />
+      )}
     </section>
   );
 }
@@ -1014,9 +1039,14 @@ function CTASection() {
         <h2 className="text-xl sm:text-2xl md:text-3xl leading-relaxed font-bold mb-4 px-2 text-white break-keep">조직의 미래를 함께 설계하시겠습니까?</h2>
         <p className="text-white/60 text-[15px] mb-8">귀사의 HR 고민을 엘레브앤컴퍼니와 함께 풀어보세요.<br/>전문 컨설턴트가 직접 상담해드립니다.</p>
         {!isFormVisible && !isSuccess && (
-          <button onClick={() => setIsFormVisible(true)} className="bg-secondary text-white px-10 py-5 rounded font-bold shadow-lg hover:bg-[#004f9b] transition-colors text-lg">
-            상담 문의하기
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button onClick={() => setIsFormVisible(true)} className="bg-secondary text-white px-10 py-5 rounded font-bold shadow-lg hover:bg-[#004f9b] transition-colors text-lg">
+              상담 문의하기
+            </button>
+            <a href="/company-profile.pdf" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-10 py-5 rounded font-bold hover:bg-white hover:text-primary transition-colors text-lg">
+              회사 소개서
+            </a>
+          </div>
         )}
         {isSuccess && <div className="bg-green-100 p-6 rounded text-green-700 font-semibold">문의가 성공적으로 전달되었습니다.</div>}
         {isFormVisible && !isSuccess && (
