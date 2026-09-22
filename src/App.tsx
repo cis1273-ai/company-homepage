@@ -479,7 +479,7 @@ function VideoModal({ src, title, onClose }: { src: string; title: string; onClo
 }
 
 function Hero() {
-  const [playingVideo, setPlayingVideo] = useState<'perf' | null>(null);
+  const [playingVideo, setPlayingVideo] = useState<'perf' | 'okr' | null>(null);
   return (
     <section className="relative bg-primary text-white py-24 md:py-36 px-4 md:px-6 overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04]" style={{backgroundImage: 'repeating-linear-gradient(45deg, white 0, white 1px, transparent 0, transparent 50%)', backgroundSize: '24px 24px'}} />
@@ -495,10 +495,14 @@ function Hero() {
         <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-8">
           <a href="/ai-hr-system.html" target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">AI HR Platform 소개</a>
           <button onClick={() => setPlayingVideo('perf')} className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">성과관리시스템 소개 동영상</button>
+          <button onClick={() => setPlayingVideo('okr')} className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">OKR 소개 동영상</button>
         </div>
       </div>
       {playingVideo === 'perf' && (
         <VideoModal src="/성과관리.mp4" title="성과관리시스템 소개 동영상" onClose={() => setPlayingVideo(null)} />
+      )}
+      {playingVideo === 'okr' && (
+        <VideoModal src="/공공기관OKR소개.mp4" title="OKR 소개 동영상" onClose={() => setPlayingVideo(null)} />
       )}
     </section>
   );
