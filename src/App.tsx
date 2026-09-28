@@ -812,7 +812,7 @@ function ProfileSection() {
           <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
             <picture>
               <source srcSet="/profile-2026.webp" type="image/webp" />
-              <img src="/profile-2026.jpg" alt="전인식 대표 프로필 사진" width={844} height={1264} className="w-full h-auto lg:aspect-square lg:object-cover lg:object-top rounded-lg border-4 border-white shadow-2xl" />
+              <img src="/profile-2026.jpg" alt="전인식 대표 프로필 사진" width={844} height={1264} className="w-full h-auto lg:max-w-[320px] lg:mx-auto rounded-lg border-4 border-white shadow-2xl" />
             </picture>
           </div>
           <div className="lg:col-span-7 order-2 lg:order-1 space-y-8">
