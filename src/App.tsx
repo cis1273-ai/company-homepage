@@ -849,7 +849,7 @@ function ProfileSection() {
           </div>
         </div>
         <div className="pt-10 border-t border-outline/50">
-          <h3 className="font-bold text-xl mb-6 text-primary">심화 전문 영역 (Core Competencies)</h3>
+          <h3 className="font-bold text-xl mb-6 text-primary">전문 분야</h3>
           <div className="grid md:grid-cols-3 gap-5">
             {competencies.map((c) => (
               <div key={c.title} className="bg-surface-low p-6 rounded border border-outline/40">
