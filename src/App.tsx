@@ -813,7 +813,7 @@ function ProfileSection() {
   ];
   const knowledge = [
     '『알기 쉬운 조사방법론』, 『사례로 배우는 스포츠마케팅』 등 저술',
-    '기업·공공기관 대상 전문 강연 46회 이상',
+    '민간기업·공공기관 대상 전문 강연 46회 이상',
   ];
   const competencies = [
     { icon: <BarChart3 size={18} />, title: '조직 전략 및 거버넌스', desc: '조직 진단부터 중장기 전략 로드맵까지', tags: ['조직 진단', '조직구조 재설계', '적정 인력 산정'] },
