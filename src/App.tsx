@@ -15,7 +15,7 @@ const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
 };
 
-const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인적자원관리 분야 25년 경력 · 네모파트너즈 이사 역임 · 前 서울특별시·인천광역시 출자출연기관 경영평가 위원 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 46회 이상 · 저서 『알기 쉬운 조사방법론』';
+const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인적자원관리 분야 25년 경력 · 네모파트너즈 이사 역임 · 前 서울특별시·인천광역시 출자출연기관 경영평가 위원 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 50여 건 · 저서 『알기 쉬운 조사방법론』';
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   return (
@@ -813,12 +813,7 @@ function ProfileSection() {
   ];
   const knowledge = [
     '『알기 쉬운 조사방법론』, 『사례로 배우는 스포츠마케팅』 등 저술',
-    '민간기업·공공기관 대상 전문 강연 46회 이상',
-  ];
-  const competencies = [
-    { icon: <BarChart3 size={18} />, title: '조직 전략 및 거버넌스', desc: '조직 진단부터 조직 구조 및 인력산정 설계', tags: ['조직 진단', '조직구조 재설계', '적정 인력 산정'] },
-    { icon: <Users size={18} />, title: '직무 중심 HR 솔루션', desc: '직무 중심 인사제도 설계', tags: ['직무분석 및 직무평가', '직급 체계 및 채용·승진제도 설계', '보수 구조 및 운영 설계'] },
-    { icon: <ShieldCheck size={18} />, title: '성과 관리 및 평가 환류', desc: 'AI 기반 시스템 설계', tags: ['MBO·BSC·OKR 구축', '공공기관 경영평가 자문', 'AI HR 시스템 구축'] },
+    '민간기업·공공기관 대상 전문 강연 50여 건',
   ];
   const bullet = (text: string) => (
     <li key={text} className="flex gap-2.5">
@@ -846,26 +841,6 @@ function ProfileSection() {
               <BookOpen size={18} className="text-secondary" /> 저술 · 강연
             </h3>
             <ul className="space-y-2.5">{knowledge.map(bullet)}</ul>
-          </div>
-        </div>
-        <div className="pt-10 border-t border-outline/50">
-          <h3 className="font-bold text-xl mb-6 text-primary">전문 분야</h3>
-          <div className="grid md:grid-cols-3 gap-5">
-            {competencies.map((c) => (
-              <div key={c.title} className="bg-surface-low p-6 rounded border border-outline/40">
-                <h4 className="font-bold text-[16px] mb-2 flex items-center gap-2 text-secondary">
-                  {c.icon} {c.title}
-                </h4>
-                <p className="text-sm text-on-surface-muted mb-4 pb-4 border-b border-outline/50 break-keep">{c.desc}</p>
-                <ul className="space-y-2.5">
-                  {c.tags.map((t) => (
-                    <li key={t} className="flex items-center gap-2 text-[14px] text-on-surface">
-                      <CheckCircle2 size={16} className="text-secondary shrink-0" /> {t}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
           </div>
         </div>
       </div>
