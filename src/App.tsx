@@ -856,12 +856,14 @@ function ProfileSection() {
                 <h4 className="font-bold text-[16px] mb-2 flex items-center gap-2 text-secondary">
                   {c.icon} {c.title}
                 </h4>
-                <p className="text-sm text-on-surface-muted mb-4 break-keep">{c.desc}</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="text-sm text-on-surface-muted mb-4 pb-4 border-b border-outline/50 break-keep">{c.desc}</p>
+                <ul className="space-y-2.5">
                   {c.tags.map((t) => (
-                    <span key={t} className="text-[13px] text-on-surface bg-background border border-outline/60 rounded-full px-3 py-1">{t}</span>
+                    <li key={t} className="flex items-center gap-2 text-[14px] text-on-surface">
+                      <CheckCircle2 size={16} className="text-secondary shrink-0" /> {t}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             ))}
           </div>
