@@ -809,13 +809,13 @@ function ProfileSection() {
     <section className="py-24 bg-background px-4 md:px-6 border-t border-outline">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
+          <div className="lg:col-span-4 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
             <picture>
               <source srcSet="/profile-2026.webp" type="image/webp" />
-              <img src="/profile-2026.jpg" alt="전인식 대표 프로필 사진" width={844} height={1264} className="w-full h-auto lg:max-w-[320px] lg:mx-auto rounded-lg border-4 border-white shadow-2xl" />
+              <img src="/profile-2026.jpg" alt="전인식 대표 프로필 사진" width={844} height={1264} className="w-full h-auto lg:max-w-[320px] lg:ml-auto rounded-lg border-4 border-white shadow-2xl" />
             </picture>
           </div>
-          <div className="lg:col-span-7 order-2 lg:order-1 space-y-8">
+          <div className="lg:col-span-8 order-2 lg:order-1 space-y-8">
             <div>
               <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
               <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-6">Principal Consultant</span>
