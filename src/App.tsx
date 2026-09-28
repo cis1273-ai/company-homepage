@@ -816,9 +816,9 @@ function ProfileSection() {
     '민간기업·공공기관 대상 전문 강연 46회 이상',
   ];
   const competencies = [
-    { icon: <BarChart3 size={18} />, title: '조직 전략 및 거버넌스', desc: '조직 진단부터 중장기 전략 로드맵까지', tags: ['조직 진단', '조직구조 재설계', '적정 인력 산정'] },
-    { icon: <Users size={18} />, title: '직무 중심 HR 솔루션', desc: '직무 가치에 맞는 인사·보상 체계 설계', tags: ['직무분석 및 직무평가', '직급 체계 및 채용·승진제도 설계', '보수 구조 및 운영 설계'] },
-    { icon: <ShieldCheck size={18} />, title: '성과 관리 및 평가 환류', desc: '평가 결과가 실제 성과로 이어지는 체계', tags: ['MBO·BSC·OKR 구축', '공공기관 경영평가 자문', 'AI HR 시스템 구축'] },
+    { icon: <BarChart3 size={18} />, title: '조직 전략 및 거버넌스', desc: '조직 진단부터 조직 구조 및 인력산정 설계', tags: ['조직 진단', '조직구조 재설계', '적정 인력 산정'] },
+    { icon: <Users size={18} />, title: '직무 중심 HR 솔루션', desc: '직무 중심 인사제도 설계', tags: ['직무분석 및 직무평가', '직급 체계 및 채용·승진제도 설계', '보수 구조 및 운영 설계'] },
+    { icon: <ShieldCheck size={18} />, title: '성과 관리 및 평가 환류', desc: 'AI 기반 시스템 설계', tags: ['MBO·BSC·OKR 구축', '공공기관 경영평가 자문', 'AI HR 시스템 구축'] },
   ];
   const bullet = (text: string) => (
     <li key={text} className="flex gap-2.5">
