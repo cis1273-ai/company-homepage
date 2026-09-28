@@ -508,6 +508,38 @@ function Hero() {
   );
 }
 
+// 화면에 절반 이상 보일 때 한 번만 음소거 자동재생 (끝나면 멈춤, 소리는 컨트롤로 켬)
+function GreetingVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      // 재생이 막히면(절전 등) 다음에 다시 보일 때 재시도
+      if (entry.isIntersecting) {
+        video.play().then(() => observer.disconnect()).catch(() => {});
+      }
+    }, { threshold: 0.5 });
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <video
+      ref={ref}
+      src="/ceo-greeting.mp4"
+      poster="/ceo-greeting-thumb.jpg"
+      muted
+      playsInline
+      controls
+      preload="none"
+      width={1920}
+      height={1080}
+      aria-label="엘레브앤컴퍼니 대표 인사말 영상"
+      className="w-full h-auto aspect-video rounded-lg shadow-xl bg-black mb-12"
+    />
+  );
+}
+
 function GreetingSection() {
   return (
     <section className="py-24 bg-surface-low px-4 md:px-6 border-b border-outline">
@@ -515,9 +547,10 @@ function GreetingSection() {
         <h2 className="text-2xl md:text-3xl lg:text-[32px] font-bold text-on-surface mb-6 leading-tight break-keep">
           사람을 향한 진심, <br className="hidden sm:block"/> 상생을 이끄는 고객중심의 정교한 전략.
         </h2>
-        <h3 className="text-lg md:text-[19px] font-medium text-secondary mb-12">
+        <h3 className="text-lg md:text-[19px] font-medium text-secondary mb-8">
           안녕하십니까, 엘레브앤컴퍼니 대표 전인식입니다.
         </h3>
+        <GreetingVideo />
         <div className="space-y-6 text-[15px] md:text-[16px] text-on-surface-muted leading-[1.8] break-keep">
           <p>한 분야에서 25년을 보낸다는 것은, 수많은 기업의 고민을 내 고민처럼 여기고 함께 밤을 지새웠다는 의미이기도 합니다.</p>
           <p>지난 2010년, 더 가치 있는 HR 서비스를 제공하고자 문을 연 <span className="font-semibold text-on-surface">엘레브앤컴퍼니</span>는 언제나 '고객중심'의 가치를 최우선에 두고 달려왔습니다. 우리는 단순히 컨설팅을 제공하는 제3자가 아닙니다. 고객사의 치열한 현장 속으로 들어가 함께 호흡하고, 기업이 직면한 진짜 문제를 함께 해결하는 가장 든든한 러닝메이트입니다.</p>
@@ -778,15 +811,15 @@ function ProfileSection() {
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
             <picture>
-              <source srcSet="/Profile.webp" type="image/webp" />
-              <img src="/Profile.png" alt="전인식 대표 프로필 사진" className="w-full rounded-lg border-4 border-white shadow-2xl" />
+              <source srcSet="/profile-2026.webp" type="image/webp" />
+              <img src="/profile-2026.jpg" alt="전인식 대표 프로필 사진" width={844} height={1264} className="w-full h-auto rounded-lg border-4 border-white shadow-2xl" />
             </picture>
           </div>
           <div className="lg:col-span-7 order-2 lg:order-1 space-y-8">
             <div>
               <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
               <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-6">Principal Consultant</span>
-              <p className="font-bold text-[15px] md:text-[16px] text-primary p-6 bg-surface-low rounded border-l-4 border-secondary leading-relaxed break-keep shadow-sm">
+              <p className="font-bold text-[15px] md:text-[16px] xl:text-[15px] xl:whitespace-nowrap text-primary p-6 bg-surface-low rounded border-l-4 border-secondary leading-relaxed break-keep shadow-sm">
                 "조직 및 인적자원관리 전략 분야에 있어 25년에 걸친 전략적 통찰력과 전문적 실무 역량의 결집"
               </p>
             </div>
