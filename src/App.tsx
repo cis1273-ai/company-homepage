@@ -805,83 +805,62 @@ function StatsClientsSection() {
 }
 
 function ProfileSection() {
+  const competencies = [
+    { icon: <BarChart3 size={18} />, title: '조직 전략 및 거버넌스', desc: '조직 정밀 진단(Diagnostic)을 통해 숨겨진 비효율을 찾아내고, 기능 기반의 과학적 적정 정원 산정(Manpower Sizing)을 수행합니다. 이를 통해 거시적 거버넌스 체계를 재설계하고 실행력 있는 중장기 경영 전략 로드맵을 수립하는 데 특화되어 있습니다.' },
+    { icon: <Users size={18} />, title: '직무 중심 HR 솔루션', desc: '현대적 HR의 핵심인 과학적 직무 분석과 직무가치 평가(Job Evaluation) 시스템을 구축합니다. 역량 중심의 직급 체계 고도화는 물론, 구성원의 동기부여를 극대화할 수 있는 성과 및 직무 기반의 보수 체계(Total Rewards)를 설계하여 조직의 보상 경쟁력을 강화합니다.' },
+    { icon: <ShieldCheck size={18} />, title: '성과 관리 및 평가 환류', desc: 'BSC(Balanced Scorecard) 및 MBO 체계를 조직 문화에 맞게 커스터마이징하여 구축합니다. 특히 공공기관 경영평가(Internal & External) 대응에 있어 단순한 지표 관리를 넘어, 평가 결과가 조직의 실제 성과 향상으로 이어지도록 하는 환류 시스템 고도화 자문에 강점을 보유하고 있습니다.' },
+  ];
   return (
     <section className="py-24 bg-background px-4 md:px-6 border-t border-outline">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div className="lg:col-span-4 order-1 lg:order-2 lg:sticky lg:top-28 w-full">
-            <picture>
-              <source srcSet="/profile-2026.webp" type="image/webp" />
-              <img src="/profile-2026.jpg" alt="전인식 대표 프로필 사진" width={844} height={1264} className="w-full h-auto lg:max-w-[320px] lg:ml-auto rounded-lg border-4 border-white shadow-2xl" />
-            </picture>
+      <div className="max-w-[1200px] mx-auto space-y-14">
+        <div>
+          <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
+          <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-6">Principal Consultant</span>
+          <p className="font-bold text-[15px] md:text-[17px] text-primary p-6 bg-surface-low rounded border-l-4 border-secondary leading-relaxed break-keep shadow-sm">
+            "조직 및 인적자원관리 전략 분야에 있어 25년에 걸친 전략적 통찰력과 전문적 실무 역량의 결집"
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-12 text-on-surface-muted text-[15px] leading-relaxed break-keep">
+          <div>
+            <h3 className="font-bold text-on-surface text-lg mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+              총 경력 개요 및 전략적 리더십
+            </h3>
+            <p className="pl-3.5">
+              네모파트너즈(Nemo Partners) 이사를 역임하였으며, 국내 경영 컨설팅 산업의 성장기부터 현재에 이르기까지 약 25년에 달하는 심도 있는 실무 경력과 사업적 통찰력을 보유하고 있습니다. 단순한 이론적 자문 수준을 넘어, 급변하는 경영 환경 속에서 조직의 중장기 비전과 실제 인사 실행 전략을 정밀하게 정렬시키는 핵심 의사결정 파트너로서 독보적인 입지를 확고히 해왔습니다.
+            </p>
           </div>
-          <div className="lg:col-span-8 order-2 lg:order-1 space-y-8">
-            <div>
-              <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
-              <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-6">Principal Consultant</span>
-              <p className="font-bold text-[15px] md:text-[16px] xl:text-[15px] xl:whitespace-nowrap text-primary p-6 bg-surface-low rounded border-l-4 border-secondary leading-relaxed break-keep shadow-sm">
-                "조직 및 인적자원관리 전략 분야에 있어 25년에 걸친 전략적 통찰력과 전문적 실무 역량의 결집"
-              </p>
-            </div>
-            <div className="space-y-6 text-on-surface-muted text-[15px] leading-relaxed break-keep">
-              <div>
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                  총 경력 개요 및 전략적 리더십
-                </h3>
-                <p className="pl-3.5">
-                  네모파트너즈(Nemo Partners) 이사를 역임하였으며, 국내 경영 컨설팅 산업의 성장기부터 현재에 이르기까지 약 25년에 달하는 심도 있는 실무 경력과 사업적 통찰력을 보유하고 있습니다. 단순한 이론적 자문 수준을 넘어, 급변하는 경영 환경 속에서 조직의 중장기 비전과 실제 인사 실행 전략을 정밀하게 정렬시키는 핵심 의사결정 파트너로서 독보적인 입지를 확고히 해왔습니다.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
-                  압도적인 프로젝트 트랙 레코드
-                </h3>
-                <p className="pl-3.5">
-                  공공 부문 108건 및 민간 부문 42건을 합산하여 총 150여 건 이상의 대형 프로젝트를 성공적으로 완수하였습니다. 이는 중앙 부처의 정책 수립 지원부터 지방자치단체 산하 공공기관의 체질 개선, 그리고 대기업의 글로벌 인사 전략 구축에 이르기까지, 다양한 조직 생태계의 특수성을 깊이 있게 이해하고 각기 다른 문제 해결 방법론을 유연하게 적용할 수 있는 검증된 실무 능력을 의미합니다.
-                </p>
-              </div>
-              <div className="pt-4 border-t border-outline/50">
-                <h3 className="font-bold text-on-surface text-xl mb-4 text-primary">심화 전문 영역 (Core Competencies)</h3>
-                <div className="space-y-4 pl-1">
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <BarChart3 size={18} /> 조직 전략 및 거버넌스
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      조직 정밀 진단(Diagnostic)을 통해 숨겨진 비효율을 찾아내고, 기능 기반의 과학적 적정 정원 산정(Manpower Sizing)을 수행합니다. 이를 통해 거시적 거버넌스 체계를 재설계하고 실행력 있는 중장기 경영 전략 로드맵을 수립하는 데 특화되어 있습니다.
-                    </p>
-                  </div>
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <Users size={18} /> 직무 중심 HR 솔루션
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      현대적 HR의 핵심인 과학적 직무 분석과 직무가치 평가(Job Evaluation) 시스템을 구축합니다. 역량 중심의 직급 체계 고도화는 물론, 구성원의 동기부여를 극대화할 수 있는 성과 및 직무 기반의 보수 체계(Total Rewards)를 설계하여 조직의 보상 경쟁력을 강화합니다.
-                    </p>
-                  </div>
-                  <div className="bg-surface-low p-4 rounded border border-outline/40">
-                    <h4 className="font-bold text-on-surface text-[16px] mb-1 flex items-center gap-2 text-secondary">
-                      <ShieldCheck size={18} /> 성과 관리 및 평가 환류
-                    </h4>
-                    <p className="text-sm text-on-surface-muted leading-relaxed pl-6">
-                      BSC(Balanced Scorecard) 및 MBO 체계를 조직 문화에 맞게 커스터마이징하여 구축합니다. 특히 공공기관 경영평가(Internal & External) 대응에 있어 단순한 지표 관리를 넘어, 평가 결과가 조직의 실제 성과 향상으로 이어지도록 하는 환류 시스템 고도화 자문에 강점을 보유하고 있습니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="pt-4 border-t border-outline/50">
-                <h3 className="font-bold text-on-surface text-lg mb-2 flex items-center gap-2">
-                  <BookOpen size={18} className="text-secondary" />
-                  지식 자본 및 학술적 기여
-                </h3>
-                <p className="pl-6 text-sm sm:text-[15px]">
-                  『알기 쉬운 조사방법론』, 『사례로 배우는 스포츠마케팅』 등 다수의 전문 서적 저술 활동과 총 46회 이상의 기업 및 공공기관 대상 전문 강연을 실시하였습니다. 이를 통해 이론과 현장 실무가 융합된 지식 자산을 업계에 공유하고, 후배 컨설턴트 및 인사 담당자들에게 실질적인 가이드라인을 제시하며 해당 분야의 지식 전파를 주도해오고 있습니다.
-                </p>
-              </div>
-            </div>
+          <div>
+            <h3 className="font-bold text-on-surface text-lg mb-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-secondary rounded-full"></span>
+              압도적인 프로젝트 트랙 레코드
+            </h3>
+            <p className="pl-3.5">
+              공공 부문 108건 및 민간 부문 42건을 합산하여 총 150여 건 이상의 대형 프로젝트를 성공적으로 완수하였습니다. 이는 중앙 부처의 정책 수립 지원부터 지방자치단체 산하 공공기관의 체질 개선, 그리고 대기업의 글로벌 인사 전략 구축에 이르기까지, 다양한 조직 생태계의 특수성을 깊이 있게 이해하고 각기 다른 문제 해결 방법론을 유연하게 적용할 수 있는 검증된 실무 능력을 의미합니다.
+            </p>
           </div>
+        </div>
+        <div className="pt-10 border-t border-outline/50">
+          <h3 className="font-bold text-xl mb-6 text-primary">심화 전문 영역 (Core Competencies)</h3>
+          <div className="grid md:grid-cols-3 gap-5">
+            {competencies.map((c) => (
+              <div key={c.title} className="bg-surface-low p-6 rounded border border-outline/40">
+                <h4 className="font-bold text-[16px] mb-3 flex items-center gap-2 text-secondary">
+                  {c.icon} {c.title}
+                </h4>
+                <p className="text-sm text-on-surface-muted leading-relaxed break-keep">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="pt-10 border-t border-outline/50 text-on-surface-muted leading-relaxed break-keep">
+          <h3 className="font-bold text-on-surface text-lg mb-3 flex items-center gap-2">
+            <BookOpen size={18} className="text-secondary" />
+            지식 자본 및 학술적 기여
+          </h3>
+          <p className="pl-6 text-sm sm:text-[15px]">
+            『알기 쉬운 조사방법론』, 『사례로 배우는 스포츠마케팅』 등 다수의 전문 서적 저술 활동과 총 46회 이상의 기업 및 공공기관 대상 전문 강연을 실시하였습니다. 이를 통해 이론과 현장 실무가 융합된 지식 자산을 업계에 공유하고, 후배 컨설턴트 및 인사 담당자들에게 실질적인 가이드라인을 제시하며 해당 분야의 지식 전파를 주도해오고 있습니다.
+          </p>
         </div>
       </div>
     </section>
