@@ -816,9 +816,9 @@ function ProfileSection() {
     '기업·공공기관 대상 전문 강연 46회 이상',
   ];
   const competencies = [
-    { icon: <BarChart3 size={18} />, title: '조직 전략 및 거버넌스', desc: '조직 진단부터 중장기 전략 로드맵까지', tags: ['조직 정밀 진단', '적정 정원 산정', '거버넌스 재설계', '중장기 전략 로드맵'] },
-    { icon: <Users size={18} />, title: '직무 중심 HR 솔루션', desc: '직무 가치에 맞는 인사·보상 체계 설계', tags: ['직무 분석', '직무가치 평가', '직급 체계 고도화', '보수 체계(Total Rewards)'] },
-    { icon: <ShieldCheck size={18} />, title: '성과 관리 및 평가 환류', desc: '평가 결과가 실제 성과로 이어지는 체계', tags: ['BSC · MBO 구축', '공공기관 경영평가 대응', '평가 환류 시스템'] },
+    { icon: <BarChart3 size={18} />, title: '조직 전략 및 거버넌스', desc: '조직 진단부터 중장기 전략 로드맵까지', tags: ['조직 진단', '적정 인력 산정', '조직구조 재설계'] },
+    { icon: <Users size={18} />, title: '직무 중심 HR 솔루션', desc: '직무 가치에 맞는 인사·보상 체계 설계', tags: ['직무분석 및 직무평가', '채용 및 승진제도 설계', '보수 구조 및 운영 설계'] },
+    { icon: <ShieldCheck size={18} />, title: '성과 관리 및 평가 환류', desc: '평가 결과가 실제 성과로 이어지는 체계', tags: ['MBO·BSC·OKR 구축', '공공기관 경영평가 자문', '조직 및 인사평가 시스템'] },
   ];
   const bullet = (text: string) => (
     <li key={text} className="flex gap-2.5">
