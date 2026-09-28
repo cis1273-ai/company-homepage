@@ -15,7 +15,7 @@ const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
 };
 
-const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인사 분야 25년 경력 · 네모파트너즈 이사 역임 · 前 서울특별시·인천광역시 출자·출연기관 경영평가 위원 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 50여 건 · 저서 『알기 쉬운 조사방법론』';
+const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인사관리 분야 25년 경력 · 네모파트너즈 이사 역임 · 前 서울특별시·인천광역시 출자·출연기관 경영평가 위원 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 50여 건 · 저서 『알기 쉬운 조사방법론』';
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   return (
@@ -806,7 +806,7 @@ function StatsClientsSection() {
 
 function ProfileSection() {
   const career = [
-    '조직·인사 분야 25년 컨설팅 경력',
+    '조직·인사관리 분야 25년 컨설팅 경력',
     '前 네모파트너즈(Nemo Partners) 이사',
     '前 서울특별시·인천광역시 출자·출연기관 경영평가 위원',
     '공공 108건 · 민간 42건, 총 150여 건 프로젝트 수행',
