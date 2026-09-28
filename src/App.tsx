@@ -828,7 +828,7 @@ function ProfileSection() {
           <h2 className="text-3xl font-bold mb-2 text-on-surface">전인식 대표 컨설턴트</h2>
           <span className="text-secondary font-semibold text-sm tracking-widest uppercase block mb-6">Principal Consultant</span>
           <p className="font-bold text-[15px] md:text-[17px] text-primary p-6 bg-surface-low rounded border-l-4 border-secondary leading-relaxed break-keep shadow-sm">
-            "조직 및 인적자원관리 전략 분야에 있어 25년에 걸친 전략적 통찰력과 전문적 실무 역량의 결집"
+            "조직 및 인사관리 분야에 있어 25년에 걸친 전략적 통찰력과 전문적 실무 역량의 결집"
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-10 md:gap-12 text-on-surface text-[15px] md:text-[16px] leading-relaxed break-keep">
