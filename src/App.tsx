@@ -806,7 +806,7 @@ function StatsClientsSection() {
 
 function ProfileSection() {
   const career = [
-    '조직·인적자원관리 분야 25년 컨설팅 경력',
+    '조직·인사 분야 25년 컨설팅 경력',
     '前 네모파트너즈(Nemo Partners) 이사',
     '前 서울특별시·인천광역시 출자출연기관 경영평가 위원',
     '공공 108건 · 민간 42건, 총 150여 건 프로젝트 수행',
