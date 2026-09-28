@@ -15,7 +15,7 @@ const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
 };
 
-const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인적자원관리 분야 25년 경력 · 네모파트너즈 이사 역임 · 前 서울특별시·인천광역시 출자출연기관 경영평가 위원 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 50여 건 · 저서 『알기 쉬운 조사방법론』';
+const TICKER_TEXT = '전인식 대표컨설턴트 · 조직·인사 분야 25년 경력 · 네모파트너즈 이사 역임 · 前 서울특별시·인천광역시 출자·출연기관 경영평가 위원 역임 · 공공 108건 + 민간 42건, 총 150여 건 프로젝트 수행 · 기존 고객 재계약률 80%+ · 전문 강연 50여 건 · 저서 『알기 쉬운 조사방법론』';
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   return (
@@ -547,7 +547,7 @@ function GreetingSection() {
         <h2 className="text-2xl md:text-3xl lg:text-[32px] font-bold text-on-surface mb-6 leading-tight break-keep">
           사람을 향한 진심, <br className="hidden sm:block"/> 상생을 이끄는 고객중심의 정교한 전략.
         </h2>
-        <h3 className="text-lg md:text-[19px] font-medium text-secondary mb-8">
+        <h3 className="text-lg md:text-[19px] font-medium text-secondary mb-8 break-keep">
           안녕하십니까, 엘레브앤컴퍼니 대표 전인식입니다.
         </h3>
         <GreetingVideo />
@@ -808,7 +808,7 @@ function ProfileSection() {
   const career = [
     '조직·인사 분야 25년 컨설팅 경력',
     '前 네모파트너즈(Nemo Partners) 이사',
-    '前 서울특별시·인천광역시 출자출연기관 경영평가 위원',
+    '前 서울특별시·인천광역시 출자·출연기관 경영평가 위원',
     '공공 108건 · 민간 42건, 총 150여 건 프로젝트 수행',
   ];
   const knowledge = [
