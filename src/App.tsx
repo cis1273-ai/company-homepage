@@ -11,6 +11,9 @@ import { coreValues, businessModels, detailedServices, publicClients, privateCli
 // 프로젝트: hr-faq-chatbot-e9b05 / 승인된 원본: https://ellev.co.kr
 const GOOGLE_CLIENT_ID = '791913527750-pioe059ihric80qsl7co9tnvtkas0m94.apps.googleusercontent.com';
 
+// 관리자 로그인에 사용하는 구글 계정
+const ADMIN_LOGIN_EMAIL = 'ellev1273@gmail.com';
+
 const IconMap: Record<string, React.FC<any>> = {
   Users, Lightbulb, Award
 };
@@ -96,6 +99,7 @@ type Inquiry = {
 
 function AdminPage() {
   const [idToken, setIdToken] = useState<string | null>(() => sessionStorage.getItem('adminToken'));
+  const [loginError, setLoginError] = useState('');
   const btnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -105,7 +109,19 @@ function AdminPage() {
       if (!gis()?.accounts?.id) return;
       gis().accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
+        login_hint: ADMIN_LOGIN_EMAIL,
         callback: (resp: { credential: string }) => {
+          // 화면 안내용 확인일 뿐이며, 실제 권한 검증은 Apps Script 에서 토큰으로 다시 한다.
+          let email = '';
+          try {
+            const b64 = resp.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+            email = String(JSON.parse(atob(b64)).email || '').toLowerCase();
+          } catch { /* 파싱 실패 시 아래에서 거부 */ }
+          if (email !== ADMIN_LOGIN_EMAIL) {
+            setLoginError(`${ADMIN_LOGIN_EMAIL} 계정으로 로그인해주세요.`);
+            return;
+          }
+          setLoginError('');
           sessionStorage.setItem('adminToken', resp.credential);
           setIdToken(resp.credential);
         },
@@ -113,6 +129,7 @@ function AdminPage() {
       if (btnRef.current) {
         gis().accounts.id.renderButton(btnRef.current, { theme: 'outline', size: 'large', width: 280 });
       }
+      gis().accounts.id.prompt();
     };
     if (gis()?.accounts?.id) { render(); return; }
     const existing = document.getElementById('gis-client') as HTMLScriptElement | null;
@@ -142,7 +159,8 @@ function AdminPage() {
           {GOOGLE_CLIENT_ID
             ? <div ref={btnRef}></div>
             : <p className="text-red-500 text-xs text-center">로그인 설정이 필요합니다 (VITE_GOOGLE_CLIENT_ID 미설정).</p>}
-          <p className="text-[#747780] text-xs mt-4 text-center">허가된 구글 계정만 접근할 수 있습니다.</p>
+          {loginError && <p className="text-red-500 text-xs mt-4 text-center">{loginError}</p>}
+          <p className="text-[#747780] text-xs mt-4 text-center">{ADMIN_LOGIN_EMAIL} 계정으로 로그인해주세요.</p>
         </div>
         <p className="text-white/20 text-xs mt-8">© 2026 Ellev&Company</p>
       </div>
