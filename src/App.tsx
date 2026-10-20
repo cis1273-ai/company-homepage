@@ -494,7 +494,7 @@ function Hero() {
         </h1>
         <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-8">
           <a href="/ai-hr-system.html" target="_blank" rel="noopener noreferrer" className="bg-secondary text-white px-8 py-4 rounded hover:bg-[#004f9b] font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">AI HR Platform 소개</a>
-          <button onClick={() => setPlayingVideo('perf')} className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">성과관리시스템 소개 동영상</button>
+          <a href="https://www.youtube.com/@ellev1273" target="_blank" rel="noopener noreferrer" className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">유튜브 채널 소개</a>
           <button onClick={() => setPlayingVideo('okr')} className="border border-white text-white px-8 py-4 rounded hover:bg-white hover:text-primary font-semibold transition-colors text-lg text-center block md:w-[292px] md:h-[78px] md:flex md:items-center md:justify-center">회사 홍보 영상</button>
         </div>
       </div>
