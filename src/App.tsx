@@ -1006,7 +1006,7 @@ function CTASection() {
       await new Promise((resolve) => {
         const img = new Image();
         img.onload = img.onerror = resolve;
-        img.src = `https://script.google.com/macros/s/AKfycbykmXSj0YKsvUjC7QTJdKYyNbZWzw7J9jV-M_AhK5K1HFvocdhl6z73b5wAvmZ8cJnWxg/exec?${params}`;
+        img.src = `${SCRIPT_URL}?${params.toString()}`;
       });
       setIsSuccess(true);
       setFormData({ name: '', company: '', email: '', phone: '', message: '' });
